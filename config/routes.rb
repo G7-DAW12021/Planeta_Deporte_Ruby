@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  #----------------------------------Home Routes --------------------------------------------#
+  #----------------------------------Home & General Routes --------------------------------------------#
   root to: 'home#index'
   get 'home/index'
 
+  resources :articles do
+    resources :comments
+  end
   #----------------------------------Article Routes -----------------------------------------#
-  resources :articles
   get 'articles', to: 'articles#index'
   get 'articles/new', to: 'articles#new'
   get 'articles/:id', to: 'articles#show'
