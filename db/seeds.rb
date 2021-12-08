@@ -5,3 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+#ruta1= File.expand_path("..",Rails.root)
+#ruta2='/data.json'
+#file=File.read(ruta1+ruta2)
