@@ -1,0 +1,47 @@
+<%= form_with(model: article) do |form| %>
+  <% if article.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+      <ul>
+        <% article.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :foto %>
+    <%= form.text_field :foto %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fecha %>
+    <%= form.text_field :fecha %>
+  </div>
+
+  <div class="field">
+    <%= form.label :titulo %>
+    <%= form.text_area :titulo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :subtitulo %>
+    <%= form.text_area :subtitulo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :seccion %>
+    <%= form.text_field :seccion %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cuerpo %>
+    <%= form.text_area :cuerpo %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
