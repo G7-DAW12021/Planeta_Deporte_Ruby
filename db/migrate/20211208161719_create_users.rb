@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :nombre
       t.string :apellidos
       t.string :email
-      t.string :clave
+      t.string :clave_digest
       t.string :tipo
 
       t.timestamps

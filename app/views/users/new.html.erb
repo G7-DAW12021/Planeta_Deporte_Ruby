@@ -1,0 +1,21 @@
+<h1>Registrarse</h1>
+
+<%= form_with model: @user, local: true do |f| %>
+  <%= f.label :nombre %><br>
+  <%= f.text_field :nombre %><br><br>
+
+  <%= f.label :apellidos %><br>
+  <%= f.text_field :apellidos %><br><br>
+
+  <%= f.label :email %><br>
+  <%= f.text_field :email %><br><br>
+
+  <%= f.label :clave_digest %><br>
+  <%= f.password_field :clave_digest %><br><br>
+
+  <%= f.label :tipo %><br>
+  <%= f.text_field :tipo %><br><br>
+
+
+  <%= f.submit "Sign Up" %>
+<% end %>

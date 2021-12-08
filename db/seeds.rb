@@ -21,7 +21,7 @@ comentariosnoticias = data_parsed['data'][3]['comentariosnoticias']
 
 for i in 0...usuarios.length
   User.create(:foto => usuarios[i]['foto'], :nombre => usuarios[i]['nombre'], :apellidos => usuarios[i]['apellidos'],
-              :email => usuarios[i]['email'], :clave => usuarios[i]['clave'], :tipo => usuarios[i]['tipo'])
+              :email => usuarios[i]['email'], :clave_digest => usuarios[i]['clave'], :tipo => usuarios[i]['tipo'])
 end
 
 for j in 0...noticias.length

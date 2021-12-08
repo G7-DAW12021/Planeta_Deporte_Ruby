@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2021_12_08_162428) do
     t.string "nombre"
     t.string "apellidos"
     t.string "email"
-    t.string "clave"
+    t.string "clave_digest"
     t.string "tipo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
