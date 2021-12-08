@@ -1,6 +1,7 @@
 class CreateArticles < ActiveRecord::Migration[6.1]
   def change
     create_table :articles do |t|
+      t.string :autor
       t.string :foto
       t.string :fecha
       t.text :titulo

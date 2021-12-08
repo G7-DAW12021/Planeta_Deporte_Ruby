@@ -1,6 +1,7 @@
 <h1>Articles</h1>
 <table>
   <tr>
+    <th>Autor</th>
     <th>Foto</th>
     <th>Fecha</th>
     <th>Titulo</th>
@@ -12,6 +13,7 @@
   <tbody>
     <% @articles.each do |i| %>
       <tr>
+        <td><%= i.autor %></td>
         <td><%= i.foto %></td>
         <td><%= i.fecha %></td>
         <td><%= i.titulo %></td>
