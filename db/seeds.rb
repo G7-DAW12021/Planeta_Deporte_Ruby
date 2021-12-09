@@ -15,9 +15,6 @@ data_parsed = JSON.parse(file)
 usuarios = data_parsed['data'][0]['usuarios']
 noticias = data_parsed['data'][1]['noticias']
 comentarios = data_parsed['data'][2]['comentarios']
-comentariosnoticias = data_parsed['data'][3]['comentariosnoticias']
-usuariosnoticias = data_parsed['data'][4]['usuariosnoticias']
-usuarioscomentarios = data_parsed['data'][5]['usuarioscomentarios']
 
 for i in 0...usuarios.length
   User.create(:foto => usuarios[i]['foto'], :nombre => usuarios[i]['nombre'], :apellidos => usuarios[i]['apellidos'],
@@ -25,11 +22,11 @@ for i in 0...usuarios.length
 end
 
 for j in 0...noticias.length
-  Article.create(:user_id => usuariosnoticias[j]['idusuario'], :foto => noticias[j]['foto'], :fecha => noticias[j]['fecha'], :titulo => noticias[j]['titulo'],
+  Article.create(:user_id => noticias[j]['idautor'], :foto => noticias[j]['foto'], :fecha => noticias[j]['fecha'], :titulo => noticias[j]['titulo'],
                  :subtitulo => noticias[j]['subtitulo'], :seccion => noticias[j]['seccion'],
                  :cuerpo => noticias[j]['cuerpo'])
 end
 
 for k in 0...comentarios.length
-  Comment.create(:user_id => usuarioscomentarios[k]['idusuario'], :article_id => comentariosnoticias[k]['idnoticia'], :texto => comentarios[k]['texto'])
+  Comment.create(:user_id => comentarios[k]['idautor'], :article_id => comentarios[k]['idnoticia'], :texto => comentarios[k]['texto'])
 end

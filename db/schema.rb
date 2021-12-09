@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_08_162428) do
+ActiveRecord::Schema.define(version: 2021_12_08_161719) do
 
   create_table "articles", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -25,20 +25,6 @@ ActiveRecord::Schema.define(version: 2021_12_08_162428) do
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
-  create_table "articles_comments", id: false, force: :cascade do |t|
-    t.integer "article_id", null: false
-    t.integer "comment_id", null: false
-    t.index ["article_id"], name: "index_articles_comments_on_article_id"
-    t.index ["comment_id"], name: "index_articles_comments_on_comment_id"
-  end
-
-  create_table "articles_users", id: false, force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "article_id", null: false
-    t.index ["article_id"], name: "index_articles_users_on_article_id"
-    t.index ["user_id"], name: "index_articles_users_on_user_id"
-  end
-
   create_table "comments", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "article_id", null: false
@@ -47,13 +33,6 @@ ActiveRecord::Schema.define(version: 2021_12_08_162428) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["article_id"], name: "index_comments_on_article_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
-  end
-
-  create_table "comments_users", id: false, force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "comment_id", null: false
-    t.index ["comment_id"], name: "index_comments_users_on_comment_id"
-    t.index ["user_id"], name: "index_comments_users_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
