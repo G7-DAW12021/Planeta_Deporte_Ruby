@@ -1,10 +1,8 @@
 <header>
-
-
-  <%if !login  %>
-    <%= link_to "Iniciar Sesión", login_path %>
-    <%= link_to "Registrarse"%>
-  <%else %>
-    <%= link_to "Cerrar Sesión"%>
-  <% end %>
+ <% if !signed_in? %>
+    <%= link_to "Iniciar Sesión" %>
+    <%= link_to "Registrarse" %>
+ <% else %>
+    <%= link_to "Cerrar Sesión" %>
+ <% end %>
 </header>

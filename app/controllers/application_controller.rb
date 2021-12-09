@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+=begin
   helper_method :login
   helper_method :current_user
 
@@ -9,5 +10,6 @@ class ApplicationController < ActionController::Base
   def login
     !current_user.nil?
   end
+=end
 end
 
