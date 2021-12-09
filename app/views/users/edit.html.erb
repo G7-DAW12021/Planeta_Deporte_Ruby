@@ -1,0 +1,11 @@
+<h1>Would you like to Edit your Account Details?</h1>
+
+<%= form_with model: @user, local: true do |f| %>
+  <%= f.label :nombre %><br>
+  <%= f.text_field :nombre, autofocus: true %><br>
+
+  <%= f.label :clave_digest %><br>
+  <%= f.password_field :clave_digest %><br>
+
+  <%= f.submit "Confirm Changes" %>
+<% end %>

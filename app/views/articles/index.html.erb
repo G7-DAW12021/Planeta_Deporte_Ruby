@@ -10,19 +10,19 @@
   </tr>
 
   <tbody>
-  <% @articles.each do |i| %>
-    <tr>
-      <td><%= i.foto %></td>
-      <td><%= i.fecha %></td>
-      <td><%= i.titulo %></td>
-      <td><%= i.subtitulo %></td>
-      <td><%= i.seccion %></td>
-      <td><%= i.cuerpo %></td>
-      <td><%= link_to 'Show', i %></td>
-      <td><%= link_to 'Edit', edit_article_path(i) %></td>
-      <td><%= link_to 'Destroy', i, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
+    <% @articles.each do |i| %>
+      <tr>
+        <td><%= i.foto %></td>
+        <td><%= i.fecha %></td>
+        <td><%= i.titulo %></td>
+        <td><%= i.subtitulo %></td>
+        <td><%= i.seccion %></td>
+        <td><%= i.cuerpo %></td>
+        <td><%= link_to 'Show', i %></td>
+        <td><%= link_to 'Edit', edit_article_path(i) %></td>
+        <td><%= link_to 'Destroy', i, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
 <br>

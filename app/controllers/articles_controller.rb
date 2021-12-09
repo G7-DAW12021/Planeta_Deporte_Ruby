@@ -57,6 +57,6 @@ class ArticlesController < ApplicationController
 
   #Sets the allowed article parameters
   def article_params
-    params.require(:article).permit(:foto, :fecha, :titulo, :subtitulo, :seccion, :cuerpo)
+    params.require(:article).permit(:autor, :foto, :fecha, :titulo, :subtitulo, :seccion, :cuerpo)
   end
 end

@@ -1,3 +1,6 @@
+
+<h1> Artículo: <%= @article.titulo %></h1>
+
 <p>
   <strong>Foto:</strong>
   <%= @article.foto %>
@@ -27,6 +30,14 @@
   <strong>Cuerpo:</strong>
   <%= @article.cuerpo %>
 </p>
+
+
+<h2>Comentarios</h2>
+<%= render @article.comments %>
+
+<h2> Añadir comentario</h2>
+<%= render 'comments/form' %>
+
 
 <%= link_to 'Edit', edit_article_path(@article) %>
 <%= link_to 'Back', articles_path%>
