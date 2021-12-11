@@ -14,11 +14,13 @@ class ArticlesController < ApplicationController
   # GET /articles/new
   def new
     @article = Article.new
+    #@article = current_user.articles.build
   end
 
   # POST /articles ; /articles.json
   def create
     @article = Article.new(article_params)
+    #@article = current_user.articles.build(article_params)
     if @article.save
       redirect_to @article
     else
@@ -57,6 +59,6 @@ class ArticlesController < ApplicationController
 
   #Sets the allowed article parameters
   def article_params
-    params.require(:article).permit(:autor, :foto, :fecha, :titulo, :subtitulo, :seccion, :cuerpo)
+    params.require(:article).permit(:user_id, :foto, :fecha, :titulo, :subtitulo, :seccion, :cuerpo, :imagen)
   end
 end

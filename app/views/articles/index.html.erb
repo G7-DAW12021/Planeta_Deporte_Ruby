@@ -1,4 +1,4 @@
-<h1>Articles</h1>
+<h1>Noticias</h1>
 <table>
   <tr>
     <th>Foto</th>
@@ -18,12 +18,12 @@
         <td><%= i.subtitulo %></td>
         <td><%= i.seccion %></td>
         <td><%= i.cuerpo %></td>
-        <td><%= link_to 'Show', i %></td>
-        <td><%= link_to 'Edit', edit_article_path(i) %></td>
-        <td><%= link_to 'Destroy', i, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ir a la noticia', i %></td>
+        <td><%= link_to 'Editar', edit_article_path(i) %></td>
+        <td><%= link_to 'Eliminar', i, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 <br>
-<%= link_to 'New Article', 'articles/new' %>
+<%= link_to 'Nueva Noticia', 'articles/new' %>

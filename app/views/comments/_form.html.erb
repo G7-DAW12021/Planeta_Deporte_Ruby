@@ -1,12 +1,11 @@
 <%= form_with(model: [ @article, @article.comments.build ], local: true) do |form| %>
-  <p>
-    Autor:<br>
-    TEMPORAL
-  </p>
+  <div>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+  </div>
 
   <p>
-    <%= form.label :text %><br>
-    <%= form.text_area :text %>
+    <%= form.label :texto %><br>
+    <%= form.text_area :texto %>
   </p>
 
   <p>
