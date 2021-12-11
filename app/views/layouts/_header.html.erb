@@ -1,8 +1,17 @@
 <header>
+  <% if !current_page?("/login") %>
+  <%= link_to image_tag("logo.png", :alt=>"logo", :class=>"Logo"), root_path %>
+  <% end %>
+  <%= link_to "Fútbol" %>
+  <%= link_to "Baloncesto" %>
+  <%= link_to "Tenis" %>
+  <%= link_to "Fórmula 1" %>
+  <%= link_to "eSport" %>
  <% if !signed_in? %>
-    <%= link_to "Iniciar Sesión" %>
-    <%= link_to "Registrarse" %>
+    <%= link_to "Iniciar Sesión", new_user_session_path %>
+    <%= link_to "Registrarse", new_user_registration_path %>
  <% else %>
-    <%= link_to "Cerrar Sesión" %>
+    <%= link_to "Cerrar Sesión", destroy_user_session_path, :method => :delete%>
+    <%= link_to "Perfil", edit_user_registration_path %>
  <% end %>
 </header>
