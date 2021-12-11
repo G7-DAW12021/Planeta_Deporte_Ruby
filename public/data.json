@@ -1,0 +1,254 @@
+
+{"data": [
+
+
+    { "usuarios": [
+        {"id": "1", "foto": "./fotos_BD/profile1.png", "nombre":"Pepe", "apellidos":"Moreno Pérez", "email":"pepe2301@gmail.com", "clave":"c4ca4238a0b923820dcc509a6f75849b", "tipo":"1"},
+        {"id": "2", "foto": "./fotos_BD/profile2.png", "nombre":"Laura", "apellidos":"Jiménez González", "email":"laura2560@gmail.com", "clave":"c81e728d9d4c2f636f067f89cc14862c", "tipo":"2"},
+        {"id": "3", "foto": "./fotos_BD/profile3.png", "nombre":"Rodrigo", "apellidos":"Medina Santana", "email":"rodrigomed54@gmail.com", "clave":"c81e728d9d4c2f636f067f89cc14862c", "tipo":"2"},
+        {"id": "4", "foto": "./fotos_BD/profile4.png", "nombre":"Cristina", "apellidos":"Salgado Morales", "email":"crissalmo@gmail.com", "clave":"eccbc87e4b5ce2fe28308fd9f2a7baf3", "tipo":"3"},
+        {"id": "5", "foto": "./fotos_BD/profile5.png", "nombre":"Juan", "apellidos":"García Peñate", "email":"juangar23@gmail.com", "clave":"eccbc87e4b5ce2fe28308fd9f2a7baf3", "tipo":"3"},
+        {"id": "6", "foto": "./fotos_BD/profile6.png", "nombre":"Sara", "apellidos":"Martínez Hernández", "email":"saramarher@gmail.com", "clave":"eccbc87e4b5ce2fe28308fd9f2a7baf3", "tipo":"3"},
+        {"id": "7", "foto": "./fotos_BD/profile7.png", "nombre":"Carla", "apellidos":"Domínguez Ortega", "email":"carladomort65@gmail.com", "clave":"eccbc87e4b5ce2fe28308fd9f2a7baf3", "tipo":"3"}
+    ]},
+
+
+    { "noticias": [
+
+        {"id":"1", "idautor": "2", "foto":"./fotos_BD/pochettino.jpg", "fecha":"1633512808", "titulo":"Pochettino: \"Quizá la realidad de Sergio Ramos es otra que la de 2014\"", 
+         "subtitulo":"El entrenador habla sobre Messi, Neymar, Mbappé y Sergio Ramos en 'Universo Valdano'", "seccion":"Futbol", 
+         "cuerpo":"PSG es el equipo de moda en Europa, con la oleada de fichajes que realizaron en verano Messi, Ramos, Donnarumma, Achraf o Wijnaldum sumado a una posible salida de Mbappé hace que tenga siempre el foco mediático. Y esa carga la sobrelleva en muchas ocasiones su entrenador Mauricio Pochettino, que tiene que lidiar con esta presión."
+        },
+
+        {"id":"2", "idautor": "3", "foto":"./fotos_BD/quique.jpg", "fecha":"1633522228", "titulo":"Quique Sánchez Flores: \"Michel es mi amigo, hablé con él y nos deseamos lo mejor\"", 
+         "subtitulo":"Presentado como entrenador del Getafe, asegura que tiene que \"hablar poco y trabajar mucho\"", "seccion":"Futbol", 
+         "cuerpo":"Quique Sánchez Flores fue anunciado oficialmente como sustituto de Míchel como entrenador del Getafe, en la misma rueda de prensa en la que el técnico atendió a los medios."
+        },
+
+        {"id":"3", "idautor": "2", "foto":"./fotos_BD/chiesa.jpg", "fecha":"1633519307", "titulo":"Federico Chiesa, de querar dejarlo a los 13 años a ser la estrella de Italia", 
+         "subtitulo":"La historia del futbolista que nos batió en la última Eurocopa", "seccion":"Futbol", 
+         "cuerpo":"Ser hijo de no es sencillo es ninguna faceta de la vida. El fútbol no es una excepción. El peso de un gran apellido ha supuesto una mochila demasiado pesada para buenos jugadores a los que siempre se les colocó a sus padres como un espejo. La lista es larga: Jordi Cruyff, los Zidane, Kluivert...No son muchos los que salen ganadores de esa batalla parental."
+        },
+
+        {"id":"4", "idautor": "3", "foto":"./fotos_BD/xavi.jpg", "fecha":"1636476506", "titulo":"La primera arenga de Xavi: \"Quiero intensidad y que compitáis\"", 
+         "subtitulo":"El técnico quiere que el equipo crea en sí mismo y así se lo dijo a los jugadores en la charla que mantuvo este martes en el vestuario", "seccion":"Futbol", 
+         "cuerpo":"Xavi Hernández ha comenzado a ejercer de primer entrenador del Barcelona este martes. Si un día antes era presentado entre multitudes, ahora ya se ha puesto el mono de trabajo. A primera hora ya se encontraba en la Ciudad Deportiva y lo primero que hizo fue ver a los jugadores que estaban, una gran parte de la plantilla se encuentra con sus selecciones, y hablar con ellos junto a Laporta y los miembros de la dirección deportiva del club."
+        },
+
+        {"id":"5", "idautor": "2", "foto":"./fotos_BD/vidal.jpg", "fecha":"1633514807", "titulo":"Sale a la luz un polémico vídeo de Arturo Vidal 'achispado' de más en su Ferrari", 
+         "subtitulo":"Se han compartido en las redes sociales numerosos comentarios al respecto", "seccion":"Futbol", 
+         "cuerpo":"El jugador chileno del Inter de Milán fue grabado a la salida de un local nocturno en la localidad italiana de Como mostrando claros signos de ebriedad. Al parecer, la escena sucedió hace un par de meses, durante el verano, antes de que comenzase el campeonato de la Serie A. El 'Rey Arturo' aparece en las imágenes pasándoselo bien con amigos mientras se tambalea en su caminar y hace una especie de voltereta sobre su Ferrari descapotable antes de subirse, con bastante dificultad, en el asiento del copiloto."
+        },
+
+
+
+
+        {"id":"6", "idautor": "3", "foto":"./fotos_BD/irving.jpg", "fecha":"1633512252", "titulo":"¡Bombazo en la NBA! Los Brooklyn Nets se cansan de Kyrie Irving y podrían prescindir de él esta misma temporada", 
+         "subtitulo":"El escolta se niega a recibir la vacuna y la franquicia no quiere contar con él a tiempo parcial", "seccion":"Baloncesto", 
+         "cuerpo":"Kyrie Irving sigue manteniendo en vilo a toda la NBA por su decisión de no recibir la vacuna contra el coronavirus. El base no participó en el último entrenamiento de los Netscelebrado en Brooklyn, alimentando los rumores sobre su situación en una franquicia que, poco a poco, se va cansando de una de sus estrellas."
+        },
+
+        {"id":"7", "idautor": "2", "foto":"./fotos_BD/bulls.jpg", "fecha":"1637052958", "titulo":"DeRozan y los Bulls pulverizan a unos pobres Lakers", 
+         "subtitulo":"Chicago, que llegó a ganar hasta por 30 puntos, muestra las debilidades de un equipo en el que fue expulsado Davis", "seccion":"Baloncesto", 
+         "cuerpo":"Un DeMar DeRozan magnífico, con 38 puntos (15 de 23 en tiros) y 6 asistencias, guió a los Chicago Bulls a una victoria contundente e inapelable sobre Los Angeles Lakers (103-121), que sin LeBron James siguen dando señales muy preocupantes de un equipo sin rumbo."
+        },
+
+        {"id":"8", "idautor": "3", "foto":"./fotos_BD/ricky.jpg", "fecha":"1637046118", "titulo":"Tatum y Schroder arruinan el partidazo de Ricky Rubio", 
+         "subtitulo":"El base español se sale en la segunda mitad pero los Cavs ceden ante los Celtics", "seccion":"Baloncesto", 
+         "cuerpo":"Un enorme Jayson Tatum con 23 puntos y un efectivo Dennis Schroder con seis puntos en los 76 segundos finales, facilitaron la victoria de los Boston Celtics sobre los Cleveland Cavaliers, 92-96, en el choque celebrado en el Rocket Mortgage FieldHouse."
+        },
+
+        {"id":"9", "idautor": "2", "foto":"./fotos_BD/porzingis.jpg", "fecha":"1637047858", "titulo":"Porzingis tumba a Jokic y Doncic se retira lesionado", 
+         "subtitulo":"Los Mavs logran el triunfo ante los Nuggets aunque preocupa el tobillo del esloveno", "seccion":"Baloncesto", 
+         "cuerpo":"En uno de sus partidos más destacados desde que llegó a los Mavericks, Kristaps Porzingis firmó 29 puntos y 11 rebotes y Tim Hardaway logró 13 de sus 19 puntos en el último cuarto para que el equipo tejano prevaleciera sobre los Denver Nuggets 111-101."
+        },
+
+        {"id":"10", "idautor": "3", "foto":"./fotos_BD/curry.jpg", "fecha":"1636969362", "titulo":"Stephen Curry está completamente loco: desde el logo y sobre la bocina como si no costara", 
+         "subtitulo":"Terry Rozier se presenta como la solución final para ganar a los Warriors", "seccion":"Baloncesto", 
+         "cuerpo":"Terry Rozier ganó un salto entre dos decisivo ay anotó un par de tiros libres cerca del final que ayudaron a los Charlotte Hornets a vencer 106-102 a los Golden State Warriors, que rompieron racha de siete triunfos consecutivos."
+        },
+
+
+
+        {"id":"11", "idautor": "2", "foto":"./fotos_BD/kyrgios.jpg", "fecha":"1637004559", "titulo":"La enésima rajada de Kyrgios: \"Roland Garros es la mayor jodida basura\"", 
+         "subtitulo":"El tenista australiano también confesó que Roger Federer le parece el mejor tenista de la historia", "seccion":"Tenis", 
+         "cuerpo":"No es una novedad que Nick Kyrgios es un deportista polémico. El tenista australiano suele protagonizar declaraciones y gestos en los que muestra una cara sin grises: o le aman o le odian. Cuando opina sube el pan, y tiene para todo: Grand Slams, compañeros... La última va sobre Roland Garros y un odio que no duda en sacar a la luz"
+        },
+            
+        {"id":"12", "idautor": "3", "foto":"./fotos_BD/badosa.jpg", "fecha":"1637016679", "titulo":"Paula Badosa ve rota su racha de victorias en un partido intrascendente ante Swiatek", 
+         "subtitulo":"La catalana, ya primera de su grupo, jugó pensando en la semifinal de mañana ante Garbiñe Muguruza", "seccion":"Tenis", 
+         "cuerpo":"Si había un partido que Paula Badosa podía perder era el tercero de la fase de grupos del Masters de Guadalajara. La española ya estaba matemáticamente clasificada como primera.  Incluso conocía que mañana tendrá que emplearse a fondo porque está programada en la primera semifinal, a las 21.00 horas en España, contra su compatriota Garbiñe Muguruza."
+        },
+            
+        {"id":"13", "idautor": "2", "foto":"./fotos_BD/medvedev.jpg", "fecha":"1637081805", "titulo":"Medvedev se agarra a su corona de maestro, derrota a Zverev y ya está en semifinales", 
+         "subtitulo":"El ruso, defensor de la corona en el Masters ATP, se ha beneficiado de la retirada de Berretini para colarse entre los cuatro mejores", "seccion":"Tenis", 
+         "cuerpo":"Son siete las victorias consecutivas de Daniil Medvedev en la Copa Masters. Campeón invicto el año pasado en lo que significó la despedida del O2 londinense para los maestros ya son dos partidos ganados en la presente edición del torneo, que se ha movido al Alpitour de Turín."
+        },
+            
+        {"id":"14", "idautor": "3", "foto":"./fotos_BD/federer.jpg", "fecha":"1636972605", "titulo":"Ljubicic: \"Federer se perderá probablemente Australia\"", 
+         "subtitulo":"Como consecuencia de la tercera intervención quirúrgica a la que se sometió en dieciocho meses", "seccion":"Tenis", 
+         "cuerpo":"El croata Ivan Ljubicic admitió que será muy difícil que su pupilo y campeón de veinte grandes Roger Federer llegue a la primera gran cita del año en Melbourne Park como consecuencia de la tercera intervención quirúrgica a la que se sometió en dieciocho meses."
+        },
+            
+        {"id":"15", "idautor": "2", "foto":"./fotos_BD/muguruza.jpg", "fecha":"1636799805", "titulo":"Muguruza vence a Krejcikova y se mantiene viva en la WTA Finals", 
+         "subtitulo":"Muguruza se jugará seguir adelante en el torneo en el partido ante la estonia Anett Kontaveit, ya clasificada para las semifinales", "seccion":"Tenis", 
+         "cuerpo":"La española Garbiñe Muguruza fue de menos a más para vencer este viernes por 2-6, 6-4, 6-4 a la checa Barbora Krejcikova y mantenerse con vida en la Akron WTA Finals que transcurre en Guadalajara, occidente de México. El duelo comenzó con varios errores no forzados de ambas jugadoras, la española con dificultades para colocar bien sus primeros servicios."
+        },
+
+
+
+        {"id":"16", "idautor": "3", "foto":"./fotos_BD/vegni.jpg", "fecha":"1636974522", "titulo":"Mauro Vegni desafía a Pogacar a que intente el doblete Giro-Tour", 
+         "subtitulo":"El esloveno parece que se decanta por correr la Vuelta tras defender su doble corona en la ronda francesa", "seccion":"Ciclismo", 
+         "cuerpo":"El Giro de Italia espera ver en su edición 2022 a Tadej Pogacar, doble ganador del Tour, lanzándole el reto de hacer el doblete Giro-Tour, algo que desde Chris Froome en 2018 no ha intentado ningún corredor."
+        },
+
+        {"id":"17", "idautor": "2", "foto":"./fotos_BD/schmid.jpg", "fecha":"1636652982", "titulo":"El suizo Mauro Schmid otro refuerzo para el Deceuninck", 
+         "subtitulo":"El joven ciclista deja el equipo Qhubeka NextHash y firma por dos temporadas", "seccion":"Ciclismo", 
+         "cuerpo":"El suizo de 21 años, Mauro Schmid, ganador de etapa en el Giro de Italia, procedente del Qhubeka, es el nuevo fichaje del Deceuninck Quick Step para las dos próximas temporadas. Schmid mostró su potencial durante la etapa de las pistas de tierra del Giro de Italia de este año, donde se llevó la victoria en Montalcino tras meterse en la escapada buena de la jornada."
+        },
+
+        {"id":"18", "idautor": "3", "foto":"./fotos_BD/pogacar.jpg", "fecha":"1636381482", "titulo":"Pogacar, Alaphilippe y Roglic, principales aspirantes a la Bicicleta de Oro", 
+         "subtitulo":"Los tres corredores más destacados a nivel de títulos compiten por el galardón", "seccion":"Ciclismo", 
+         "cuerpo":"Los eslovenos Tadej Pogacar y Primoz Roglic, ganadores del Tour de Francia y Vuelta a España respectivamente, y el francés Julian Alaphlippe, doble campeón del Mundo, son las principales referencias en el grupo de 12 corredores elegidos para la Bicicleta de Oro 2021 que acredita al mejor ciclista de la temporada."
+        },
+
+        {"id":"19", "idautor": "2", "foto":"./fotos_BD/teresa.jpg", "fecha":"1636904502", "titulo":"Teresa Fernández-Miranda, bronce en el Europeo de BMX", 
+         "subtitulo":"Acabó tercera en el campeonato de Europa de ciclismo BMX estilo libre en la modalidad Park", "seccion":"Ciclismo", 
+         "cuerpo":"Teresa Fernández-Miranda se adjudicó la medalla de bronce en los Campeonatos de Europa de ciclismo BMX estilo libre en la modalidad Park, que se disputan en Moscú."
+        },
+
+        {"id":"20", "idautor": "3", "foto":"./fotos_BD/froome.jpg", "fecha":"1636993902", "titulo":"Chris Froome sufrió un brote de bilharzia en el pasado Tour de Francia, parásito que ya le afectó en 2011", 
+         "subtitulo":"El ciclista argumentó sentirse muy cansado en plena ronda gala", "seccion":"Ciclismo", 
+         "cuerpo":"l británico Chris Froome (Israel Start Up Nation), cuatro veces ganador del Tour de Francia, sufrió un el pasado verano un brote de bilharzia, infección parasitaria producida por un gusano que ya padeció hace 10 años."
+        },
+
+
+
+        {"id":"21", "idautor": "2", "foto":"./fotos_BD/alonso.jpg", "fecha":"1633512702", "titulo":"Alpine: \"Fernando Alonso ha ofrecido actuaciones mágicas en varias carreras\"", 
+         "subtitulo":"Marcin Budkowski, director ejecutivo de la escudería gala, destaca el rendimiento que está ofreciendo el asturiano en el año de su regreso a la F1", "seccion":"Motor", 
+         "cuerpo":"No es la primera vez que Alpine se refiere a la magia para explicar las actuaciones de Fernando Alonso al volante del A521. Ahora han vuelto a incidir en ese concepto. Marcin Budkowski ha vuelto a elogiar al asturiano. Lo ha hecho con motivo de la previa del Gran Premio de Turquía de F1 que tendrá lugar este fin de semana en Istanbul Park."
+        },
+
+        {"id":"22", "idautor": "3", "foto":"./fotos_BD/marquez.jpg", "fecha":"1634731662", "titulo":"\"Honda ha perdido la dirección desde la lesión de Marc\"", 
+         "subtitulo":"Mick Doohan ve reflejada su situación en Márquez y, al igual que él lo consiguió, está seguro de que el ilerdense volverá a ganar: \"No ha perdido la confianza\".", "seccion":"Motor", 
+         "cuerpo":"Segundo año en blanco para Honda, marcado, de nuevo, por la lesión de Marc Márquez. El ilerdense sigue siendo su gran esperanza, de hecho, es gracias a él que la marca japonesa ha podido subirse al podio en lo que va de curso. Dos victorias que han sido claves y un podio en Aragón que fue como un regalo."
+        },
+
+        {"id":"23", "idautor": "2", "foto":"./fotos_BD/mercedes.jpg", "fecha":"1636970442", "titulo":"Mercedes estalla: \"Nos están perjudicando\"", 
+         "subtitulo":"Toto Wolff no comprende las decisiones de la FIA, y denuncia: \"Ha sido realmente vergonzoso por parte de los Comisarios\"", "seccion":"Motor", 
+         "cuerpo":"Tras este Gran Premio lleno de polémicas con el caso del alerón de Hamilton, el de Verstappen multado con 50.000 euros por romper el parc fermé y la no investigación de la FIA en la acción del '33' en la curva 4,Toto Wolff aseguró que pondrá más atención en los coches de Red Bull y manifestó que los están intentando de perjudicar."
+        },
+
+        {"id":"24", "idautor": "3", "foto":"./fotos_BD/fia.jpg", "fecha":"1636991682", "titulo":"La FIA despide a Hamilton con otra multa", 
+         "subtitulo":"Por si fuera poco el castigo que recibió el inglés en Brasil, se añadió otros 25.000 euros por desabrocharse los cinturones en la celebración con la bandera.", "seccion":"Motor", 
+         "cuerpo":"\"Es el mejor, vaya leyenda\", decía Jean Eric Vergne al acabar la cita de Brasil en referencia al gran fin de semana de Lewis Hamilton, quizás, dijo él, el mejor o más completo de su carrera."
+        },
+
+        {"id":"25", "idautor": "2", "foto":"./fotos_BD/cristina.jpg", "fecha":"1636997442", "titulo":"El cadáver de un camello se interpone en el triunfo de etapa de Cristina Gutiérrez", 
+         "subtitulo":"La española se encontró con el cadáver de un camello tras una duna, lo que le hizo perder una victoria casi segura. Pero en la general sube al segundo puesto", "seccion":"Motor", 
+         "cuerpo":"Cristina Gutiérrez tuvo la carrera en contra durante los tres primeros días, pero ha girado totalmente a su favor... o casi. Porque la piloto del Red Bull Off Road Junior Team ya es segunda del Abu Dhabi Desert Challenge en la categoría T3 después de que hoy otro de sus rivales por el título haya quedado eliminado de la pelea."
+        },
+
+
+
+        {"id":"26", "idautor": "3", "foto":"./fotos_BD/ibai.jpg", "fecha":"1636988022", "titulo":"Estos podrian ser los integrantes del equipo de 'LoL' de Ibai y Piqué", 
+         "subtitulo":"El equipo estaría casi completo a falta de 'toplaner'", "seccion":"eSports", 
+         "cuerpo":"Sin lugar a dudas, uno de los puntos fuertes de la siguiente temporada de la Superliga de 'League of Legends' de la LVP será el nuevo equipo de Ibai Llanos y Gerard Piqué. Y es que otra cosa no, pero el 'streamer' siempre ha expresado un ferviente deseo por formar su propia 'squad' competitiva."
+        },
+
+        {"id":"27", "idautor": "2", "foto":"./fotos_BD/edward.jpg", "fecha":"1636108605", "titulo":"EDward Gaming vence a Damwon Kia y se proclama campeón de los Worlds de 2021", 
+         "subtitulo":"EDward Gaming se convierte en el nuevo campeón del mundo", "seccion":"eSports", 
+         "cuerpo":"Nadie apostaba por ellos. Yo tampoco. Pero ya lo advertía Scout durante el vídeo de presentación de la final: \"No somos los 'underdog'. Venimos a jugar de tú a tú\". Dicho y hecho. EDward Gaming es el nuevo campeón del mundo de 'League of Legends'. En una serie de locura, el mejor equipo de la LPL en 2021 superó a Damwon por 3-2 en una de las mejores finales de toda la historia del 'LoL'."
+        },
+            
+        {"id":"28", "idautor": "3", "foto":"./fotos_BD/riders.jpg", "fecha":"1636295805", "titulo":"Movistar Riders: \"Nuestro objetivo es ser competitivos en los seis videojuegos en los que participamos\"", 
+         "subtitulo":"Luis Resett y ToniEmcee participaron en la charla del Sport Weekend", "seccion":"eSports", 
+         "cuerpo":"Uno de los equipos con más 'solera' dentro del panorama de los esports en España es Movistar Riders y, como tal, tuvo su espacio dentro del marco de Marca Sport Weekend. Para explicar el éxito del club participaron Luis 'Resett', director deportivo de los seis videojuegos en los que compite la franquicia y Toni 'Emcee', creador de contenido para Riders y una de las voces más autorizadas en España para hablar de FIFA."
+        },
+
+        {"id":"29", "idautor": "2", "foto":"./fotos_BD/fnatic.jpg", "fecha":"1636124022", "titulo":"Fnatic se queda fuera de los Worlds de 2021", 
+         "subtitulo":"Los británicos no lograron remontar el 0-3 de las primeras jornadas y se han quedado fuera del Mundial de 'League of Legends'", "seccion":"eSports", 
+         "cuerpo":"Van 2 de 2. Al igual que ya sucedió con Rogue, Fnatic ha sido eliminado de los Worlds de 2021 y no estará en los cuartos de final. Solo nos queda MAD Lions, y tendrá que superar un duro desafío esta tarde si quiere sobrevivir a la fase de grupos."
+        },
+
+        {"id":"30", "idautor": "3", "foto":"./fotos_BD/madlions.jpg", "fecha":"1634588622", "titulo":"MAD Lions y la locura del grupo D destroza las previsiones de los Worlds de 2021", 
+         "subtitulo":"Por primera vez en la historia de los mundiales se ha dado un cuádruple empate", "seccion":"eSports", 
+         "cuerpo":"MAD Lions ya forma parte de la historia de 'League of Legends' pase lo que pase, aunque mejor si tenemos un final feliz. Durante la jornada de hoy se produjo un hito nunca antes visto, y es que es la primera vez que vemos un cuádruple empate en los Worlds."
+        }
+    ]},
+
+    { "comentarios": [
+        {"id":"1", "idautor": "4", "idnoticia":"1", "texto":"Florentino dando lecciones."},
+        {"id":"2", "idautor": "5", "idnoticia":"1", "texto":"A todos los que critican a Pochettino, no se dan cuenta que lo dice publicamente precisamente para cubrirse las espaldas ya que aún hay prensa (como Marca) que siguen pensando que Ramos es el mejor central del mundo? Es obvio que Pochettino sabe que Ramos no es ni la mitad de lo que era en el 2014, pero lo deja claro para todos los que creen que va a ser uno de los estandartes del PSG. Viendo el estilo de Poche en el Totteham, dudo mucho que el haya pedido a Ramos, mas bien parece que se lo impuso el genio futbolistico Leonardo y ahora que está ahí, no le queda otra que contar con él (si algun día se recupera)"},
+        {"id":"3", "idautor": "6", "idnoticia":"2", "texto":"Que poca memoria hay en el fútbol.....por mucho que Michel hay sumado 1 punto de 24 los aficionados del getafe no tenemos que olvidar que Michel es leyenda del club que quedamos 6 y entramos en Europa he hizo un trabajo espectacular. Esto de insultar a un entrenador que nos llevo a Europa en el pasado.....Yo como aficionado del Getafe voy a estar muy agradecido a Michel siempre."},
+        {"id":"4", "idautor": "7", "idnoticia":"2", "texto":"En mi humilde opinión hubiese fichado a Mendilibar. No solo para el Getafe, también creo que en el Levante lo haría muy bien"},
+        {"id":"5", "idautor": "4", "idnoticia":"3", "texto":"Con este jugador va a darse lo poco comun: que el hijo de un jugador reconocido (enrico chiesa fue un crack sobre todo en la fiore) supere al padre."},
+        {"id":"6", "idautor": "5", "idnoticia":"3", "texto":"es un JUGADORAZO !!! tiene dribbling, velocidad, conducion, y sobretodo disparo, preciso y potente... ademas de correr mucho , presionar , ayudar al equipo, y es joven ...muy bueno"},
+        {"id":"7", "idautor": "6", "idnoticia":"4", "texto":"Lo de Vigo va pasar siempre durante muuuuuuuuuuuuuuuchos años en todos los partidos y en todas las competiciones. La única intensidad que va a ver este pobre hombre es al portero en sacar las bolas de las redes de su portería. No vas ganar nada d naaaadaaaaaa."},
+        {"id":"8", "idautor": "7", "idnoticia":"4", "texto":"todavia se pensara que es el entrenador."},
+        {"id":"9", "idautor": "4", "idnoticia":"5", "texto":"Inventada lo qué? Ancelotti se lo pidió y Flo había aceptado a regañadientes porque no le gustan nada estos personajes. "},
+        {"id":"10", "idautor": "5", "idnoticia":"5", "texto":"Va un poco tiki taki"},
+
+
+
+        {"id":"11", "idautor": "7", "idnoticia":"6", "texto":"Yo por 1 millón me pongo sus vacunas también y le firmó un justificante"},
+        {"id":"12", "idautor": "6", "idnoticia":"6", "texto":"Discriminación por los pensamientos, esto es insólito, cuándo hemos normalizado esta maldita locura de ver normal que alguien sea despedido por sus creencias o sus opiniones? Estamos demostrando una torpeza como sociedad que vamos a pagar muy caro."},
+        {"id":"13", "idautor": "5", "idnoticia":"7", "texto":"Estaba visto, ya desde el otro día que ganaron a SAS como le ganaron. En fin, un GERIATRICO"},
+        {"id":"14", "idautor": "4", "idnoticia":"7", "texto":"Contra los Celtics el 19 de noviembre ya deberia estar"},
+        {"id":"15", "idautor": "7", "idnoticia":"8", "texto":"Cedi Osman y Ricky han dado una exhibición de triples. Garland sigue dando recitales. Derrota pero esto es el show de Cleveland. Nunca pensé decir esto, pero salvando los años 16-17-18 con LeBron, es con la franquicia que más disfruto de ver actualmente."},
+        {"id":"16", "idautor": "6", "idnoticia":"8", "texto":"Jaaaaaaaaaaa igual es que ni te leo jajaja yo sólo leo a Wilt"},
+        {"id":"17", "idautor": "5", "idnoticia":"9", "texto":"Yo sé de uno que no va a dormir hoy..."},
+        {"id":"18", "idautor": "4", "idnoticia":"9", "texto":"Y el despertar de Campazzo? XD"},
+        {"id":"19", "idautor": "7", "idnoticia":"10", "texto":"Quien es el máximo triplista de la historia de la nba? Creo que se batió el récord hace poco."},
+        {"id":"20", "idautor": "6", "idnoticia":"10", "texto":"Dia complicado en la oficina. Curry como bien dice forzó muchísimos tiros, en vez de generar más movimiento de balón, además cuando se dio cuenta de esto quedaba minuto y medio para el final y cuando le deja el balón a Looney cuando Plumee le hace la falta quizá tuvi que tirar pero como llevaba tirando todo el último cuarto malos tiros pues¿ Un problema que creo que se debe mirar hasta que vuelva Klay es que si Curry no tiene el día y Kerr no quiere cerrar el partido con Poole nos faltan generadores de puntos propios. Ayer creo que Kerr tendría que haber estado mas abierto y poner a Poole al final o en su defecto a Payton que te va a ofrecer mas defensa que Lee, pero bueno nada qué reprochar a este equipo, veremos el martes contra Nets"},
+
+        
+        {"id":"21", "idautor": "4", "idnoticia":"11", "texto":"Lo cierto es que es un rebelde de los que ya no quedan, a medio camino entre canallita y cantamañanas. Qué decir de alguien que se esfuerza más en la Laver Cup que en los cuatro Grand Slams juntos."},
+        {"id":"22", "idautor": "5", "idnoticia":"11", "texto":"¡Menudo descubrimiento, Kyrgios! Eso ya lo sabiamos todos."},
+        {"id":"23", "idautor": "6", "idnoticia":"12", "texto":"\"La segunda clasificada en el otro grupo saldrá del duelo que disputarán de madrugada Aryna Sabalenka y Maria Sakkari\", es lo que nos dice el amigo Solsona; y yo que pensaba que estaban en el mismo grupo que Paula, tendré que desintoxicarme de tanto tenis, que ya confundo a las jugadoras."},
+        {"id":"24", "idautor": "7", "idnoticia":"12", "texto":"Yo no vi el partido pero espero q no jugara con una marcha menos como dicen. No es bueno en alta competicion. Se debe dar todo hasta en los entrenamientos. No es bueno crearte malas sensaciones. En fin espero q esto no le afecte para semifinales"},
+        {"id":"25", "idautor": "4", "idnoticia":"13", "texto":"Medvedev en arcilla es un jugador justito y con nivel mejorable, no fue capaz de ganar a Karatsev un jugador que en tierra no le gana ni a un juvenil, a parte que Medvedev siempre ha dicho por pasiva y activa que no le gusta la arcilla"},
+        {"id":"26", "idautor": "5", "idnoticia":"13", "texto":"Jajajajajajajajajaja. Después de que Djokovic retirara a rafón en Roland Garros esto es lo que os queda a los nadalistos, apoyar a Medvedev, Zverev y Thiem (cuando vuelva) para que el serbio no gane más Grand Slams. Que tristeza de afición"},
+        {"id":"27", "idautor": "6", "idnoticia":"14", "texto":"Cada vez está más claro que el Maestro irá a Winbledom y allí será su retirada deportiva. En su terrenos, en su torneo favorito y con merecidos homenajes en cada partido que dispute. Gracias por todo Señor Federer."},
+        {"id":"28", "idautor": "7", "idnoticia":"14", "texto":"A ver, todos sabemos que el Sr. Federer está de capa caida para el retiro, pero seguia dando coba como uno de los mejores tenistas de la historia que es."},
+        {"id":"29", "idautor": "4", "idnoticia":"15", "texto":"Grande, Mugu, en su cuarta participación en unas Finals, ofreció en este partido un saque afilado y una actitud positiva ¡ A por las semis!"},
+        {"id":"30", "idautor": "5", "idnoticia":"15", "texto":"bueno, con respecto a la noticia, qué tiene que hacer Garbiñe para poder pasar a la siguiente fase? (aparte de ganar y pierda Pliskova). Hay alguna combinación que ganando Garbiñe y Pliskova pase Garbiñe? o debe esperar la derrota de Pliskova?"},
+
+
+
+        {"id":"31", "idautor": "7", "idnoticia":"16", "texto":"Otros como Contador ganando giro creo que en el tour lo máximo que hizo fue 5º, Quintana en su intento en 2017 segundo en el giro y 12º en el tour, hablan bien a las claras de la dificultad de la empresa."},
+        {"id":"32", "idautor": "6", "idnoticia":"16", "texto":"¿Que acostumbra a pinchar en la crono?, 2019 le quita el podio del giro a Landa en crono, en ése mismo año gana la crono de la vuelta quitándole el rojo a Quintana, en el 2020 gana la crono de Ézaro quitándole el rojo a Carapaz y éste año gana la última crono doblando a Enric Mas."},
+        {"id":"33", "idautor": "5", "idnoticia":"17", "texto":"Con el fichaje por Quick Step a tener en cuenta en Ardenas y montaña. Igual que si se hace Marezcko por Alpecin."},
+        {"id":"34", "idautor": "4", "idnoticia":"17", "texto":"Gino Mader a casa. Este se ha caido con Marc Sulé."},
+        {"id":"35", "idautor": "7", "idnoticia":"18", "texto":"Pogacar no tiene rival, si sale otro es que está amañado."},
+        {"id":"36", "idautor": "6", "idnoticia":"18", "texto":"Pogacar, bastante claro. Roglic con Lombardía podría haberlo discutido. Lo que más me importa es que el premio se quede con este perfil bajo, para los muy aficionados, y que no se convierta en la razón de ser del ciclismo como ocurre con el Balón de Oro y el fútbol."},
+        {"id":"37", "idautor": "5", "idnoticia":"19", "texto":"Felicitaciones,Campeona!!"},
+        {"id":"38", "idautor": "4", "idnoticia":"19", "texto":"Teresa Fernández-Miranda es una campeona me encanta las acrobacias que hace y la sigo desde hace mucho tiempo"},
+        {"id":"39", "idautor": "7", "idnoticia":"20", "texto":"Lo que está claro es que algo le pasó en el Tour ya que aunque no está al nivel ya para dar guerra, sus números en la temporada le daban para estar entre los 70-80 primeros del Tour (sí, es una mierda) pero no entre los 10 peores. Demuestra el pundonor de este corredor ya que no tiene nada que demostrar y sigue ahí y encima con una enfermedad que lo fácil era irte para casa en el Tour y tratarte."},
+        {"id":"40", "idautor": "6", "idnoticia":"20", "texto":"Tras superar la enfermedad del gusano pasó a ser el mejor, pero de éso hace ya 10 años. Otra vez con lo mismo tanto tiempo después, pues por lo menos suena raro."},
+
+
+        {"id":"41", "idautor": "4", "idnoticia":"21", "texto":"Venga Marcin, que se os a abierto el cielo con las actuaciones de Fernando y la cantidad de minutos televisivos que esta consiguiendo para Alpine, si le pagaseis 30 millones al año OS seguiría saliendo barato"},
+        {"id":"42", "idautor": "5", "idnoticia":"21", "texto":"La tortuga Ocon demostro lo que sabemos de F1 tenemos claro, que con el coche de la tortuga asturiana cuello nevera puede ganar cualquiera, cualquiera menos arfonso, menudo fraude de campeon jojojoojoohohohohihiihii"},
+        {"id":"43", "idautor": "6", "idnoticia":"22", "texto":"Noticias frescas, para ése que continuamente está diciendo eso de que Honda es la fábrica más poderosa, y la que más invierte, y bla, bla, bla: el grupo VAG (llámese Ducati, tanto monta...), no contento con tener 8 motos en MotoGP el próximo año, se ha adjudicado el suministro de las motos... De Moto E!!! No se sabe con qué características, pero está firmado. Y aún hay listillos que dicen que Ducati es la fábrica pobre de MotoGP..."},
+        {"id":"44", "idautor": "7", "idnoticia":"22", "texto":"Coincido, Marquez podría llevar una nevera con ruedas y hacerla correr, pero lo que le falta a Honda es el trabajo que hacía Pedrosa"},
+        {"id":"45", "idautor": "4", "idnoticia":"23", "texto":"Supuestamente una parte del motor de Hamilton se dañó y al cambiarla, un coche que no podía la semana pasada con el Red Bull en un circuito muy similar, de repente le saca 1 segundo. Y Toti Coyotti se queja. Los antis felices con tanto barro"},
+        {"id":"46", "idautor": "5", "idnoticia":"23", "texto":"encuesta cuantos puntos mas va a tener Russell que hamilton en 2022"},
+        {"id":"47", "idautor": "6", "idnoticia":"24", "texto":"Vamos qué en ocho días Mercedes encuentra dos segundos de velocidad en su auto ajustando un par de tuercas y todo es legal, claro que si."},
+        {"id":"48", "idautor": "7", "idnoticia":"24", "texto":"Y la mala acción de Verstappen ni siquiera la revisa? Alguien duda que hay persecución contra Hamilton? Ahora más que nunca...... Que gane el Inglés, bueno, calidad le sobra, pero la FIA se seguirá inventando más presión engañosa."},
+        {"id":"49", "idautor": "4", "idnoticia":"25", "texto":"Esta debe ser una de las pocas cosas que aún no le ha pasado a Carlos Sainz."},
+        {"id":"50", "idautor": "5", "idnoticia":"25", "texto":"Se lo ha puesto la organizacion"},
+
+
+        {"id":"51", "idautor": "7", "idnoticia":"26", "texto":"Piqué, juega al fútbol o déjalo... Pero dejar de andar haciendo el tonto..., que cara tienes bastante."},
+        {"id":"52", "idautor": "6", "idnoticia":"26", "texto":"notica sobre youtuber. Correr haters ya podéis empezar a pagar vuestra frustración con el."},
+        {"id":"53", "idautor": "5", "idnoticia":"27", "texto":"Son buenisismos estan en una racha increible, lo conseguirán."},
+        {"id":"54", "idautor": "4", "idnoticia":"27", "texto":"Vaya decepción, no me gusta nada este equipo, dan pena."},
+        {"id":"55", "idautor": "7", "idnoticia":"28", "texto":"Pero que basura de noticia es esta?? Estos frikis que no saben lo que es trabajar no les importa a nadie..."},
+        {"id":"56", "idautor": "6", "idnoticia":"28", "texto":"@Blackz #1 has leído la noticia y has escrito el primer comentario. Hueles a calvo frustrado con curro penoso. Suerte en la vida loquete."},
+        {"id":"57", "idautor": "5", "idnoticia":"29", "texto":"Que pena me encantaban las jugadas de este equipo, una pena no verlas este año :("},
+        {"id":"58", "idautor": "4", "idnoticia":"29", "texto":"Me alegro este equipo esta de capa caida"},
+        {"id":"59", "idautor": "7", "idnoticia":"30", "texto":"Desde que reciben financiación de ciertas personalidades ejem, estan consiguiendo mucho xD"},
+        {"id":"60", "idautor": "6", "idnoticia":"30", "texto":"Este equipo es el mejor me encantan"}
+    ]}
+]}
