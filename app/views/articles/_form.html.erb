@@ -11,10 +11,6 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :foto %>
-    <%= form.text_field :foto %>
-  </div>
 
   <div class="field">
     <%= form.label :fecha %>
@@ -23,17 +19,22 @@
 
   <div class="field">
     <%= form.label :titulo %>
-    <%= form.text_area :titulo %>
+    <%= form.text_field :titulo %>
   </div>
 
   <div class="field">
     <%= form.label :subtitulo %>
-    <%= form.text_area :subtitulo %>
+    <%= form.text_field :subtitulo %>
   </div>
 
   <div class="field">
     <%= form.label :seccion %>
-    <%= form.text_field :seccion %>
+    <%= form.select(:seccion, ['Futbol', 'Baloncesto', 'Tenis', 'Ciclismo', 'Motor', 'eSports'] )%>
+  </div>
+
+  <div class="field">
+    <%= form.label :imagen%>
+    <%= form.file_field :imagen %>
   </div>
 
   <div class="field">

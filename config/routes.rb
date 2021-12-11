@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   delete 'articles/:id', to: 'articles#destroy'
 
   #----------------------------------Comment Routes -----------------------------------------#
-
+  get 'comments', to: 'comments#index'
+  get 'comments/new', to: 'articles#new'
+  delete 'comments/:id', to: 'comments#destroy'
 
   #----------------------------------User Routes -----------------------------------------#
   resources :users
