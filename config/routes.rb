@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :students
   get 'home/index'
   root to:'home#index'
   #devise_for :users, :path => '', path_names:
