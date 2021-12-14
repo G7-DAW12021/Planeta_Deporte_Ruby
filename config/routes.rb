@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   #----------------------------------Home & General Routes --------------------------------------------#
   root to: 'home#index'
   get 'home/index'
+  #get '/prueba', to: redirect('/client/home.html')
 
   resources :articles do
     resources :comments
