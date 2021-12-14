@@ -14,74 +14,103 @@ $(document).ready(function(){
             
             case "writer_comments_panel.html":
             case "admin_comments_panel.html":
-                data = json.data[2].comentarios;
-                var dataUsers = json.data[0].usuarios;
-                var dataNews = json.data[1].noticias;
-                var dataNewsComments=json.data[3].comentariosnoticias;
-                $('.comments_table').empty();
+                $.getJSON("http://localhost:3000/articles.json",function(json) {
+                    data = json.comentarios;
+                    //var dataUsers = json.data[0].usuarios;
+                    var dataNews = json.noticias;
+                    //var dataUsers = json.usuarios;
+                    //var dataNewsComments = json.data[3].comentariosnoticias;
+                    $('.comments_table').empty();
 
-                var th =   '<tr>\
+                    var th = '<tr>\
                                 <th class="author_th">Autor</th>\
                                 <th class="comment_th">Comentario</th>\
                                 <th class="news_th">Noticia</th>\
                                 <th class="actions_th">Acciones</th>\
                             </tr>';
-                
-                $('.comments_table').append(th);
+
+                    $('.comments_table').append(th);
+
+                    console.log(data);
+                    $.each(data, function (i) {
+                        $.each(data[i], function (k) {
+                            var name;
+                            var photo;
+                            var news;
+                            var idautor = this['idautor'];
+                            var id = this['id'];
+                            var idnoticia = this['idnoticia'];
 
 
-                $.each(data, function() {
-                    var name;
-                    var photo;
-                    var news;
-                    var idautor =this['idautor'];
-                    var id = this['id'];
+                            /*JOIN de Comentarios con Usuarios*/
+                            /*$.each(dataUsers, function (i) {
+                                if (idautor == dataUsers[i].id) {
+                                    name = dataUsers[i].nombre;
+                                    photo = dataUsers[i].foto;
+                                }
 
-                    /*JOIN de Comentarios con Usuarios*/
-                    $.each(dataUsers, function(i) {
-                        if (idautor == dataUsers[i].id) {
-                            name = dataUsers[i].nombre;
-                            photo = dataUsers[i].foto;
-                        }
+                            });*/
 
-                    });
+                            /*JOIN de Comentarios y Noticias*/
+                            /*$.each(dataNewsComments, function (j) {
+                                if (id == dataNewsComments[j].idcomentario) {
+                                    var idnew = dataNewsComments[j].idnoticia;
 
-                    /*JOIN de Comentarios y Noticias*/
-                    $.each(dataNewsComments, function(j){
-                        if(id == dataNewsComments[j].idcomentario) {
-                            var idnew = dataNewsComments[j].idnoticia;
+                                    $.each(dataNews, function (k) {
+                                        if (idnew == dataNews[k].id) {
+                                            news = dataNews[k];
 
-                            $.each(dataNews, function(k){
-                                if (idnew == dataNews[k].id) {
-                                    news = dataNews[k];
+                                        }
+                                    });
+                                }
+                            });*/
 
+
+
+
+                            /*JOIN de Comentarios con Usuarios*/
+                            /*$.each(dataUsers, function (i) {
+                                if (idautor == dataUsers[i].id) {
+                                    name = dataUsers[i].nombre;
+                                    photo = dataUsers[i].foto;
+                                }
+
+                            });*/
+
+                            /*JOIN de Comentarios y Noticias*/
+                            $.each(dataNews, function (j) {
+                                if (idnoticia == dataNews[j].id) {
+                                    news = dataNews[j];
                                 }
                             });
-                        }
+
+                            if (page == "admin_comments_panel.html") {
+
+
+                                var info = '<tr>\
+                                            <td><img class="comments_table_profile_img" title="User Img" alt="User Img" src="' + photo + '"> <p class="author_name">' + name + '</p></td>\
+                                            <td class="comment_txt">' + this['texto'] + '</td>\
+                                            <td class="comment_new_txt">' + news.titulo + '</td>\
+                                            <td class="actions_td"> \
+                                                <a class="edit_table_links" href="new_registered.html?new=' + news.id + '"> Editar comentario</a>\
+                                                <a class="remove_table_links" href=""> Eliminar comentario</a>\
+                                                <a class="answer_table_links" href="new_registered.html?new=' + news.id + '"> Responder</a> <br>\
+                                            </td>';
+                            } else {
+                                var info = '<tr>\
+                                            <td><img class="comments_table_profile_img" title="User Img" alt="User Img" src="' + photo + '"> <p class="author_name">' + name + '</p></td>\
+                                            <td class="comment_txt">' + this['texto'] + '</td>\
+                                            <td class="comment_new_txt">' + news.titulo + '</td>\
+                                            <td class="actions_td_writer"> \
+                                                <a class="remove_table_links" href=""> Eliminar comentario</a>\
+                                                <a class="answer_table_links" href="new_registered.html?new=' + news.id + '"> Responder</a> <br>\
+                                            </td>';
+                            }
+
+                            $('.comments_table').append(info);
+                        });
                     });
-                
-                    if(page == "admin_comments_panel.html") {
-                        var info = '<tr>\
-                                        <td><img class="comments_table_profile_img" title="User Img" alt="User Img" src="'+ photo + '"> <p class="author_name">'+ name+'</p></td>\
-                                        <td class="comment_txt">' + this['texto'] + '</td>\
-                                        <td class="comment_new_txt">' + news.titulo + '</td>\
-                                        <td class="actions_td"> \
-                                            <a class="edit_table_links" href="new_registered.html?new='+ news.id+ '"> Editar comentario</a>\
-                                            <a class="remove_table_links" href=""> Eliminar comentario</a>\
-                                            <a class="answer_table_links" href="new_registered.html?new='+ news.id+ '"> Responder</a> <br>\
-                                        </td>';
-                    } else {
-                        var info = '<tr>\
-                                        <td><img class="comments_table_profile_img" title="User Img" alt="User Img" src="'+ photo + '"> <p class="author_name">'+ name+'</p></td>\
-                                        <td class="comment_txt">' + this['texto'] + '</td>\
-                                        <td class="comment_new_txt">' + news.titulo + '</td>\
-                                        <td class="actions_td_writer"> \
-                                            <a class="remove_table_links" href=""> Eliminar comentario</a>\
-                                            <a class="answer_table_links" href="new_registered.html?new='+ news.id+ '"> Responder</a> <br>\
-                                        </td>';
-                    }
-                    $('.comments_table').append(info);
-                });   
+                });
 
             break;
 
@@ -186,557 +215,559 @@ $(document).ready(function(){
 
             case "sport_section_registered.html":
             case "sport_section.html":
-                data = json.data[1].noticias;//News
-                var flag = window.location.href.split("=").pop();//This indicates what section is the user in
-                $('#btn_login_out').attr("href","sport_section.html?section=" + flag+ ""); // Login out button
-                var pivot = false;
-                $('.main_new').empty();
-                $('.aside_news').empty();
-                var brdc;
-                if(page == "sport_section.html") {
-                    brdc = 'sport_section.html?section=';
-                   
-                } else {
-                    brdc = 'sport_section_registered.html?section=';
-                }
+                $.getJSON("http://localhost:3000/articles.json",function(json) {
+                    data = json.noticias;//News
+                    var flag = window.location.href.split("=").pop();//This indicates what section is the user in
+                    $('#btn_login_out').attr("href", "sport_section.html?section=" + flag + ""); // Login out button
+                    var pivot = false;
+                    $('.main_new').empty();
+                    $('.aside_news').empty();
+                    var brdc;
+                    if (page == "sport_section.html") {
+                        brdc = 'sport_section.html?section=';
 
-                /*Switch to initialize the html depending on the section*/
-                switch(flag) {
-                    case "futbol":
-                        $('#brdc_section').text('Futbol');
-                        $('#brdc_section_mobile').text('Futbol');
-                        $('#brdc_section').attr('href', brdc + 'futbol');
-                        
-                        pivot = false;
-                        var token = true;
-                        var url;
-                        //Loop to load all JSON news into the webpage
-                        for(var i= 0; i < data.length; i++) {
+                    } else {
+                        brdc = 'sport_section_registered.html?section=';
+                    }
 
-                            if(data[i].seccion == "Futbol") {
+                    /*Switch to initialize the html depending on the section*/
+                    switch (flag) {
+                        case "futbol":
+                            $('#brdc_section').text('Futbol');
+                            $('#brdc_section_mobile').text('Futbol');
+                            $('#brdc_section').attr('href', brdc + 'futbol');
 
-                                //Main New
-                                if(token == true) {
-                                    token = false;
-                                    var mainNew='<div class="main">\
-                                                    <img id="futbol'+ i +'" class="main_image" title="futbol'+ i +'" alt="futbol' + i + '" src="' +data[i].foto + '">';
+                            pivot = false;
+                            var token = true;
+                            var url;
+                            //Loop to load all JSON news into the webpage
+                            for (var i = 0; i < data.length; i++) {
 
-                                    if(page == "sport_section.html") {
-                                            url='<a class="news_links" href="new.html?new='+ data[i].id +'">';
-                                    } else {
-                                            url='<a class="news_links" href="new_registered.html?new='+ data[i].id +'">';
-                                    }
-                                    mainNew += url;     
-                                    mainNew += '<h3 id="futbol'+ i +'_text" class="news_text">'+ data[i].titulo + '</h3>\
+                                if (data[i].seccion == "Futbol") {
+
+                                    //Main New
+                                    if (token == true) {
+                                        token = false;
+                                        var mainNew = '<div class="main">\
+                                                    <img id="futbol' + i + '" class="main_image" title="futbol' + i + '" alt="futbol' + i + '" src="' + data[i].foto + '">';
+
+                                        if (page == "sport_section.html") {
+                                            url = '<a class="news_links" href="new.html?new=' + data[i].id + '">';
+                                        } else {
+                                            url = '<a class="news_links" href="new_registered.html?new=' + data[i].id + '">';
+                                        }
+                                        mainNew += url;
+                                        mainNew += '<h3 id="futbol' + i + '_text" class="news_text">' + data[i].titulo + '</h3>\
                                                     </a>\
                                                   </div>';
 
-                                    var prevSec_Div = '<div class="secondary_news"> </div>';
-                                    $('.main_new').append(mainNew);
-                                    $('.main_new').append(prevSec_Div);
+                                        var prevSec_Div = '<div class="secondary_news"> </div>';
+                                        $('.main_new').append(mainNew);
+                                        $('.main_new').append(prevSec_Div);
 
-                                }else if(window.innerWidth > 767) {
+                                    } else if (window.innerWidth > 767) {
 
-                                    //PC & Tablet
-                                    //Secondary News
-                                    if(pivot == false) {
-                                        var secondNew=' <div class="secondary_new_container">\
-                                                            <img id="futbol'+ i +'" class="secondary_images" title="futbol'+ i +'" alt="futbol' + i + '" src="' +data[i].foto + '">';
+                                        //PC & Tablet
+                                        //Secondary News
+                                        if (pivot == false) {
+                                            var secondNew = ' <div class="secondary_new_container">\
+                                                            <img id="futbol' + i + '" class="secondary_images" title="futbol' + i + '" alt="futbol' + i + '" src="' + data[i].foto + '">';
 
-                                        if(page == "sport_section.html") {
-                                                url='<a class="secondary_links" href="new.html?new='+ data[i].id +'">';
-                                        } else {
-                                                url='<a class="secondary_links" href="new_registered.html?new='+ data[i].id +'">';
-                                        }
-                                        secondNew += url;
-                                        secondNew +='<h5 id="futbol'+ i +'_text" class="news_text sport_sec_text vertical">'+ data[i].titulo + '</h5>\
+                                            if (page == "sport_section.html") {
+                                                url = '<a class="secondary_links" href="new.html?new=' + data[i].id + '">';
+                                            } else {
+                                                url = '<a class="secondary_links" href="new_registered.html?new=' + data[i].id + '">';
+                                            }
+                                            secondNew += url;
+                                            secondNew += '<h5 id="futbol' + i + '_text" class="news_text sport_sec_text vertical">' + data[i].titulo + '</h5>\
                                                     </a>\
                                                     </div>';
-                                        $('.secondary_news').append(secondNew);
-                                        pivot = true;
+                                            $('.secondary_news').append(secondNew);
+                                            pivot = true;
 
-                                    //Aside News
-                                    } else if(pivot == true) {
+                                            //Aside News
+                                        } else if (pivot == true) {
 
-                                        var asideNew='<div class="aside_new">\
-                                                            <img id="futbol'+ i +'" class="aside_images" title="futbol'+ i +'" alt="futbol'+ i +'" src="' +data[i].foto + '"/>';
+                                            var asideNew = '<div class="aside_new">\
+                                                            <img id="futbol' + i + '" class="aside_images" title="futbol' + i + '" alt="futbol' + i + '" src="' + data[i].foto + '"/>';
 
-                                        if(page == "sport_section.html") {
-                                            url='<a class="news_links" href="new.html?new='+ data[i].id +'">';
-                                        }else {
-                                            url='<a class="news_links" href="new_registered.html?new='+ data[i].id +'">';
+                                            if (page == "sport_section.html") {
+                                                url = '<a class="news_links" href="new.html?new=' + data[i].id + '">';
+                                            } else {
+                                                url = '<a class="news_links" href="new_registered.html?new=' + data[i].id + '">';
+                                            }
+                                            asideNew += url;
+                                            asideNew += '<h6 id="futbol' + i + '_text" class="news_text">' + data[i].titulo + '</h6>\
+                                                    </a>\
+                                                    </div>';
+                                            $('.aside_news').append(asideNew);
+                                            pivot = false;
                                         }
-                                        asideNew += url;
-                                        asideNew +='<h6 id="futbol'+ i +'_text" class="news_text">'+ data[i].titulo + '</h6>\
-                                                    </a>\
-                                                    </div>';               
-                                        $('.aside_news').append(asideNew);
-                                        pivot = false;
-                                    }
-                                } else {
-                                    //Mobile (All Secondary News)
-                                    var secondNewMobile=' <div class="secondary_new_container secondary_new_mobile">\
-                                                            <img id="futbol'+ i +'" class="secondary_images" title="futbol'+ i +'" alt="futbol' + i + '" src="' +data[i].foto + '">';
-
-                                    if(page == "sport_section.html") {
-                                        url='<a class="secondary_links" href="new.html?new='+ data[i].id +'">';
                                     } else {
-                                        url='<a class="secondary_links" href="new_registered.html?new='+ data[i].id +'">';
-                                    }
+                                        //Mobile (All Secondary News)
+                                        var secondNewMobile = ' <div class="secondary_new_container secondary_new_mobile">\
+                                                            <img id="futbol' + i + '" class="secondary_images" title="futbol' + i + '" alt="futbol' + i + '" src="' + data[i].foto + '">';
 
-                                    secondNewMobile+= url;
-                                    secondNewMobile+='<h5 id="futbol'+ i +'_text" class="news_text sport_sec_text vertical">'+ data[i].titulo + '</h5>\
+                                        if (page == "sport_section.html") {
+                                            url = '<a class="secondary_links" href="new.html?new=' + data[i].id + '">';
+                                        } else {
+                                            url = '<a class="secondary_links" href="new_registered.html?new=' + data[i].id + '">';
+                                        }
+
+                                        secondNewMobile += url;
+                                        secondNewMobile += '<h5 id="futbol' + i + '_text" class="news_text sport_sec_text vertical">' + data[i].titulo + '</h5>\
                                                     </a>\
-                                                    </div>';                
-                                    $('.secondary_news').append(secondNewMobile);
+                                                    </div>';
+                                        $('.secondary_news').append(secondNewMobile);
+                                    }
                                 }
                             }
-                        }
-                    break;
-                    
-                    case "baloncesto":
-                        $('#brdc_section').text('Baloncesto');
-                        $('#brdc_section_mobile').text('Baloncesto');
-                        $('#brdc_section').attr('href', brdc +'baloncesto');
-                        pivot = false;
-                        var token = true;
-                        //Loop to load all JSON news into the webpage
-                        for(var i= 0; i < data.length; i++) {
-                            if(data[i].seccion == "Baloncesto") {
+                            break;
 
-                                //Main New
-                                if(token == true) {
-                                    token = false;
-                                    var mainNew='<div class="main">\
-                                                    <img id="baloncesto'+ i +'" class="main_image" title="baloncesto'+ i +'" alt="baloncesto' + i + '" src="' +data[i].foto + '">';
+                        case "baloncesto":
+                            $('#brdc_section').text('Baloncesto');
+                            $('#brdc_section_mobile').text('Baloncesto');
+                            $('#brdc_section').attr('href', brdc + 'baloncesto');
+                            pivot = false;
+                            var token = true;
+                            //Loop to load all JSON news into the webpage
+                            for (var i = 0; i < data.length; i++) {
+                                if (data[i].seccion == "Baloncesto") {
 
-                                    if(page == "sport_section.html") {
-                                            url='<a class="news_links" href="new.html?new='+ data[i].id +'">';
-                                    } else {
-                                            url='<a class="news_links" href="new_registered.html?new='+ data[i].id +'">';
-                                    }
-                                    mainNew += url; 
-                                    mainNew += '<h3 id="baloncesto'+ i +'_text" class="news_text">'+ data[i].titulo + '</h3>\
+                                    //Main New
+                                    if (token == true) {
+                                        token = false;
+                                        var mainNew = '<div class="main">\
+                                                    <img id="baloncesto' + i + '" class="main_image" title="baloncesto' + i + '" alt="baloncesto' + i + '" src="' + data[i].foto + '">';
+
+                                        if (page == "sport_section.html") {
+                                            url = '<a class="news_links" href="new.html?new=' + data[i].id + '">';
+                                        } else {
+                                            url = '<a class="news_links" href="new_registered.html?new=' + data[i].id + '">';
+                                        }
+                                        mainNew += url;
+                                        mainNew += '<h3 id="baloncesto' + i + '_text" class="news_text">' + data[i].titulo + '</h3>\
                                                 </a>\
                                                 </div>';
-                                                        
-                                    var prevSec_Div = '<div class="secondary_news"> </div>';
-                                    $('.main_new').append(mainNew);
-                                    $('.main_new').append(prevSec_Div);
-                                }else if(window.innerWidth > 767) {
-                                    //PC & Tablet
-                                    //Secondary News
-                                    if(pivot == false) {
-                                        var secondNew=' <div class="secondary_new_container">\
-                                                            <img id="baloncesto'+ i +'" class="secondary_images" title="baloncesto'+ i +'" alt="baloncesto' + i + '" src="' +data[i].foto + '">';
 
-                                        if(page == "sport_section.html") {
-                                                url='<a class="secondary_links" href="new.html?new='+ data[i].id +'">';
-                                        } else {
-                                                url='<a class="secondary_links" href="new_registered.html?new='+ data[i].id +'">';
-                                        }
-                                        secondNew += url;
-                                        secondNew +='<h5 id="baloncesto'+ i +'_text" class="news_text sport_sec_text vertical">'+ data[i].titulo + '</h5>\
+                                        var prevSec_Div = '<div class="secondary_news"> </div>';
+                                        $('.main_new').append(mainNew);
+                                        $('.main_new').append(prevSec_Div);
+                                    } else if (window.innerWidth > 767) {
+                                        //PC & Tablet
+                                        //Secondary News
+                                        if (pivot == false) {
+                                            var secondNew = ' <div class="secondary_new_container">\
+                                                            <img id="baloncesto' + i + '" class="secondary_images" title="baloncesto' + i + '" alt="baloncesto' + i + '" src="' + data[i].foto + '">';
+
+                                            if (page == "sport_section.html") {
+                                                url = '<a class="secondary_links" href="new.html?new=' + data[i].id + '">';
+                                            } else {
+                                                url = '<a class="secondary_links" href="new_registered.html?new=' + data[i].id + '">';
+                                            }
+                                            secondNew += url;
+                                            secondNew += '<h5 id="baloncesto' + i + '_text" class="news_text sport_sec_text vertical">' + data[i].titulo + '</h5>\
                                                     </a>\
                                                     </div>';
-                                                                
-                                        $('.secondary_news').append(secondNew);
-                                        pivot = true;
 
-                                    //Aside News
-                                    } else if(pivot == true) {
+                                            $('.secondary_news').append(secondNew);
+                                            pivot = true;
 
-                                        var asideNew='<div class="aside_new">\
-                                                            <img id="baloncesto'+ i +'" class="aside_images" title="baloncesto'+ i +'" alt="baloncesto'+ i +'" src="' +data[i].foto + '"/>';
+                                            //Aside News
+                                        } else if (pivot == true) {
 
-                                        if(page == "sport_section.html") {
-                                                url='<a class="news_links" href="new.html?new='+ data[i].id +'">';
-                                        }else {
-                                                url='<a class="news_links" href="new_registered.html?new='+ data[i].id +'">';
-                                        }
-                                        asideNew += url;
-                                        asideNew +='<h6 id="baloncesto'+ i +'_text" class="news_text">'+ data[i].titulo + '</h6>\
+                                            var asideNew = '<div class="aside_new">\
+                                                            <img id="baloncesto' + i + '" class="aside_images" title="baloncesto' + i + '" alt="baloncesto' + i + '" src="' + data[i].foto + '"/>';
+
+                                            if (page == "sport_section.html") {
+                                                url = '<a class="news_links" href="new.html?new=' + data[i].id + '">';
+                                            } else {
+                                                url = '<a class="news_links" href="new_registered.html?new=' + data[i].id + '">';
+                                            }
+                                            asideNew += url;
+                                            asideNew += '<h6 id="baloncesto' + i + '_text" class="news_text">' + data[i].titulo + '</h6>\
                                                     </a>\
                                                     </div>';
-                   
-                                        $('.aside_news').append(asideNew);
-                                        pivot = false;
-                                    }
-                                } else {
-                                    //Mobile
-                                    var secondNewMobile=' <div class="secondary_new_container secondary_new_mobile">\
-                                                            <img id="baloncesto'+ i +'" class="secondary_images" title="baloncesto'+ i +'" alt="baloncesto' + i + '" src="' +data[i].foto + '">';
 
-                                    if(page == "sport_section.html") {
-                                            url='<a class="secondary_links" href="new.html?new='+ data[i].id +'">';
+                                            $('.aside_news').append(asideNew);
+                                            pivot = false;
+                                        }
                                     } else {
-                                            url='<a class="secondary_links" href="new_registered.html?new='+ data[i].id +'">';
-                                    }
-                                    secondNewMobile+= url;
-                                    secondNewMobile+='<h5 id="baloncesto'+ i +'_text" class="news_text sport_sec_text vertical">'+ data[i].titulo + '</h5>\
+                                        //Mobile
+                                        var secondNewMobile = ' <div class="secondary_new_container secondary_new_mobile">\
+                                                            <img id="baloncesto' + i + '" class="secondary_images" title="baloncesto' + i + '" alt="baloncesto' + i + '" src="' + data[i].foto + '">';
+
+                                        if (page == "sport_section.html") {
+                                            url = '<a class="secondary_links" href="new.html?new=' + data[i].id + '">';
+                                        } else {
+                                            url = '<a class="secondary_links" href="new_registered.html?new=' + data[i].id + '">';
+                                        }
+                                        secondNewMobile += url;
+                                        secondNewMobile += '<h5 id="baloncesto' + i + '_text" class="news_text sport_sec_text vertical">' + data[i].titulo + '</h5>\
                                                       </a>\
                                                       </div>';
-                                                                                 
-                                    $('.secondary_news').append(secondNewMobile);
+
+                                        $('.secondary_news').append(secondNewMobile);
+                                    }
                                 }
                             }
-                        }
-                        
-                    break;
 
-                    case "tenis":
-                        $('#brdc_section').text('Tenis');
-                        $('#brdc_section_mobile').text('Tenis');
-                        $('#brdc_section').attr('href',brdc + 'tenis');
-                        pivot = false;
-                        var token = true;
-                        //Loop to load all JSON news into the webpage
-                        for(var i= 0; i < data.length; i++) {
-                            if(data[i].seccion == "Tenis") {
+                            break;
 
-                                //Main New
-                                if(token == true) {
-                                    token = false;
-                                    var mainNew='<div class="main">\
-                                                    <img id="tenis'+ i +'" class="main_image" title="tenis'+ i +'" alt="tenis' + i + '" src="' +data[i].foto + '">';
+                        case "tenis":
+                            $('#brdc_section').text('Tenis');
+                            $('#brdc_section_mobile').text('Tenis');
+                            $('#brdc_section').attr('href', brdc + 'tenis');
+                            pivot = false;
+                            var token = true;
+                            //Loop to load all JSON news into the webpage
+                            for (var i = 0; i < data.length; i++) {
+                                if (data[i].seccion == "Tenis") {
 
-                                    if(page == "sport_section.html") {
-                                            url='<a class="news_links" href="new.html?new='+ data[i].id +'">';
-                                    } else {
-                                            url='<a class="news_links" href="new_registered.html?new='+ data[i].id +'">';
-                                    }
-                                    mainNew += url;
-                                    mainNew +='<h3 id="tenis'+ i +'_text" class="news_text">'+ data[i].titulo + '</h3>\
+                                    //Main New
+                                    if (token == true) {
+                                        token = false;
+                                        var mainNew = '<div class="main">\
+                                                    <img id="tenis' + i + '" class="main_image" title="tenis' + i + '" alt="tenis' + i + '" src="' + data[i].foto + '">';
+
+                                        if (page == "sport_section.html") {
+                                            url = '<a class="news_links" href="new.html?new=' + data[i].id + '">';
+                                        } else {
+                                            url = '<a class="news_links" href="new_registered.html?new=' + data[i].id + '">';
+                                        }
+                                        mainNew += url;
+                                        mainNew += '<h3 id="tenis' + i + '_text" class="news_text">' + data[i].titulo + '</h3>\
                                                </a>\
                                                </div>';
-                                                        
-                                    var prevSec_Div = '<div class="secondary_news"> </div>';
-                                    $('.main_new').append(mainNew);
-                                    $('.main_new').append(prevSec_Div);
-                                }else if(window.innerWidth > 767) {
-                                    //PC & Tablet
-                                    //Secondary News
-                                    if(pivot == false) {
-                                        var secondNew=' <div class="secondary_new_container">\
-                                                            <img id="tenis'+ i +'" class="secondary_images" title="tenis'+ i +'" alt="tenis' + i + '" src="' +data[i].foto + '">';
 
-                                        if(page == "sport_section.html") {
-                                                url='<a class="secondary_links" href="new.html?new='+ data[i].id +'">';
-                                        } else {
-                                                url='<a class="secondary_links" href="new_registered.html?new='+ data[i].id +'">';
-                                        }
-                                        secondNew += url;
-                                        secondNew +='<h5 id="tenis'+ i +'_text" class="news_text sport_sec_text vertical">'+ data[i].titulo + '</h5>\
+                                        var prevSec_Div = '<div class="secondary_news"> </div>';
+                                        $('.main_new').append(mainNew);
+                                        $('.main_new').append(prevSec_Div);
+                                    } else if (window.innerWidth > 767) {
+                                        //PC & Tablet
+                                        //Secondary News
+                                        if (pivot == false) {
+                                            var secondNew = ' <div class="secondary_new_container">\
+                                                            <img id="tenis' + i + '" class="secondary_images" title="tenis' + i + '" alt="tenis' + i + '" src="' + data[i].foto + '">';
+
+                                            if (page == "sport_section.html") {
+                                                url = '<a class="secondary_links" href="new.html?new=' + data[i].id + '">';
+                                            } else {
+                                                url = '<a class="secondary_links" href="new_registered.html?new=' + data[i].id + '">';
+                                            }
+                                            secondNew += url;
+                                            secondNew += '<h5 id="tenis' + i + '_text" class="news_text sport_sec_text vertical">' + data[i].titulo + '</h5>\
                                                      </a>\
                                                      </div>';
-                                                                
-                                        $('.secondary_news').append(secondNew);
-                                        pivot = true;
-                                    //Aside News
-                                    } else if(pivot == true) {
 
-                                        var asideNew='<div class="aside_new">\
-                                                            <img id="tenis'+ i +'" class="aside_images" title="tenis'+ i +'" alt="tenis'+ i +'" src="' +data[i].foto + '"/>';
+                                            $('.secondary_news').append(secondNew);
+                                            pivot = true;
+                                            //Aside News
+                                        } else if (pivot == true) {
 
-                                        if(page == "sport_section.html") {
-                                                url='<a class="news_links" href="new.html?new='+ data[i].id +'">';
-                                        }else {
-                                                url='<a class="news_links" href="new_registered.html?new='+ data[i].id +'">';
-                                        }
-                                        asideNew += url;
-                                        asideNew +='<h6 id="tenis'+ i +'_text" class="news_text">'+ data[i].titulo + '</h6>\
+                                            var asideNew = '<div class="aside_new">\
+                                                            <img id="tenis' + i + '" class="aside_images" title="tenis' + i + '" alt="tenis' + i + '" src="' + data[i].foto + '"/>';
+
+                                            if (page == "sport_section.html") {
+                                                url = '<a class="news_links" href="new.html?new=' + data[i].id + '">';
+                                            } else {
+                                                url = '<a class="news_links" href="new_registered.html?new=' + data[i].id + '">';
+                                            }
+                                            asideNew += url;
+                                            asideNew += '<h6 id="tenis' + i + '_text" class="news_text">' + data[i].titulo + '</h6>\
                                                     </a>\
                                                     </div>';
-                                                                          
-                                        $('.aside_news').append(asideNew);
-                                        pivot = false;
-                                    }
-                                } else {
-                                    //Mobile
-                                    var secondNewMobile=' <div class="secondary_new_container secondary_new_mobile">\
-                                                            <img id="tenis'+ i +'" class="secondary_images" title="tenis'+ i +'" alt="tenis' + i + '" src="' +data[i].foto + '">';
 
-                                    if(page == "sport_section.html") {
-                                            url='<a class="secondary_links" href="new.html?new='+ data[i].id +'">';
+                                            $('.aside_news').append(asideNew);
+                                            pivot = false;
+                                        }
                                     } else {
-                                            url='<a class="secondary_links" href="new_registered.html?new='+ data[i].id +'">';
-                                    }
-                                    secondNewMobile+= url;
-                                    secondNewMobile+='<h5 id="tenis'+ i +'_text" class="news_text sport_sec_text vertical">'+ data[i].titulo + '</h5>\
+                                        //Mobile
+                                        var secondNewMobile = ' <div class="secondary_new_container secondary_new_mobile">\
+                                                            <img id="tenis' + i + '" class="secondary_images" title="tenis' + i + '" alt="tenis' + i + '" src="' + data[i].foto + '">';
+
+                                        if (page == "sport_section.html") {
+                                            url = '<a class="secondary_links" href="new.html?new=' + data[i].id + '">';
+                                        } else {
+                                            url = '<a class="secondary_links" href="new_registered.html?new=' + data[i].id + '">';
+                                        }
+                                        secondNewMobile += url;
+                                        secondNewMobile += '<h5 id="tenis' + i + '_text" class="news_text sport_sec_text vertical">' + data[i].titulo + '</h5>\
                                                       </a>\
                                                       </div>';
-                                                                    
-                                    $('.secondary_news').append(secondNewMobile);
+
+                                        $('.secondary_news').append(secondNewMobile);
+                                    }
                                 }
                             }
-                        }
-                    
-                    break;
 
-                    case "ciclismo":
-                        $('#brdc_section').text('Ciclismo');
-                        $('#brdc_section_mobile').text('Ciclismo');
-                        $('#brdc_section').attr('href',brdc + 'ciclismo');
-                        pivot = false;
-                        var token = true;
-                        //Loop to load all JSON news into the webpage
-                        for(var i= 0; i < data.length; i++) {
-                            if(data[i].seccion == "Ciclismo") {
+                            break;
 
-                                //Main New
-                                if(token == true) {
-                                    token = false;
-                                    var mainNew='<div class="main">\
-                                                    <img id="ciclismo'+ i +'" class="main_image" title="ciclismo'+ i +'" alt="ciclismo' + i + '" src="' +data[i].foto + '">';
+                        case "ciclismo":
+                            $('#brdc_section').text('Ciclismo');
+                            $('#brdc_section_mobile').text('Ciclismo');
+                            $('#brdc_section').attr('href', brdc + 'ciclismo');
+                            pivot = false;
+                            var token = true;
+                            //Loop to load all JSON news into the webpage
+                            for (var i = 0; i < data.length; i++) {
+                                if (data[i].seccion == "Ciclismo") {
 
-                                    if(page == "sport_section.html") {
-                                            url='<a class="news_links" href="new.html?new='+ data[i].id +'">';
-                                    } else {
-                                            url='<a class="news_links" href="new_registered.html?new='+ data[i].id +'">';
-                                    }
-                                    mainNew += url;
-                                    mainNew +='<h3 id="ciclismo'+ i +'_text" class="news_text">'+ data[i].titulo + '</h3>\
-                                               </a>\
-                                               </div>'; 
-                                                        
-                                    var prevSec_Div = '<div class="secondary_news"> </div>';
-                                    $('.main_new').append(mainNew);
-                                    $('.main_new').append(prevSec_Div);
-                                }else if(window.innerWidth > 767) {
-                                    //PC & Tablet
-                                    //Secondary News
-                                    if(pivot == false) {
-                                        var secondNew=' <div class="secondary_new_container">\
-                                                            <img id="ciclismo'+ i +'" class="secondary_images" title="ciclismo'+ i +'" alt="ciclismo' + i + '" src="' +data[i].foto + '">';
+                                    //Main New
+                                    if (token == true) {
+                                        token = false;
+                                        var mainNew = '<div class="main">\
+                                                    <img id="ciclismo' + i + '" class="main_image" title="ciclismo' + i + '" alt="ciclismo' + i + '" src="' + data[i].foto + '">';
 
-                                        if(page == "sport_section.html") {
-                                                url='<a class="secondary_links" href="new.html?new='+ data[i].id +'">';
+                                        if (page == "sport_section.html") {
+                                            url = '<a class="news_links" href="new.html?new=' + data[i].id + '">';
                                         } else {
-                                                url='<a class="secondary_links" href="new_registered.html?new='+ data[i].id +'">';
+                                            url = '<a class="news_links" href="new_registered.html?new=' + data[i].id + '">';
                                         }
-                                        secondNew += url;
-                                        secondNew +='<h5 id="ciclismo'+ i +'_text" class="news_text sport_sec_text vertical">'+ data[i].titulo + '</h5>\
+                                        mainNew += url;
+                                        mainNew += '<h3 id="ciclismo' + i + '_text" class="news_text">' + data[i].titulo + '</h3>\
+                                               </a>\
+                                               </div>';
+
+                                        var prevSec_Div = '<div class="secondary_news"> </div>';
+                                        $('.main_new').append(mainNew);
+                                        $('.main_new').append(prevSec_Div);
+                                    } else if (window.innerWidth > 767) {
+                                        //PC & Tablet
+                                        //Secondary News
+                                        if (pivot == false) {
+                                            var secondNew = ' <div class="secondary_new_container">\
+                                                            <img id="ciclismo' + i + '" class="secondary_images" title="ciclismo' + i + '" alt="ciclismo' + i + '" src="' + data[i].foto + '">';
+
+                                            if (page == "sport_section.html") {
+                                                url = '<a class="secondary_links" href="new.html?new=' + data[i].id + '">';
+                                            } else {
+                                                url = '<a class="secondary_links" href="new_registered.html?new=' + data[i].id + '">';
+                                            }
+                                            secondNew += url;
+                                            secondNew += '<h5 id="ciclismo' + i + '_text" class="news_text sport_sec_text vertical">' + data[i].titulo + '</h5>\
                                                     </a>\
                                                     </div>';
-                                                                
-                                        $('.secondary_news').append(secondNew);
-                                        pivot = true;
 
-                                    //Aside News
-                                    } else if(pivot == true) {
+                                            $('.secondary_news').append(secondNew);
+                                            pivot = true;
 
-                                        var asideNew='<div class="aside_new">\
-                                                            <img id="ciclismo'+ i +'" class="aside_images" title="cicesports'+ i +'" alt="ciclismo'+ i +'" src="' +data[i].foto + '"/>';
+                                            //Aside News
+                                        } else if (pivot == true) {
 
-                                        if(page == "sport_section.html") {
-                                                url='<a class="news_links" href="new.html?new='+ data[i].id +'">';
-                                        }else {
-                                                url='<a class="news_links" href="new_registered.html?new='+ data[i].id +'">';
-                                        }
-                                        asideNew += url;
-                                        asideNew +='<h6 id="ciclismo'+ i +'_text" class="news_text">'+ data[i].titulo + '</h6>\
+                                            var asideNew = '<div class="aside_new">\
+                                                            <img id="ciclismo' + i + '" class="aside_images" title="cicesports' + i + '" alt="ciclismo' + i + '" src="' + data[i].foto + '"/>';
+
+                                            if (page == "sport_section.html") {
+                                                url = '<a class="news_links" href="new.html?new=' + data[i].id + '">';
+                                            } else {
+                                                url = '<a class="news_links" href="new_registered.html?new=' + data[i].id + '">';
+                                            }
+                                            asideNew += url;
+                                            asideNew += '<h6 id="ciclismo' + i + '_text" class="news_text">' + data[i].titulo + '</h6>\
                                                     </a>\
                                                     </div>';
-                                                                
-                                        $('.aside_news').append(asideNew);
-                                        pivot = false;
-                                    }
-                                } else {
-                                    //Mobile
-                                    var secondNewMobile=' <div class="secondary_new_container secondary_new_mobile">\
-                                                            <img id="ciclismo'+ i +'" class="secondary_images" title="ciclismo'+ i +'" alt="ciclismo' + i + '" src="' +data[i].foto + '">';
 
-                                    if(page == "sport_section.html") {
-                                            url='<a class="secondary_links" href="new.html?new='+ data[i].id +'">';
+                                            $('.aside_news').append(asideNew);
+                                            pivot = false;
+                                        }
                                     } else {
-                                            url='<a class="secondary_links" href="new_registered.html?new='+ data[i].id +'">';
-                                    }
-                                    secondNewMobile+= url;
-                                    secondNewMobile+='<h5 id="ciclismo'+ i +'_text" class="news_text sport_sec_text vertical">'+ data[i].titulo + '</h5>\
+                                        //Mobile
+                                        var secondNewMobile = ' <div class="secondary_new_container secondary_new_mobile">\
+                                                            <img id="ciclismo' + i + '" class="secondary_images" title="ciclismo' + i + '" alt="ciclismo' + i + '" src="' + data[i].foto + '">';
+
+                                        if (page == "sport_section.html") {
+                                            url = '<a class="secondary_links" href="new.html?new=' + data[i].id + '">';
+                                        } else {
+                                            url = '<a class="secondary_links" href="new_registered.html?new=' + data[i].id + '">';
+                                        }
+                                        secondNewMobile += url;
+                                        secondNewMobile += '<h5 id="ciclismo' + i + '_text" class="news_text sport_sec_text vertical">' + data[i].titulo + '</h5>\
                                                       </a>\
                                                       </div>';
-                                                                             
-                                    $('.secondary_news').append(secondNewMobile);
+
+                                        $('.secondary_news').append(secondNewMobile);
+                                    }
                                 }
                             }
-                        }
-                    break;
+                            break;
 
-                    case "motor":
-                        $('#brdc_section').text('Motor');
-                        $('#brdc_section_mobile').text('Motor');
-                        $('#brdc_section').attr('href',brdc + 'motor');
-                        pivot = false;
-                        var token = true;
-                        //Loop to load all JSON news into the webpage
-                        for(var i= 0; i < data.length; i++) {
-                            if(data[i].seccion == "Motor") {
+                        case "motor":
+                            $('#brdc_section').text('Motor');
+                            $('#brdc_section_mobile').text('Motor');
+                            $('#brdc_section').attr('href', brdc + 'motor');
+                            pivot = false;
+                            var token = true;
+                            //Loop to load all JSON news into the webpage
+                            for (var i = 0; i < data.length; i++) {
+                                if (data[i].seccion == "Motor") {
 
-                                //Main New
-                                if(token == true) {
-                                    token = false;
-                                    var mainNew='<div class="main">\
-                                                    <img id="motor'+ i +'" class="main_image" title="motor'+ i +'" alt="motor' + i + '" src="' +data[i].foto + '">';
+                                    //Main New
+                                    if (token == true) {
+                                        token = false;
+                                        var mainNew = '<div class="main">\
+                                                    <img id="motor' + i + '" class="main_image" title="motor' + i + '" alt="motor' + i + '" src="' + data[i].foto + '">';
 
-                                    if(page == "sport_section.html") {
-                                            url='<a class="news_links" href="new.html?new='+ data[i].id +'">';
-                                    } else {
-                                            url='<a class="news_links" href="new_registered.html?new='+ data[i].id +'">';
-                                    }
-                                    mainNew += url;
-                                    mainNew +='<h3 id="motor'+ i +'_text" class="news_text">'+ data[i].titulo + '</h3>\
-                                               </a>\
-                                               </div>'; 
-                                                        
-                                    var prevSec_Div = '<div class="secondary_news"> </div>';
-                                    $('.main_new').append(mainNew);
-                                    $('.main_new').append(prevSec_Div);
-                                }else if(window.innerWidth > 767) {
-                                    //PC & Tablet
-                                    //Secondary News
-                                    if(pivot == false) {
-                                        var secondNew=' <div class="secondary_new_container">\
-                                                            <img id="motor'+ i +'" class="secondary_images" title="motor'+ i +'" alt="motor' + i + '" src="' +data[i].foto + '">';
-
-                                        if(page == "sport_section.html") {
-                                                url='<a class="secondary_links" href="new.html?new='+ data[i].id +'">';
+                                        if (page == "sport_section.html") {
+                                            url = '<a class="news_links" href="new.html?new=' + data[i].id + '">';
                                         } else {
-                                                url='<a class="secondary_links" href="new_registered.html?new='+ data[i].id +'">';
+                                            url = '<a class="news_links" href="new_registered.html?new=' + data[i].id + '">';
                                         }
-                                        secondNew += url;
-                                        secondNew +='<h5 id="motor'+ i +'_text" class="news_text sport_sec_text vertical">'+ data[i].titulo + '</h5>\
+                                        mainNew += url;
+                                        mainNew += '<h3 id="motor' + i + '_text" class="news_text">' + data[i].titulo + '</h3>\
+                                               </a>\
+                                               </div>';
+
+                                        var prevSec_Div = '<div class="secondary_news"> </div>';
+                                        $('.main_new').append(mainNew);
+                                        $('.main_new').append(prevSec_Div);
+                                    } else if (window.innerWidth > 767) {
+                                        //PC & Tablet
+                                        //Secondary News
+                                        if (pivot == false) {
+                                            var secondNew = ' <div class="secondary_new_container">\
+                                                            <img id="motor' + i + '" class="secondary_images" title="motor' + i + '" alt="motor' + i + '" src="' + data[i].foto + '">';
+
+                                            if (page == "sport_section.html") {
+                                                url = '<a class="secondary_links" href="new.html?new=' + data[i].id + '">';
+                                            } else {
+                                                url = '<a class="secondary_links" href="new_registered.html?new=' + data[i].id + '">';
+                                            }
+                                            secondNew += url;
+                                            secondNew += '<h5 id="motor' + i + '_text" class="news_text sport_sec_text vertical">' + data[i].titulo + '</h5>\
                                                      </a>\
                                                      </div>';
-                                                                
-                                        $('.secondary_news').append(secondNew);
-                                        pivot = true;
 
-                                    //Aside News
-                                    } else if(pivot == true) {
+                                            $('.secondary_news').append(secondNew);
+                                            pivot = true;
 
-                                        var asideNew='<div class="aside_new">\
-                                                            <img id="motor'+ i +'" class="aside_images" title="motor'+ i +'" alt="motor'+ i +'" src="' +data[i].foto + '"/>';
-                                        if(page == "sport_section.html") {
-                                                url='<a class="news_links" href="new.html?new='+ data[i].id +'">';
-                                        }else {
-                                                url='<a class="news_links" href="new_registered.html?new='+ data[i].id +'">';
-                                        }
-                                        asideNew += url;
-                                        asideNew +='<h6 id="motor'+ i +'_text" class="news_text">'+ data[i].titulo + '</h6>\
+                                            //Aside News
+                                        } else if (pivot == true) {
+
+                                            var asideNew = '<div class="aside_new">\
+                                                            <img id="motor' + i + '" class="aside_images" title="motor' + i + '" alt="motor' + i + '" src="' + data[i].foto + '"/>';
+                                            if (page == "sport_section.html") {
+                                                url = '<a class="news_links" href="new.html?new=' + data[i].id + '">';
+                                            } else {
+                                                url = '<a class="news_links" href="new_registered.html?new=' + data[i].id + '">';
+                                            }
+                                            asideNew += url;
+                                            asideNew += '<h6 id="motor' + i + '_text" class="news_text">' + data[i].titulo + '</h6>\
                                                     </a>\
                                                     </div>';
-             
-                                        $('.aside_news').append(asideNew);
-                                        pivot = false;
-                                    }
-                                } else {
-                                    //Mobile
-                                    var secondNewMobile=' <div class="secondary_new_container secondary_new_mobile">\
-                                                            <img id="motor'+ i +'" class="secondary_images" title="motor'+ i +'" alt="motor' + i + '" src="' +data[i].foto + '">';
-                                    if(page == "sport_section.html") {
-                                            url='<a class="secondary_links" href="new.html?new='+ data[i].id +'">';
+
+                                            $('.aside_news').append(asideNew);
+                                            pivot = false;
+                                        }
                                     } else {
-                                            url='<a class="secondary_links" href="new_registered.html?new='+ data[i].id +'">';
-                                    }
-                                    secondNewMobile+= url;
-                                    secondNewMobile+='<h5 id="motor'+ i +'_text" class="news_text sport_sec_text vertical">'+ data[i].titulo + '</h5>\
+                                        //Mobile
+                                        var secondNewMobile = ' <div class="secondary_new_container secondary_new_mobile">\
+                                                            <img id="motor' + i + '" class="secondary_images" title="motor' + i + '" alt="motor' + i + '" src="' + data[i].foto + '">';
+                                        if (page == "sport_section.html") {
+                                            url = '<a class="secondary_links" href="new.html?new=' + data[i].id + '">';
+                                        } else {
+                                            url = '<a class="secondary_links" href="new_registered.html?new=' + data[i].id + '">';
+                                        }
+                                        secondNewMobile += url;
+                                        secondNewMobile += '<h5 id="motor' + i + '_text" class="news_text sport_sec_text vertical">' + data[i].titulo + '</h5>\
                                                       </a>\
                                                       </div>';
-                                                                      
-                                    $('.secondary_news').append(secondNewMobile);
+
+                                        $('.secondary_news').append(secondNewMobile);
+                                    }
                                 }
                             }
-                        }
-                    break;
+                            break;
 
-                    case "esports":
-                        $('#brdc_section').text('eSports');
-                        $('#brdc_section_mobile').text('eSports');
-                        $('#brdc_section').attr('href',brdc + 'esports');
-                        pivot = false;
-                        var token = true;
-                        //Loop to load all JSON news into the webpage
-                        for(var i= 0; i < data.length; i++) {
-                            if(data[i].seccion == "eSports") {
+                        case "esports":
+                            $('#brdc_section').text('eSports');
+                            $('#brdc_section_mobile').text('eSports');
+                            $('#brdc_section').attr('href', brdc + 'esports');
+                            pivot = false;
+                            var token = true;
+                            //Loop to load all JSON news into the webpage
+                            for (var i = 0; i < data.length; i++) {
+                                if (data[i].seccion == "eSports") {
 
-                                //Main New
-                                if(token == true) {
-                                    token = false;
-                                    var mainNew='<div class="main">\
-                                                    <img id="esports'+ i +'" class="main_image" title="esports'+ i +'" alt="esports' + i + '" src="' +data[i].foto + '">';
+                                    //Main New
+                                    if (token == true) {
+                                        token = false;
+                                        var mainNew = '<div class="main">\
+                                                    <img id="esports' + i + '" class="main_image" title="esports' + i + '" alt="esports' + i + '" src="' + data[i].foto + '">';
 
-                                    if(page == "sport_section.html") {
-                                            url='<a class="news_links" href="new.html?new='+ data[i].id +'">';
-                                    } else {
-                                            url='<a class="news_links" href="new_registered.html?new='+ data[i].id +'">';
-                                    }
-                                    mainNew += url;
-                                    mainNew +='<h3 id="esports'+ i +'_text" class="news_text">'+ data[i].titulo + '</h3>\
-                                               </a>\
-                                               </div>'; 
-                                                        
-                                    var prevSec_Div = '<div class="secondary_news"> </div>';
-                                    $('.main_new').append(mainNew);
-                                    $('.main_new').append(prevSec_Div);
-                                }else if(window.innerWidth > 767) {
-                                    //PC & Tablet
-                                    //Secondary News
-                                    if(pivot == false) {
-                                        var secondNew=' <div class="secondary_new_container">\
-                                                            <img id="esports'+ i +'" class="secondary_images" title="esports'+ i +'" alt="esports' + i + '" src="' +data[i].foto + '">';
-
-                                        if(page == "sport_section.html") {
-                                                url='<a class="secondary_links" href="new.html?new='+ data[i].id +'">';
+                                        if (page == "sport_section.html") {
+                                            url = '<a class="news_links" href="new.html?new=' + data[i].id + '">';
                                         } else {
-                                                url='<a class="secondary_links" href="new_registered.html?new='+ data[i].id +'">';
+                                            url = '<a class="news_links" href="new_registered.html?new=' + data[i].id + '">';
                                         }
-                                        secondNew += url;
-                                        secondNew +='<h5 id="esports'+ i +'_text" class="news_text sport_sec_text vertical">'+ data[i].titulo + '</h5>\
+                                        mainNew += url;
+                                        mainNew += '<h3 id="esports' + i + '_text" class="news_text">' + data[i].titulo + '</h3>\
+                                               </a>\
+                                               </div>';
+
+                                        var prevSec_Div = '<div class="secondary_news"> </div>';
+                                        $('.main_new').append(mainNew);
+                                        $('.main_new').append(prevSec_Div);
+                                    } else if (window.innerWidth > 767) {
+                                        //PC & Tablet
+                                        //Secondary News
+                                        if (pivot == false) {
+                                            var secondNew = ' <div class="secondary_new_container">\
+                                                            <img id="esports' + i + '" class="secondary_images" title="esports' + i + '" alt="esports' + i + '" src="' + data[i].foto + '">';
+
+                                            if (page == "sport_section.html") {
+                                                url = '<a class="secondary_links" href="new.html?new=' + data[i].id + '">';
+                                            } else {
+                                                url = '<a class="secondary_links" href="new_registered.html?new=' + data[i].id + '">';
+                                            }
+                                            secondNew += url;
+                                            secondNew += '<h5 id="esports' + i + '_text" class="news_text sport_sec_text vertical">' + data[i].titulo + '</h5>\
                                                      </a>\
                                                      </div>';
-                                                                
-                                        $('.secondary_news').append(secondNew);
-                                        pivot = true;
 
-                                    //Aside News
-                                    } else if(pivot == true) {
+                                            $('.secondary_news').append(secondNew);
+                                            pivot = true;
 
-                                        var asideNew='<div class="aside_new">\
-                                                            <img id="esports'+ i +'" class="aside_images" title="esports'+ i +'" alt="esports'+ i +'" src="' +data[i].foto + '"/>';
-                                        if(page == "sport_section.html") {
-                                                url='<a class="news_links" href="new.html?new='+ data[i].id +'">';
-                                        }else {
-                                                url='<a class="news_links" href="new_registered.html?new='+ data[i].id +'">';
-                                        }
-                                        asideNew += url;
-                                        asideNew +='<h6 id="esports'+ i +'_text" class="news_text">'+ data[i].titulo + '</h6>\
+                                            //Aside News
+                                        } else if (pivot == true) {
+
+                                            var asideNew = '<div class="aside_new">\
+                                                            <img id="esports' + i + '" class="aside_images" title="esports' + i + '" alt="esports' + i + '" src="' + data[i].foto + '"/>';
+                                            if (page == "sport_section.html") {
+                                                url = '<a class="news_links" href="new.html?new=' + data[i].id + '">';
+                                            } else {
+                                                url = '<a class="news_links" href="new_registered.html?new=' + data[i].id + '">';
+                                            }
+                                            asideNew += url;
+                                            asideNew += '<h6 id="esports' + i + '_text" class="news_text">' + data[i].titulo + '</h6>\
                                                     </a>\
                                                     </div>';
-                                                                
-                                        $('.aside_news').append(asideNew);
-                                        pivot = false;
-                                    }
-                                } else {
-                                    //Mobile
-                                    var secondNewMobile=' <div class="secondary_new_container secondary_new_mobile">\
-                                                            <img id="esports'+ i +'" class="secondary_images" title="esports'+ i +'" alt="esports' + i + '" src="' +data[i].foto + '">';
 
-                                    if(page == "sport_section.html") {
-                                            url='<a class="secondary_links" href="new.html?new='+ data[i].id +'">';
+                                            $('.aside_news').append(asideNew);
+                                            pivot = false;
+                                        }
                                     } else {
-                                            url='<a class="secondary_links" href="new_registered.html?new='+ data[i].id +'">';
-                                    }
-                                    secondNewMobile+= url;
-                                    secondNewMobile+='<h5 id="esports'+ i +'_text" class="news_text sport_sec_text vertical">'+ data[i].titulo + '</h5>\
+                                        //Mobile
+                                        var secondNewMobile = ' <div class="secondary_new_container secondary_new_mobile">\
+                                                            <img id="esports' + i + '" class="secondary_images" title="esports' + i + '" alt="esports' + i + '" src="' + data[i].foto + '">';
+
+                                        if (page == "sport_section.html") {
+                                            url = '<a class="secondary_links" href="new.html?new=' + data[i].id + '">';
+                                        } else {
+                                            url = '<a class="secondary_links" href="new_registered.html?new=' + data[i].id + '">';
+                                        }
+                                        secondNewMobile += url;
+                                        secondNewMobile += '<h5 id="esports' + i + '_text" class="news_text sport_sec_text vertical">' + data[i].titulo + '</h5>\
                                                       </a>\
                                                       </div>';
-                                                                
-                                    $('.secondary_news').append(secondNewMobile);
+
+                                        $('.secondary_news').append(secondNewMobile);
+                                    }
                                 }
                             }
-                        }
-                    break;
-                };
+                            break;
+                    };
+                });
             break;
 
             case "new_registered.html":
@@ -910,5 +941,5 @@ $(document).ready(function(){
                 $('.comments').append(array);
             break;
         }
-    //});
+    //}); -> del getJSON general
 });
