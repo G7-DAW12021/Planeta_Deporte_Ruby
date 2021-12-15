@@ -43,6 +43,12 @@ def destroy
   redirect_to root_path
 end
 
+def sendToken
+  @user = current_user
+  #render json: @user
+  json_response(@user)
+end
+
 private
 
 def user_params

@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-
+  include Response
 
   helper_method :logged_in?
   helper_method :current_user

@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   #----------------------------------Home & General Routes --------------------------------------------#
   root to: 'home#index'
   get 'home/index'
-  #get '/prueba', to: redirect('/client/home.html')
 
   resources :articles do
     resources :comments
@@ -23,6 +22,7 @@ Rails.application.routes.draw do
 
   #----------------------------------User Routes -----------------------------------------#
   resources :users
+  get 'sendToken', to: 'users#sendToken'
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
