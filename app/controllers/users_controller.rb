@@ -9,7 +9,8 @@ def create
   @user = User.new(user_params)
   if @user.save
     session[:user_id] = @user.id
-    redirect_to user_path(@user)
+    #redirect_to user_path(@user)
+    redirect_to "/client/home_registered.html"
   else
     render :new
   end
@@ -45,7 +46,6 @@ end
 
 def sendToken
   @user = current_user
-  #render json: @user
   json_response(@user)
 end
 

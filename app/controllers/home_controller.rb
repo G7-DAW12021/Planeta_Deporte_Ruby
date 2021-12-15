@@ -1,5 +1,10 @@
 class HomeController < ApplicationController
   def index
-    redirect_to '/client/home.html'
+    if logged_in?
+      redirect_to '/client/home_registered.html'
+    else
+      redirect_to '/client/home.html'
+    end
+
   end
 end
