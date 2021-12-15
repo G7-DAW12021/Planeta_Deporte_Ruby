@@ -4,7 +4,13 @@ $(document).ready(function(){
     /*--------------------------------------------------------------------------Retrieve data from JSON file-----------------------------------------------------------------------*/
     //$.getJSON("data.json",function(json) {
     //$.getJSON("http://localhost:3000/articles.json",function(json) {
-        /*To know what html file is loaded*/ 
+        /*To know what html file is loaded*/
+        $.getJSON("http://localhost:3000/sendToken",function(json) {
+            var prueba = json;
+            console.log(prueba);
+
+        });
+
         var path = window.location.pathname;
         var page = path.split("/").pop();
         var data;
