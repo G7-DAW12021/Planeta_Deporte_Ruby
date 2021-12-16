@@ -1,16 +1,6 @@
 
 /*Wait for the document to be ready*/
 $(document).ready(function(){
-    /*--------------------------------------------------------------------------Retrieve data from JSON file-----------------------------------------------------------------------*/
-    //$.getJSON("data.json",function(json) {
-    //$.getJSON("http://localhost:3000/articles.json",function(json) {
-        /*To know what html file is loaded*/
-        $.getJSON("http://localhost:3000/sendToken",function(json) {
-            var prueba = json;
-            console.log(prueba);
-
-        });
-
         var path = window.location.pathname;
         var page = path.split("/").pop();
         var data;
@@ -946,6 +936,23 @@ $(document).ready(function(){
 
                 $('.comments').append(array);
             break;
+
+            case "profile.html":
+                // Get the current user type to filter between admin and writer
+                $.getJSON("http://localhost:3000/sendToken",function(json) {
+                    localStorage.setItem("Token", json["tipo"])
+                });
+                var token = localStorage.getItem("Token");
+                console.log(token);
+                if(token == 1) {
+                    $('#mobile_panel_link').attr("href","admin_content_panel.html");
+                    $('#pc_tablet_panel_link').attr("href","admin_content_panel.html");
+
+                } else if ( token == 2) {
+                    $('#mobile_panel_link').attr("href","writer_content_panel.html");
+                    $('#pc_tablet_panel_link').attr("href","writer_content_panel.html");
+                }
+                break;
+
         }
-    //}); -> del getJSON general
 });
