@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :articles do
     resources :comments
   end
+
+  resources :users
   #----------------------------------Article Routes -----------------------------------------#
   get 'articles', to: 'articles#index'
   get 'articles/new', to: 'articles#new'
@@ -21,7 +23,8 @@ Rails.application.routes.draw do
   delete 'comments/:id', to: 'comments#destroy'
 
   #----------------------------------User Routes -----------------------------------------#
-  resources :users
+
+  get 'users', to: 'users#index'
   get 'sendToken', to: 'users#sendToken'
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'

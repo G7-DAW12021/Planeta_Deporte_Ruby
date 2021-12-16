@@ -5,6 +5,7 @@ class ArticlesController < ApplicationController
   # GET /articles ; /articles.json
   def index
     @articles = Article.all
+    json_response(@articles)
   end
 
   # GET /articles/id ; /articles/id.json

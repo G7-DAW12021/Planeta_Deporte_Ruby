@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
   # GET /comments ; /comments.json
   def index
     @comments = Comment.all
+    json_response(@comments)
   end
 
   # POST /articles/id/comments

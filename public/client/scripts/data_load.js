@@ -4,18 +4,28 @@ $(document).ready(function(){
         var path = window.location.pathname;
         var page = path.split("/").pop();
         var data;
-    
         /*Flow control depending of the html document loaded*/
         switch(page) {
             
             case "writer_comments_panel.html":
             case "admin_comments_panel.html":
-                $.getJSON("http://localhost:3000/articles.json",function(json) {
-                    data = json.comentarios;
-                    //var dataUsers = json.data[0].usuarios;k
-                    var dataNews = json.noticias;
-                    //var dataUsers = json.usuarios;
-                    //var dataNewsComments = json.data[3].comentariosnoticias;
+                    $.getJSON("http://localhost:3000/comments",function(json) {
+                        localStorage.setItem("Comentarios", JSON.stringify(json))
+                    });
+
+                    $.getJSON("http://localhost:3000/articles",function(json) {
+                        localStorage.setItem("Articulos", JSON.stringify(json))
+                    });
+
+                    $.getJSON("http://localhost:3000/users",function(json) {
+                        localStorage.setItem("Usuarios", JSON.stringify(json))
+                    });
+                    data = JSON.parse(localStorage.getItem("Comentarios"));
+                    var dataNews = JSON.parse(localStorage.getItem("Articulos"));
+                    var dataUsers = JSON.parse(localStorage.getItem("Usuarios"));
+                    localStorage.clear()
+
+
                     $('.comments_table').empty();
 
                     var th = '<tr>\
@@ -27,51 +37,21 @@ $(document).ready(function(){
 
                     $('.comments_table').append(th);
 
-                    console.log(data);
                     $.each(data, function (i) {
-                        $.each(data[i], function (k) {
                             var name;
                             var photo;
                             var news;
-                            var idautor = this['idautor'];
-                            var id = this['id'];
-                            var idnoticia = this['idnoticia'];
+                            var idautor = this['user_id'];
+                            var idnoticia = this['article_id'];
 
-
-                            /*JOIN de Comentarios con Usuarios*/
-                            /*$.each(dataUsers, function (i) {
+                            /*JOIN de Comentarios y Usuarios*/
+                            $.each(dataUsers, function (i) {
                                 if (idautor == dataUsers[i].id) {
                                     name = dataUsers[i].nombre;
                                     photo = dataUsers[i].foto;
                                 }
 
-                            });*/
-
-                            /*JOIN de Comentarios y Noticias*/
-                            /*$.each(dataNewsComments, function (j) {
-                                if (id == dataNewsComments[j].idcomentario) {
-                                    var idnew = dataNewsComments[j].idnoticia;
-
-                                    $.each(dataNews, function (k) {
-                                        if (idnew == dataNews[k].id) {
-                                            news = dataNews[k];
-
-                                        }
-                                    });
-                                }
-                            });*/
-
-
-
-
-                            /*JOIN de Comentarios con Usuarios*/
-                            /*$.each(dataUsers, function (i) {
-                                if (idautor == dataUsers[i].id) {
-                                    name = dataUsers[i].nombre;
-                                    photo = dataUsers[i].foto;
-                                }
-
-                            });*/
+                            });
 
                             /*JOIN de Comentarios y Noticias*/
                             $.each(dataNews, function (j) {
@@ -81,7 +61,6 @@ $(document).ready(function(){
                             });
 
                             if (page == "admin_comments_panel.html") {
-
 
                                 var info = '<tr>\
                                             <td><img class="comments_table_profile_img" title="User Img" alt="User Img" src="' + photo + '"> <p class="author_name">' + name + '</p></td>\
@@ -104,17 +83,14 @@ $(document).ready(function(){
                             }
 
                             $('.comments_table').append(info);
-                        });
                     });
-                });
-
             break;
 
             case "writer_content_panel.html":
             case "admin_content_panel.html":
-                $.getJSON("http://localhost:3000/articles.json",function(json) {
+                $.getJSON("http://localhost:3000/articles",function(json) {
 
-                    data = json.noticias;
+                    data = json;
                     $('.content_section').empty();
                     var location;
 
@@ -146,40 +122,42 @@ $(document).ready(function(){
             break;
 
             case "admin_users_panel.html":
-                data = json.data[0].usuarios;
-                $('.users_table').empty();
-                var th =   '<tr>\
-                                <th>Foto</th>\
-                                <th>Nombre</th>\
-                                <th>Apellido</th>\
-                                <th>Email</th>\
-                                <th>Clave (Hash)</th>\
-                                <th>Acciones</th>\
-                            </tr>';
-
-                $('.users_table').append(th);
-
-                $.each(data, function() {
-                    var info = '<tr>\
-                                    <td><img class="users_table_profile_img" title="User Img" alt="User Img" src="'+ this['foto']+ '"></td>\
-                                    <td>' + this['nombre'] + '</td>\
-                                    <td>' + this['apellidos'] + '</td>\
-                                    <td>' + this['email'] + '</td>\
-                                    <td class="hash_td">' + this['clave'] + '</td>\
-                                    <td>\
-                                        <div class="edit_remove_btns_V2">\
-                                            <button class="button_edit_V2" onclick="window.location.href= \'create_user.html\'">\
-                                                <img  class="edit_delete_V2" title="Edit" alt="Edit" src="img/edit.png">\
-                                            </button>\
-                                            <button class="button_delete_V2" type="button">\
-                                                <img class="edit_delete_V2" title="Delete" alt="Delete" src="img/delete.png">\
-                                            </button>\
-                                        </div>\
-                                    </td>\
+                $.getJSON("http://localhost:3000/users",function(json) {
+                    data = json;
+                    console.log(data);
+                    $('.users_table').empty();
+                    var th = '<tr>\
+                                    <th>Foto</th>\
+                                    <th>Nombre</th>\
+                                    <th>Apellido</th>\
+                                    <th>Email</th>\
+                                    <th>Clave (Hash)</th>\
+                                    <th>Acciones</th>\
                                 </tr>';
-                    $('.users_table').append(info);
+
+                    $('.users_table').append(th);
+
+                    $.each(data, function () {
+                        var info = '<tr>\
+                                        <td><img class="users_table_profile_img" title="User Img" alt="User Img" src="' + this['foto'] + '"></td>\
+                                        <td>' + this['nombre'] + '</td>\
+                                        <td>' + this['apellidos'] + '</td>\
+                                        <td>' + this['email'] + '</td>\
+                                        <td class="hash_td">' + this['clave_digest'] + '</td>\
+                                        <td>\
+                                            <div class="edit_remove_btns_V2">\
+                                                <button class="button_edit_V2" onclick="window.location.href= \'create_user.html\'">\
+                                                    <img  class="edit_delete_V2" title="Edit" alt="Edit" src="img/edit.png">\
+                                                </button>\
+                                                <button class="button_delete_V2" type="button">\
+                                                    <img class="edit_delete_V2" title="Delete" alt="Delete" src="img/delete.png">\
+                                                </button>\
+                                            </div>\
+                                        </td>\
+                                    </tr>';
+                        $('.users_table').append(info);
+                    });
                 });
-            
             break;
 
             case "home_registered.html":
@@ -211,8 +189,8 @@ $(document).ready(function(){
 
             case "sport_section_registered.html":
             case "sport_section.html":
-                $.getJSON("http://localhost:3000/articles.json",function(json) {
-                    data = json.noticias;//News
+                $.getJSON("http://localhost:3000/articles",function(json) {
+                    data = json;//News
                     var flag = window.location.href.split("=").pop();//This indicates what section is the user in
                     $('#btn_login_out').attr("href", "sport_section.html?section=" + flag + ""); // Login out button
                     var pivot = false;
