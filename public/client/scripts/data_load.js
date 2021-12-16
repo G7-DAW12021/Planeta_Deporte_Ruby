@@ -12,7 +12,7 @@ $(document).ready(function(){
             case "admin_comments_panel.html":
                 $.getJSON("http://localhost:3000/articles.json",function(json) {
                     data = json.comentarios;
-                    //var dataUsers = json.data[0].usuarios;
+                    //var dataUsers = json.data[0].usuarios;k
                     var dataNews = json.noticias;
                     //var dataUsers = json.usuarios;
                     //var dataNewsComments = json.data[3].comentariosnoticias;
