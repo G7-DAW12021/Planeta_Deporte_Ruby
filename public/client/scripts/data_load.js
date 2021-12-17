@@ -10,20 +10,20 @@ $(document).ready(function(){
             case "writer_comments_panel.html":
             case "admin_comments_panel.html":
                     $.getJSON("http://localhost:3000/comments",function(json) {
-                        localStorage.setItem("Comentarios", JSON.stringify(json))
+                        localStorage.setItem("Comentarios", JSON.stringify(json));
                     });
 
                     $.getJSON("http://localhost:3000/articles",function(json) {
-                        localStorage.setItem("Articulos", JSON.stringify(json))
+                        localStorage.setItem("Articulos", JSON.stringify(json));
                     });
 
                     $.getJSON("http://localhost:3000/users",function(json) {
-                        localStorage.setItem("Usuarios", JSON.stringify(json))
+                        localStorage.setItem("Usuarios", JSON.stringify(json));
                     });
                     data = JSON.parse(localStorage.getItem("Comentarios"));
                     var dataNews = JSON.parse(localStorage.getItem("Articulos"));
                     var dataUsers = JSON.parse(localStorage.getItem("Usuarios"));
-                    localStorage.clear()
+                    localStorage.clear();
 
 
                     $('.comments_table').empty();
@@ -742,24 +742,26 @@ $(document).ready(function(){
                 });
             break;
 
+            //Mirar lo de refresh
             case "new_registered.html":
             case "new.html":
-
                 $.getJSON("http://localhost:3000/articles",function(json) {
-                    localStorage.setItem("Articulos", JSON.stringify(json))
+                    localStorage.setItem("Articulos", JSON.stringify(json));
+                    console.log(JSON.parse(localStorage.getItem("Articulos")));
                 });
 
                 $.getJSON("http://localhost:3000/comments",function(json) {
-                    localStorage.setItem("Comentarios", JSON.stringify(json))
+                    localStorage.setItem("Comentarios", JSON.stringify(json));
                 });
 
                 $.getJSON("http://localhost:3000/users",function(json) {
-                    localStorage.setItem("Usuarios", JSON.stringify(json))
+                    localStorage.setItem("Usuarios", JSON.stringify(json));
                 });
                 data = JSON.parse(localStorage.getItem("Articulos"));//News
+                console.log(data);
                 var dataComments = JSON.parse(localStorage.getItem("Comentarios"));
                 var dataUsers = JSON.parse(localStorage.getItem("Usuarios"));
-                localStorage.clear()
+                localStorage.clear();
 
 
                 var flag = window.location.href.split("=").pop();//This indicates what new has been selected

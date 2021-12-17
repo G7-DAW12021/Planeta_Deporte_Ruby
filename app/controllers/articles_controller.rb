@@ -37,7 +37,9 @@ class ArticlesController < ApplicationController
   def update
 
     if @article.update(article_params)
-      redirect_to @article
+      #redirect_to @article
+      id = @article.id
+      redirect_to '/client/new_registered.html?new=' + id.to_s
     else
       render 'edit'
     end
