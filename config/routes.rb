@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
   get 'users', to: 'users#index'
   get 'sendToken', to: 'users#sendToken'
+  delete 'users/:id', to: 'users#destroy'
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'

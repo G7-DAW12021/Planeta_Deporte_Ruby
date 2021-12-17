@@ -24,12 +24,14 @@
 
   <% if logged_in? && current_user.tipo == "1" %>
     <%= f.label :tipo %><br>
-    <%= f.text_field :tipo %>
+    <%= f.text_field :tipo %><br><br>
+    <%= f.submit "Crear usuario" %>
   <% else %>
 
     <%= f.hidden_field :tipo, :value => "3" %>
+    <%= f.submit "Registrarse" %>
 
   <% end %>
 
-  <%= f.submit "Registrarse" %>
+
 <% end %>

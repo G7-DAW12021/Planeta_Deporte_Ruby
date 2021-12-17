@@ -108,7 +108,7 @@ $(document).ready(function(){
                                         <button onclick="'+ editLocation +'" class="button_edit">\
                                             <img  class="edit_delete" title="Edit" alt="Edit" src="img/edit.png">\
                                         </button>\
-                                        <button onclick="'+ deleteArticle(data[i].id) +'" class="button_delete" type="button">\
+                                        <button class="button_delete" type="button">\
                                             <img class="edit_delete" title="Delete" alt="Delete" src="img/delete.png">\
                                         </button>\
                                     </div>\
@@ -121,9 +121,9 @@ $(document).ready(function(){
 
             //Arreglar el DELETE
             case "admin_users_panel.html":
+
                 $.getJSON("http://localhost:3000/users",function(json) {
                     data = json;
-                    console.log(data);
                     $('.users_table').empty();
                     var th = '<tr>\
                                     <th>Foto</th>\
@@ -148,7 +148,7 @@ $(document).ready(function(){
                                                 <button class="button_edit_V2" onclick="window.location.href= \'http://localhost:3000/users/'+ this['id']+ '/edit\'">\
                                                     <img  class="edit_delete_V2" title="Edit" alt="Edit" src="img/edit.png">\
                                                 </button>\
-                                                <button class="button_delete_V2" type="button">\
+                                                <button  class="button_delete_V2" onclick="deleteUser('+this['id']+')" type="button">\
                                                     <img class="edit_delete_V2" title="Delete" alt="Delete" src="img/delete.png">\
                                                 </button>\
                                             </div>\
@@ -182,6 +182,7 @@ $(document).ready(function(){
 
                     $('#mobile_new3_link').attr("href","new_registered.html?new=4");
                     $('#mobile_new4_link').attr("href","new_registered.html?new=6");
+                    //$('.header_profile_img_V2').attr("src", "" + user.foto);
                 }
 
             break;
@@ -927,8 +928,9 @@ $(document).ready(function(){
 
                 // Get the current user type to filter between admin and writer
                 $.getJSON("http://localhost:3000/sendToken",function(json) {
-                    localStorage.setItem("Token", json["tipo"])
-                    localStorage.setItem("Idsent", json["id"])
+                    localStorage.setItem("Token", json["tipo"]);
+                    localStorage.setItem("Idsent", json["id"]);
+                    //localStorage.setItem("Usuario", json);
 
                 });
                 var token = localStorage.getItem("Token");
