@@ -86,31 +86,28 @@ $(document).ready(function(){
                     });
             break;
 
+            //Arreglar el DELETE
             case "writer_content_panel.html":
             case "admin_content_panel.html":
-                $.getJSON("http://localhost:3000/articles",function(json) {
 
+                $.getJSON("http://localhost:3000/articles",function(json) {
                     data = json;
                     $('.content_section').empty();
-                    var location;
-
-                    if(page == "writer_content_panel.html") {
-                        location = "window.location.href='writer_create_news.html'";
-                    } else {
-                        location = "window.location.href='create_news.html'";
-                    }
+                    var editLocation;
 
                     $.each(data, function(i) {
+                        editLocation = "window.location.href='http://localhost:3000/articles/"+ data[i].id + "/edit'";
+
                         var info=   '<div class="div_content_panel_new">\
                                     <div onclick= "window.location.href=\'new_registered.html?new='+ data[i].id +'\'">\
                                     <img class="img_content_panel_new" title="New" alt="New" src="'+ this['foto']+ '">\
                                     <p class="text_content_panel_new">'+ this['titulo'] + '</p>\
                                     </div>\
                                     <div class="edit_remove_btns">\
-                                        <button onclick="'+ location +'" class="button_edit">\
+                                        <button onclick="'+ editLocation +'" class="button_edit">\
                                             <img  class="edit_delete" title="Edit" alt="Edit" src="img/edit.png">\
                                         </button>\
-                                        <button class="button_delete" type="button">\
+                                        <button onclick="'+ deleteArticle(data[i].id) +'" class="button_delete" type="button">\
                                             <img class="edit_delete" title="Delete" alt="Delete" src="img/delete.png">\
                                         </button>\
                                     </div>\
@@ -121,6 +118,7 @@ $(document).ready(function(){
 
             break;
 
+            //Arreglar el DELETE
             case "admin_users_panel.html":
                 $.getJSON("http://localhost:3000/users",function(json) {
                     data = json;
@@ -146,7 +144,7 @@ $(document).ready(function(){
                                         <td class="hash_td">' + this['clave_digest'] + '</td>\
                                         <td>\
                                             <div class="edit_remove_btns_V2">\
-                                                <button class="button_edit_V2" onclick="window.location.href= \'create_user.html\'">\
+                                                <button class="button_edit_V2" onclick="window.location.href= \'http://localhost:3000/users/'+ this['id']+ '/edit\'">\
                                                     <img  class="edit_delete_V2" title="Edit" alt="Edit" src="img/edit.png">\
                                                 </button>\
                                                 <button class="button_delete_V2" type="button">\
@@ -746,10 +744,24 @@ $(document).ready(function(){
 
             case "new_registered.html":
             case "new.html":
-                data = json.data[1].noticias;//News
-                dataUsers=json.data[0].usuarios;
-                dataComments = json.data[2].comentarios;
-                dataUserComments = json.data[3].comentariosnoticias;
+
+                $.getJSON("http://localhost:3000/articles",function(json) {
+                    localStorage.setItem("Articulos", JSON.stringify(json))
+                });
+
+                $.getJSON("http://localhost:3000/comments",function(json) {
+                    localStorage.setItem("Comentarios", JSON.stringify(json))
+                });
+
+                $.getJSON("http://localhost:3000/users",function(json) {
+                    localStorage.setItem("Usuarios", JSON.stringify(json))
+                });
+                data = JSON.parse(localStorage.getItem("Articulos"));//News
+                var dataComments = JSON.parse(localStorage.getItem("Comentarios"));
+                var dataUsers = JSON.parse(localStorage.getItem("Usuarios"));
+                localStorage.clear()
+
+
                 var flag = window.location.href.split("=").pop();//This indicates what new has been selected
                 $('#btn_login_out').attr("href","new.html?new=" + flag+ ""); // Login out button
 
@@ -769,7 +781,7 @@ $(document).ready(function(){
                 //Get the author
                 var autor;
                 $.each(dataUsers, function(i) {
-                    if(dataUsers[i].id == data[flag-1].idautor) {
+                    if(dataUsers[i].id == data[flag-1].user_id) {
                         autor = dataUsers[i];
                     }
                 });
@@ -884,16 +896,13 @@ $(document).ready(function(){
                 var array='';
                 
                 /* Get the related Comments: JOIN Comments, News & Users*/
-                $.each(dataUserComments, function(j){
-                    if(dataUserComments[j].idnoticia == data[flag-1].id) {
-                        var idcomment = dataUserComments[j].idcomentario;
-                        $.each(dataComments, function(k){
-                            if(idcomment == dataComments[k].id) {
-                                var comment = dataComments[k];
-                                $.each(dataUsers, function(l){
-                                    if(comment.idautor == dataUsers[l].id) {
-                                        var user = dataUsers[l];
-                                        var relatedComments = '<div class="comment_section">\
+                $.each(dataComments, function(j){
+                    if(dataComments[j].article_id == data[flag-1].id) {
+                        var comment = dataComments[j];
+                        $.each(dataUsers, function(l){
+                            if(comment.user_id == dataUsers[l].id) {
+                                var user = dataUsers[l];
+                                var relatedComments = '<div class="comment_section">\
                                                                     <div class="commentator_photo_section">\
                                                                         <img class="commentator_photo" title="Comentator photo" alt="Comentator photo 1" src="'+ user.foto + '">\
                                                                     </div>\
@@ -904,9 +913,7 @@ $(document).ready(function(){
                                                                         <p class="commentator_text">' + comment.texto +'</p>\
                                                                     </div>\
                                                                 </div>';
-                                        array += relatedComments;
-                                    }
-                                });
+                                array += relatedComments;
                             }
                         });
                     }
