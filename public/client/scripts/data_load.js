@@ -4,6 +4,7 @@ $(document).ready(function(){
         var path = window.location.pathname;
         var page = path.split("/").pop();
         var data;
+
         /*Flow control depending of the html document loaded*/
         switch(page) {
             
@@ -923,11 +924,16 @@ $(document).ready(function(){
             break;
 
             case "profile.html":
+
                 // Get the current user type to filter between admin and writer
                 $.getJSON("http://localhost:3000/sendToken",function(json) {
                     localStorage.setItem("Token", json["tipo"])
+                    localStorage.setItem("Idsent", json["id"])
+
                 });
                 var token = localStorage.getItem("Token");
+                var idsent = localStorage.getItem("Idsent");
+
                 if(token == 1) {
                     $('#mobile_panel_link').attr("href","admin_content_panel.html");
                     $('#pc_tablet_panel_link').attr("href","admin_content_panel.html");
@@ -935,7 +941,33 @@ $(document).ready(function(){
                 } else if ( token == 2) {
                     $('#mobile_panel_link').attr("href","writer_content_panel.html");
                     $('#pc_tablet_panel_link').attr("href","writer_content_panel.html");
+                } else if (token == 3) {
+                    $('#mobile_panel_link').css("display","none");
+                    $('#pc_tablet_panel_link').css("display","none");
+                    $('#mobile_panel_img').css("display","none");
+                    $('#pc_tablet_panel_img').css("display","none");
                 }
+
+
+
+                $.getJSON("http://localhost:3000/users",function(json) {
+
+                    data = json;
+                    var user;
+
+                    $.each(data, function(i) {
+                        if(data[i].id == idsent) {
+                            user = data[i];
+                        }
+                    });
+                    $('#name_profile').val(user.nombre);
+                    $('#last_name_profile').val(user.apellidos);
+                    $('#email_profile').val(user.email);
+                    var editLocation = "window.location.href='http://localhost:3000/users/"+ user.id + "/edit'";
+                    $(".button_edit, .btn_change_img").attr("onclick", "" + editLocation);
+
+                });
+
                 break;
 
         }

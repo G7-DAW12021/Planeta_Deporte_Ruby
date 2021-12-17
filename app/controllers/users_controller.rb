@@ -46,7 +46,7 @@ class UsersController < ApplicationController
       if @user.errors.any?
         render "edit"
       else
-        redirect_to user_path(@user)
+        redirect_to "/client/profile.html"
       end
     else
       render "edit"
