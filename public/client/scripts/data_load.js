@@ -190,7 +190,7 @@ $(document).ready(function(){
                 $.getJSON("http://localhost:3000/articles",function(json) {
                     data = json;//News
                     var flag = window.location.href.split("=").pop();//This indicates what section is the user in
-                    $('#btn_login_out').attr("href", "sport_section.html?section=" + flag + ""); // Login out button
+                    $('#btn_login_out').attr("href", "http://localhost:3000/login"); // Login out button
                     var pivot = false;
                     $('.main_new').empty();
                     $('.aside_news').empty();
@@ -747,7 +747,6 @@ $(document).ready(function(){
             case "new.html":
                 $.getJSON("http://localhost:3000/articles",function(json) {
                     localStorage.setItem("Articulos", JSON.stringify(json));
-                    console.log(JSON.parse(localStorage.getItem("Articulos")));
                 });
 
                 $.getJSON("http://localhost:3000/comments",function(json) {
@@ -758,14 +757,13 @@ $(document).ready(function(){
                     localStorage.setItem("Usuarios", JSON.stringify(json));
                 });
                 data = JSON.parse(localStorage.getItem("Articulos"));//News
-                console.log(data);
                 var dataComments = JSON.parse(localStorage.getItem("Comentarios"));
                 var dataUsers = JSON.parse(localStorage.getItem("Usuarios"));
                 localStorage.clear();
 
 
                 var flag = window.location.href.split("=").pop();//This indicates what new has been selected
-                $('#btn_login_out').attr("href","new.html?new=" + flag+ ""); // Login out button
+                $('#btn_login_out').attr("href","http://localhost:3000/login"); // Login out button
 
                 //Modifying breadcrumbs attributes and values
                 $('#brdc_new_section').text(data[flag-1].seccion);
@@ -930,7 +928,6 @@ $(document).ready(function(){
                     localStorage.setItem("Token", json["tipo"])
                 });
                 var token = localStorage.getItem("Token");
-                console.log(token);
                 if(token == 1) {
                     $('#mobile_panel_link').attr("href","admin_content_panel.html");
                     $('#pc_tablet_panel_link').attr("href","admin_content_panel.html");
