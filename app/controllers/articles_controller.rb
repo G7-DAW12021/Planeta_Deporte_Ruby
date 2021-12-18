@@ -25,7 +25,8 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
     #@article = current_user.articles.build(article_params)
     if @article.save
-      redirect_to @article
+      id = @article.id
+      redirect_to '/client/new_registered.html?new=' + id.to_s
     else
       render 'new'
     end
@@ -37,9 +38,7 @@ class ArticlesController < ApplicationController
 
   # PATCH/PUT /articles/id ; /articles/id.json
   def update
-
     if @article.update(article_params)
-      #redirect_to @article
       id = @article.id
       redirect_to '/client/new_registered.html?new=' + id.to_s
     else

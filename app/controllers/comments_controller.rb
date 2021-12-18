@@ -15,21 +15,23 @@ class CommentsController < ApplicationController
     redirect_to article_path(@article)
   end
 
-  # GET /comments/id/edit
-  #def edit
-  #end
+  # GET /articles/id/comments/id/edit
+  def edit
+    @article = Article.find(params[:article_id])
+    @comment = @article.comments.find(params[:id])
+  end
 
-  # PATCH/PUT /comments/id ; /comments/id.json
-  #def update
 
-  #  if @article.comments.update(comment_params)
-      #redirect_to @article
-  #    id = @article.id
-  #    redirect_to '/client/new_registered.html?new=' + id.to_s
-  #  else
-  #    render 'edit'
-  #  end
-  #end
+  def update
+    @article = Article.find(params[:article_id])
+    @comment = @article.comments.find(params[:id])
+    if @comment.update(comment_params)
+      id = @article.id
+      redirect_to '/client/new_registered.html?new=' + id.to_s
+    else
+      render 'edit'
+    end
+  end
 
   #DELETE /articles/id/comments/id ; /articles/id/comments/id.json
   def destroy

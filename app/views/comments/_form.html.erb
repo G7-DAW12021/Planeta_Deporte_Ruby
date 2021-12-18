@@ -1,15 +1,16 @@
-<%= form_with(model: [ @article, @article.comments.build ], local: true) do |form| %>
+<%= form_with(model: [ @article, @comment ], local: true) do |form| %>
   <div>
-    <%= form.hidden_field :user_id, value: current_user.id %>
+    <%= form.hidden_field :user_id, value: @comment.user_id %>
   </div>
 
-  <p>
+  <div class="field">
     <%= form.label :texto %><br>
     <%= form.text_area :texto %>
-  </p>
+  </div>
 
-  <p>
-    <%= form.submit %>
-  </p>
+  <div class="actions">
+    <%= form.submit%>
+  </div>
+
 
 <% end %>

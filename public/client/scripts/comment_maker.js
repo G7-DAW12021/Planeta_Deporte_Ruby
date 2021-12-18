@@ -25,19 +25,21 @@ $(document).ready(function(){
             $(submitButton).click(function () {
                 var texto = $("#comentArea").val();
                 var id= window.location.href.split("=").pop();
-                var iduser = localStorage.getItem("Token");
-                //console.log(id);
-                //console.log(iduser);
-                $.ajax( {
-                    type : "POST",
-                    url: "http://localhost:3000/articles/" + id + "/comments",
-                    data: { comment: {user_id: iduser, article_id : id, texto : texto}},
-                    success: function(datos) {
-                    }
-                });
+                var iduser = localStorage.getItem("Idsent");
+                if(iduser != undefined) {
+                    $.ajax( {
+                        type : "POST",
+                        url: "http://localhost:3000/articles/" + id + "/comments",
+                        data: { comment: {user_id: iduser, article_id : id, texto : texto}},
+                        success: function(datos) {
+                        }
+                    });
+                } else {
+                    window.location.replace("http://localhost:3000/login");
+                }
 
 
-                //console.log(comment);
+
                 $("#text_area_div").empty();
                 $("#submit_button_div").empty();
                 $(".add_comment_button").show();

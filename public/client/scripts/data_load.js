@@ -70,8 +70,8 @@ $(document).ready(function(){
                                             <td class="comment_txt">' + this['texto'] + '</td>\
                                             <td class="comment_new_txt">' + news.titulo + '</td>\
                                             <td class="actions_td"> \
-                                                <a class="edit_table_links" href="http://localhost:3000/comments/'+ this['id']+ '/edit\"> Editar comentario</a>\
-                                                <a class="remove_table_links" href="#" onclick="deleteComment('+this['id'] + ',' + news.id +')"> Eliminar comentario</a>\
+                                                <a class="edit_table_links" href="http://localhost:3000/articles/'+ news.id + '/comments/'+ this['id']+ '/edit\"> Editar comentario</a>\
+                                                <a class="remove_table_links" href="" onclick="deleteComment('+this['id'] + ',' + news.id +')"> Eliminar comentario</a>\
                                                 <a class="answer_table_links" href="new_registered.html?new=' + news.id + '"> Responder</a> <br>\
                                             </td>';
                             } else {
@@ -80,7 +80,7 @@ $(document).ready(function(){
                                             <td class="comment_txt">' + this['texto'] + '</td>\
                                             <td class="comment_new_txt">' + news.titulo + '</td>\
                                             <td class="actions_td_writer"> \
-                                                <a class="remove_table_links" href="#" onclick="deleteComment('+this['id'] + ',' + news.id +')"> Eliminar comentario</a>\
+                                                <a class="remove_table_links" href="" onclick="deleteComment('+this['id'] + ',' + news.id +')"> Eliminar comentario</a>\
                                                 <a class="answer_table_links" href="new_registered.html?new=' + news.id + '"> Responder</a> <br>\
                                             </td>';
                             }
@@ -746,7 +746,7 @@ $(document).ready(function(){
                 });
             break;
 
-            //Mirar lo de refresh
+
             case "new_registered.html":
             case "new.html":
                 $.getJSON("http://localhost:3000/articles",function(json) {
