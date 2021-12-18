@@ -20,8 +20,8 @@ Rails.application.routes.draw do
   get 'comments', to: 'comments#index'
   get 'comments/new', to: 'articles#new'
   #get 'comments/:id/edit', to: 'comments#edit'
-  #post '/articles/:id/comments', to: 'articles#create'
-  delete 'comments/:id', to: 'comments#destroy'
+  post '/articles/:id/comments', to: 'comments#create'
+  delete '/articles/:id/comments/:id', to: 'comments#destroy'
 
   #----------------------------------User Routes -----------------------------------------#
 

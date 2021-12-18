@@ -23,7 +23,7 @@ $(document).ready(function(){
 
 
             $(submitButton).click(function () {
-                var comment = $("#comentArea").val();
+                var texto = $("#comentArea").val();
                 var id= window.location.href.split("=").pop();
                 var iduser = localStorage.getItem("Token");
                 //console.log(id);
@@ -31,12 +31,8 @@ $(document).ready(function(){
                 $.ajax( {
                     type : "POST",
                     url: "http://localhost:3000/articles/" + id + "/comments",
-                    data: { user_id: iduser, article_id : id, texto : comment},
+                    data: { comment: {user_id: iduser, article_id : id, texto : texto}},
                     success: function(datos) {
-                        console.log(datos)
-                    },
-                    error: function(errors) {
-                        console.log(comment)
                     }
                 });
 

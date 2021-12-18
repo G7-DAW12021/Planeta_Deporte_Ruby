@@ -27,9 +27,9 @@ function deleteUser(id) {
 }
 
 
-function deleteComment(id) {
+function deleteComment(id, idnoticia) {
     $.ajax ({
-        url: 'http://localhost:3000/comments/' + id,
+        url: 'http://localhost:3000/articles/' + idnoticia + '/comments/' + id,
         type: 'DELETE',
         success: function(result) {
             //location.reload();
