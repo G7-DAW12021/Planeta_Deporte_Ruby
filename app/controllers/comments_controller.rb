@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
 
+  skip_before_action :verify_authenticity_token
+
   # GET /comments ; /comments.json
   def index
     @comments = Comment.all
@@ -13,6 +15,22 @@ class CommentsController < ApplicationController
     redirect_to article_path(@article)
   end
 
+  # GET /comments/id/edit
+  #def edit
+  #end
+
+  # PATCH/PUT /comments/id ; /comments/id.json
+  #def update
+
+  #  if @article.comments.update(comment_params)
+      #redirect_to @article
+  #    id = @article.id
+  #    redirect_to '/client/new_registered.html?new=' + id.to_s
+  #  else
+  #    render 'edit'
+  #  end
+  #end
+
   #DELETE /articles/id/comments/id ; /articles/id/comments/id.json
   def destroy
     @article = Article.find(params[:article_id])
@@ -24,7 +42,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:user_id, :texto)
+    params.require(:comment).permit(:user_id, :article_id, :texto)
   end
 
 end

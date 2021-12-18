@@ -1,4 +1,6 @@
 class ArticlesController < ApplicationController
+
+  skip_before_action :verify_authenticity_token
   #Find the article for show, edit, update and destroy actions (%i means array with withespaces)
   before_action :set_article, only: %i[ show edit update destroy]
 

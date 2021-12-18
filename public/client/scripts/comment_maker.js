@@ -24,7 +24,24 @@ $(document).ready(function(){
 
             $(submitButton).click(function () {
                 var comment = $("#comentArea").val();
-                console.log(comment);
+                var id= window.location.href.split("=").pop();
+                var iduser = localStorage.getItem("Token");
+                //console.log(id);
+                //console.log(iduser);
+                $.ajax( {
+                    type : "POST",
+                    url: "http://localhost:3000/articles/" + id + "/comments",
+                    data: { user_id: iduser, article_id : id, texto : comment},
+                    success: function(datos) {
+                        console.log(datos)
+                    },
+                    error: function(errors) {
+                        console.log(comment)
+                    }
+                });
+
+
+                //console.log(comment);
                 $("#text_area_div").empty();
                 $("#submit_button_div").empty();
                 $(".add_comment_button").show();

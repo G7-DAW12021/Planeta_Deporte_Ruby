@@ -1,4 +1,6 @@
 
+//NOTA: EN ALGUNAS PAGINAS A VECES ES NECESARIO HACER UN REFRESH PARA VER LAS ACTUALIZACIONES DE LOS DATOS
+
 /*Wait for the document to be ready*/
 $(document).ready(function(){
         var path = window.location.pathname;
@@ -68,8 +70,8 @@ $(document).ready(function(){
                                             <td class="comment_txt">' + this['texto'] + '</td>\
                                             <td class="comment_new_txt">' + news.titulo + '</td>\
                                             <td class="actions_td"> \
-                                                <a class="edit_table_links" href="new_registered.html?new=' + news.id + '"> Editar comentario</a>\
-                                                <a class="remove_table_links" href=""> Eliminar comentario</a>\
+                                                <a class="edit_table_links" href="http://localhost:3000/comments/'+ this['id']+ '/edit\"> Editar comentario</a>\
+                                                <a class="remove_table_links" href="#" onclick="deleteComment('+this['id']+')"> Eliminar comentario</a>\
                                                 <a class="answer_table_links" href="new_registered.html?new=' + news.id + '"> Responder</a> <br>\
                                             </td>';
                             } else {
@@ -78,7 +80,7 @@ $(document).ready(function(){
                                             <td class="comment_txt">' + this['texto'] + '</td>\
                                             <td class="comment_new_txt">' + news.titulo + '</td>\
                                             <td class="actions_td_writer"> \
-                                                <a class="remove_table_links" href=""> Eliminar comentario</a>\
+                                                <a class="remove_table_links" href="#" onclick="deleteComment('+this['id']+')"> Eliminar comentario</a>\
                                                 <a class="answer_table_links" href="new_registered.html?new=' + news.id + '"> Responder</a> <br>\
                                             </td>';
                             }
@@ -87,7 +89,7 @@ $(document).ready(function(){
                     });
             break;
 
-            //Arreglar el DELETE
+
             case "writer_content_panel.html":
             case "admin_content_panel.html":
 
@@ -108,7 +110,7 @@ $(document).ready(function(){
                                         <button onclick="'+ editLocation +'" class="button_edit">\
                                             <img  class="edit_delete" title="Edit" alt="Edit" src="img/edit.png">\
                                         </button>\
-                                        <button class="button_delete" type="button">\
+                                        <button class="button_delete" onclick="deleteArticle('+this['id']+')" type="button">\
                                             <img class="edit_delete" title="Delete" alt="Delete" src="img/delete.png">\
                                         </button>\
                                     </div>\
@@ -119,7 +121,7 @@ $(document).ready(function(){
 
             break;
 
-            //Arreglar el DELETE
+
             case "admin_users_panel.html":
 
                 $.getJSON("http://localhost:3000/users",function(json) {
@@ -761,7 +763,7 @@ $(document).ready(function(){
                 data = JSON.parse(localStorage.getItem("Articulos"));//News
                 var dataComments = JSON.parse(localStorage.getItem("Comentarios"));
                 var dataUsers = JSON.parse(localStorage.getItem("Usuarios"));
-                localStorage.clear();
+                //localStorage.clear();
 
 
                 var flag = window.location.href.split("=").pop();//This indicates what new has been selected
