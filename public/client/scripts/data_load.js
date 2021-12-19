@@ -1,31 +1,34 @@
 
+//NOTA: EN ALGUNAS PAGINAS A VECES ES NECESARIO HACER UN REFRESH PARA VER LAS ACTUALIZACIONES DE LOS DATOS
+
 /*Wait for the document to be ready*/
 $(document).ready(function(){
-    /*--------------------------------------------------------------------------Retrieve data from JSON file-----------------------------------------------------------------------*/
-    //$.getJSON("data.json",function(json) {
-    //$.getJSON("http://localhost:3000/articles.json",function(json) {
-        /*To know what html file is loaded*/
-        $.getJSON("http://localhost:3000/sendToken",function(json) {
-            var prueba = json;
-            console.log(prueba);
-
-        });
-
         var path = window.location.pathname;
         var page = path.split("/").pop();
         var data;
-    
+
         /*Flow control depending of the html document loaded*/
         switch(page) {
             
             case "writer_comments_panel.html":
             case "admin_comments_panel.html":
-                $.getJSON("http://localhost:3000/articles.json",function(json) {
-                    data = json.comentarios;
-                    //var dataUsers = json.data[0].usuarios;
-                    var dataNews = json.noticias;
-                    //var dataUsers = json.usuarios;
-                    //var dataNewsComments = json.data[3].comentariosnoticias;
+                    $.getJSON("http://localhost:3000/comments",function(json) {
+                        localStorage.setItem("Comentarios", JSON.stringify(json));
+                    });
+
+                    $.getJSON("http://localhost:3000/articles",function(json) {
+                        localStorage.setItem("Articulos", JSON.stringify(json));
+                    });
+
+                    $.getJSON("http://localhost:3000/users",function(json) {
+                        localStorage.setItem("Usuarios", JSON.stringify(json));
+                    });
+                    data = JSON.parse(localStorage.getItem("Comentarios"));
+                    var dataNews = JSON.parse(localStorage.getItem("Articulos"));
+                    var dataUsers = JSON.parse(localStorage.getItem("Usuarios"));
+                    localStorage.clear();
+
+
                     $('.comments_table').empty();
 
                     var th = '<tr>\
@@ -37,51 +40,21 @@ $(document).ready(function(){
 
                     $('.comments_table').append(th);
 
-                    console.log(data);
                     $.each(data, function (i) {
-                        $.each(data[i], function (k) {
                             var name;
                             var photo;
                             var news;
-                            var idautor = this['idautor'];
-                            var id = this['id'];
-                            var idnoticia = this['idnoticia'];
+                            var idautor = this['user_id'];
+                            var idnoticia = this['article_id'];
 
-
-                            /*JOIN de Comentarios con Usuarios*/
-                            /*$.each(dataUsers, function (i) {
+                            /*JOIN de Comentarios y Usuarios*/
+                            $.each(dataUsers, function (i) {
                                 if (idautor == dataUsers[i].id) {
                                     name = dataUsers[i].nombre;
                                     photo = dataUsers[i].foto;
                                 }
 
-                            });*/
-
-                            /*JOIN de Comentarios y Noticias*/
-                            /*$.each(dataNewsComments, function (j) {
-                                if (id == dataNewsComments[j].idcomentario) {
-                                    var idnew = dataNewsComments[j].idnoticia;
-
-                                    $.each(dataNews, function (k) {
-                                        if (idnew == dataNews[k].id) {
-                                            news = dataNews[k];
-
-                                        }
-                                    });
-                                }
-                            });*/
-
-
-
-
-                            /*JOIN de Comentarios con Usuarios*/
-                            /*$.each(dataUsers, function (i) {
-                                if (idautor == dataUsers[i].id) {
-                                    name = dataUsers[i].nombre;
-                                    photo = dataUsers[i].foto;
-                                }
-
-                            });*/
+                            });
 
                             /*JOIN de Comentarios y Noticias*/
                             $.each(dataNews, function (j) {
@@ -92,14 +65,13 @@ $(document).ready(function(){
 
                             if (page == "admin_comments_panel.html") {
 
-
                                 var info = '<tr>\
                                             <td><img class="comments_table_profile_img" title="User Img" alt="User Img" src="' + photo + '"> <p class="author_name">' + name + '</p></td>\
                                             <td class="comment_txt">' + this['texto'] + '</td>\
                                             <td class="comment_new_txt">' + news.titulo + '</td>\
                                             <td class="actions_td"> \
-                                                <a class="edit_table_links" href="new_registered.html?new=' + news.id + '"> Editar comentario</a>\
-                                                <a class="remove_table_links" href=""> Eliminar comentario</a>\
+                                                <a class="edit_table_links" href="http://localhost:3000/articles/'+ news.id + '/comments/'+ this['id']+ '/edit\"> Editar comentario</a>\
+                                                <a class="remove_table_links" href="" onclick="deleteComment('+this['id'] + ',' + news.id +')"> Eliminar comentario</a>\
                                                 <a class="answer_table_links" href="new_registered.html?new=' + news.id + '"> Responder</a> <br>\
                                             </td>';
                             } else {
@@ -108,43 +80,37 @@ $(document).ready(function(){
                                             <td class="comment_txt">' + this['texto'] + '</td>\
                                             <td class="comment_new_txt">' + news.titulo + '</td>\
                                             <td class="actions_td_writer"> \
-                                                <a class="remove_table_links" href=""> Eliminar comentario</a>\
+                                                <a class="remove_table_links" href="" onclick="deleteComment('+this['id'] + ',' + news.id +')"> Eliminar comentario</a>\
                                                 <a class="answer_table_links" href="new_registered.html?new=' + news.id + '"> Responder</a> <br>\
                                             </td>';
                             }
 
                             $('.comments_table').append(info);
-                        });
                     });
-                });
-
             break;
+
 
             case "writer_content_panel.html":
             case "admin_content_panel.html":
-                $.getJSON("http://localhost:3000/articles.json",function(json) {
 
-                    data = json.noticias;
+                $.getJSON("http://localhost:3000/articles",function(json) {
+                    data = json;
                     $('.content_section').empty();
-                    var location;
-
-                    if(page == "writer_content_panel.html") {
-                        location = "window.location.href='writer_create_news.html'";
-                    } else {
-                        location = "window.location.href='create_news.html'";
-                    }
+                    var editLocation;
 
                     $.each(data, function(i) {
+                        editLocation = "window.location.href='http://localhost:3000/articles/"+ data[i].id + "/edit'";
+
                         var info=   '<div class="div_content_panel_new">\
                                     <div onclick= "window.location.href=\'new_registered.html?new='+ data[i].id +'\'">\
                                     <img class="img_content_panel_new" title="New" alt="New" src="'+ this['foto']+ '">\
                                     <p class="text_content_panel_new">'+ this['titulo'] + '</p>\
                                     </div>\
                                     <div class="edit_remove_btns">\
-                                        <button onclick="'+ location +'" class="button_edit">\
+                                        <button onclick="'+ editLocation +'" class="button_edit">\
                                             <img  class="edit_delete" title="Edit" alt="Edit" src="img/edit.png">\
                                         </button>\
-                                        <button class="button_delete" type="button">\
+                                        <button class="button_delete" onclick="deleteArticle('+this['id']+')" type="button">\
                                             <img class="edit_delete" title="Delete" alt="Delete" src="img/delete.png">\
                                         </button>\
                                     </div>\
@@ -155,41 +121,44 @@ $(document).ready(function(){
 
             break;
 
+
             case "admin_users_panel.html":
-                data = json.data[0].usuarios;
-                $('.users_table').empty();
-                var th =   '<tr>\
-                                <th>Foto</th>\
-                                <th>Nombre</th>\
-                                <th>Apellido</th>\
-                                <th>Email</th>\
-                                <th>Clave (Hash)</th>\
-                                <th>Acciones</th>\
-                            </tr>';
 
-                $('.users_table').append(th);
-
-                $.each(data, function() {
-                    var info = '<tr>\
-                                    <td><img class="users_table_profile_img" title="User Img" alt="User Img" src="'+ this['foto']+ '"></td>\
-                                    <td>' + this['nombre'] + '</td>\
-                                    <td>' + this['apellidos'] + '</td>\
-                                    <td>' + this['email'] + '</td>\
-                                    <td class="hash_td">' + this['clave'] + '</td>\
-                                    <td>\
-                                        <div class="edit_remove_btns_V2">\
-                                            <button class="button_edit_V2" onclick="window.location.href= \'create_user.html\'">\
-                                                <img  class="edit_delete_V2" title="Edit" alt="Edit" src="img/edit.png">\
-                                            </button>\
-                                            <button class="button_delete_V2" type="button">\
-                                                <img class="edit_delete_V2" title="Delete" alt="Delete" src="img/delete.png">\
-                                            </button>\
-                                        </div>\
-                                    </td>\
+                $.getJSON("http://localhost:3000/users",function(json) {
+                    data = json;
+                    $('.users_table').empty();
+                    var th = '<tr>\
+                                    <th>Foto</th>\
+                                    <th>Nombre</th>\
+                                    <th>Apellido</th>\
+                                    <th>Email</th>\
+                                    <th>Clave (Hash)</th>\
+                                    <th>Acciones</th>\
                                 </tr>';
-                    $('.users_table').append(info);
+
+                    $('.users_table').append(th);
+
+                    $.each(data, function () {
+                        var info = '<tr>\
+                                        <td><img class="users_table_profile_img" title="User Img" alt="User Img" src="' + this['foto'] + '"></td>\
+                                        <td>' + this['nombre'] + '</td>\
+                                        <td>' + this['apellidos'] + '</td>\
+                                        <td>' + this['email'] + '</td>\
+                                        <td class="hash_td">' + this['clave_digest'] + '</td>\
+                                        <td>\
+                                            <div class="edit_remove_btns_V2">\
+                                                <button class="button_edit_V2" onclick="window.location.href= \'http://localhost:3000/users/'+ this['id']+ '/edit\'">\
+                                                    <img  class="edit_delete_V2" title="Edit" alt="Edit" src="img/edit.png">\
+                                                </button>\
+                                                <button  class="button_delete_V2" onclick="deleteUser('+this['id']+')" type="button">\
+                                                    <img class="edit_delete_V2" title="Delete" alt="Delete" src="img/delete.png">\
+                                                </button>\
+                                            </div>\
+                                        </td>\
+                                    </tr>';
+                        $('.users_table').append(info);
+                    });
                 });
-            
             break;
 
             case "home_registered.html":
@@ -215,16 +184,17 @@ $(document).ready(function(){
 
                     $('#mobile_new3_link').attr("href","new_registered.html?new=4");
                     $('#mobile_new4_link').attr("href","new_registered.html?new=6");
+                    //$('.header_profile_img_V2').attr("src", "" + user.foto);
                 }
 
             break;
 
             case "sport_section_registered.html":
             case "sport_section.html":
-                $.getJSON("http://localhost:3000/articles.json",function(json) {
-                    data = json.noticias;//News
+                $.getJSON("http://localhost:3000/articles",function(json) {
+                    data = json;//News
                     var flag = window.location.href.split("=").pop();//This indicates what section is the user in
-                    $('#btn_login_out').attr("href", "sport_section.html?section=" + flag + ""); // Login out button
+                    $('#btn_login_out').attr("href", "http://localhost:3000/login"); // Login out button
                     var pivot = false;
                     $('.main_new').empty();
                     $('.aside_news').empty();
@@ -776,14 +746,28 @@ $(document).ready(function(){
                 });
             break;
 
+
             case "new_registered.html":
             case "new.html":
-                data = json.data[1].noticias;//News
-                dataUsers=json.data[0].usuarios;
-                dataComments = json.data[2].comentarios;
-                dataUserComments = json.data[3].comentariosnoticias;
+                $.getJSON("http://localhost:3000/articles",function(json) {
+                    localStorage.setItem("Articulos", JSON.stringify(json));
+                });
+
+                $.getJSON("http://localhost:3000/comments",function(json) {
+                    localStorage.setItem("Comentarios", JSON.stringify(json));
+                });
+
+                $.getJSON("http://localhost:3000/users",function(json) {
+                    localStorage.setItem("Usuarios", JSON.stringify(json));
+                });
+                data = JSON.parse(localStorage.getItem("Articulos"));//News
+                var dataComments = JSON.parse(localStorage.getItem("Comentarios"));
+                var dataUsers = JSON.parse(localStorage.getItem("Usuarios"));
+                //localStorage.clear();
+
+
                 var flag = window.location.href.split("=").pop();//This indicates what new has been selected
-                $('#btn_login_out').attr("href","new.html?new=" + flag+ ""); // Login out button
+                $('#btn_login_out').attr("href","http://localhost:3000/login"); // Login out button
 
                 //Modifying breadcrumbs attributes and values
                 $('#brdc_new_section').text(data[flag-1].seccion);
@@ -801,7 +785,7 @@ $(document).ready(function(){
                 //Get the author
                 var autor;
                 $.each(dataUsers, function(i) {
-                    if(dataUsers[i].id == data[flag-1].idautor) {
+                    if(dataUsers[i].id == data[flag-1].user_id) {
                         autor = dataUsers[i];
                     }
                 });
@@ -916,16 +900,13 @@ $(document).ready(function(){
                 var array='';
                 
                 /* Get the related Comments: JOIN Comments, News & Users*/
-                $.each(dataUserComments, function(j){
-                    if(dataUserComments[j].idnoticia == data[flag-1].id) {
-                        var idcomment = dataUserComments[j].idcomentario;
-                        $.each(dataComments, function(k){
-                            if(idcomment == dataComments[k].id) {
-                                var comment = dataComments[k];
-                                $.each(dataUsers, function(l){
-                                    if(comment.idautor == dataUsers[l].id) {
-                                        var user = dataUsers[l];
-                                        var relatedComments = '<div class="comment_section">\
+                $.each(dataComments, function(j){
+                    if(dataComments[j].article_id == data[flag-1].id) {
+                        var comment = dataComments[j];
+                        $.each(dataUsers, function(l){
+                            if(comment.user_id == dataUsers[l].id) {
+                                var user = dataUsers[l];
+                                var relatedComments = '<div class="comment_section">\
                                                                     <div class="commentator_photo_section">\
                                                                         <img class="commentator_photo" title="Comentator photo" alt="Comentator photo 1" src="'+ user.foto + '">\
                                                                     </div>\
@@ -936,9 +917,7 @@ $(document).ready(function(){
                                                                         <p class="commentator_text">' + comment.texto +'</p>\
                                                                     </div>\
                                                                 </div>';
-                                        array += relatedComments;
-                                    }
-                                });
+                                array += relatedComments;
                             }
                         });
                     }
@@ -946,6 +925,54 @@ $(document).ready(function(){
 
                 $('.comments').append(array);
             break;
+
+            case "profile.html":
+
+                // Get the current user type to filter between admin and writer
+                $.getJSON("http://localhost:3000/sendToken",function(json) {
+                    localStorage.setItem("Token", json["tipo"]);
+                    localStorage.setItem("Idsent", json["id"]);
+                    //localStorage.setItem("Usuario", json);
+
+                });
+                var token = localStorage.getItem("Token");
+                var idsent = localStorage.getItem("Idsent");
+
+                if(token == 1) {
+                    $('#mobile_panel_link').attr("href","admin_content_panel.html");
+                    $('#pc_tablet_panel_link').attr("href","admin_content_panel.html");
+
+                } else if ( token == 2) {
+                    $('#mobile_panel_link').attr("href","writer_content_panel.html");
+                    $('#pc_tablet_panel_link').attr("href","writer_content_panel.html");
+                } else if (token == 3) {
+                    $('#mobile_panel_link').css("display","none");
+                    $('#pc_tablet_panel_link').css("display","none");
+                    $('#mobile_panel_img').css("display","none");
+                    $('#pc_tablet_panel_img').css("display","none");
+                }
+
+
+
+                $.getJSON("http://localhost:3000/users",function(json) {
+
+                    data = json;
+                    var user;
+
+                    $.each(data, function(i) {
+                        if(data[i].id == idsent) {
+                            user = data[i];
+                        }
+                    });
+                    $('#name_profile').val(user.nombre);
+                    $('#last_name_profile').val(user.apellidos);
+                    $('#email_profile').val(user.email);
+                    var editLocation = "window.location.href='http://localhost:3000/users/"+ user.id + "/edit'";
+                    $(".button_edit, .btn_change_img").attr("onclick", "" + editLocation);
+
+                });
+
+                break;
+
         }
-    //}); -> del getJSON general
 });

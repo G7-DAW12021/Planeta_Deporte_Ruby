@@ -3,13 +3,13 @@
 
 
     { "usuarios": [
-        {"id": "1", "foto": "./fotos_BD/profile1.png", "nombre":"Pepe", "apellidos":"Moreno Pérez", "email":"pepe2301@gmail.com", "clave":"c4ca4238a0b923820dcc509a6f75849b", "tipo":"1"},
-        {"id": "2", "foto": "./fotos_BD/profile2.png", "nombre":"Laura", "apellidos":"Jiménez González", "email":"laura2560@gmail.com", "clave":"c81e728d9d4c2f636f067f89cc14862c", "tipo":"2"},
-        {"id": "3", "foto": "./fotos_BD/profile3.png", "nombre":"Rodrigo", "apellidos":"Medina Santana", "email":"rodrigomed54@gmail.com", "clave":"c81e728d9d4c2f636f067f89cc14862c", "tipo":"2"},
-        {"id": "4", "foto": "./fotos_BD/profile4.png", "nombre":"Cristina", "apellidos":"Salgado Morales", "email":"crissalmo@gmail.com", "clave":"eccbc87e4b5ce2fe28308fd9f2a7baf3", "tipo":"3"},
-        {"id": "5", "foto": "./fotos_BD/profile5.png", "nombre":"Juan", "apellidos":"García Peñate", "email":"juangar23@gmail.com", "clave":"eccbc87e4b5ce2fe28308fd9f2a7baf3", "tipo":"3"},
-        {"id": "6", "foto": "./fotos_BD/profile6.png", "nombre":"Sara", "apellidos":"Martínez Hernández", "email":"saramarher@gmail.com", "clave":"eccbc87e4b5ce2fe28308fd9f2a7baf3", "tipo":"3"},
-        {"id": "7", "foto": "./fotos_BD/profile7.png", "nombre":"Carla", "apellidos":"Domínguez Ortega", "email":"carladomort65@gmail.com", "clave":"eccbc87e4b5ce2fe28308fd9f2a7baf3", "tipo":"3"}
+        {"id": "1", "foto": "./fotos_BD/profile1.png", "nombre":"Pepe", "apellidos":"Moreno Pérez", "email":"pepe2301@gmail.com", "clave":"$2a$12$QnUpr0crDS3RqbltXH.73.mYYsMcGClavkMs6sxO.xh/wZIYFIdQC", "tipo":"1"},
+        {"id": "2", "foto": "./fotos_BD/profile2.png", "nombre":"Laura", "apellidos":"Jiménez González", "email":"laura2560@gmail.com", "clave":"$2a$12$nmYERXGVK8cSF/qFPp4i5Ob9PmT56bQvTOsK5hqEcZ76dHMJvmInC", "tipo":"2"},
+        {"id": "3", "foto": "./fotos_BD/profile3.png", "nombre":"Rodrigo", "apellidos":"Medina Santana", "email":"rodrigomed54@gmail.com", "clave":"$2a$12$nmYERXGVK8cSF/qFPp4i5Ob9PmT56bQvTOsK5hqEcZ76dHMJvmInC", "tipo":"2"},
+        {"id": "4", "foto": "./fotos_BD/profile4.png", "nombre":"Cristina", "apellidos":"Salgado Morales", "email":"crissalmo@gmail.com", "clave":"$2a$12$tG7urzl51uGPrzxEpVyWtuTIX5LJ9L9LP432ol7Jt2zcLsG/iLCai", "tipo":"3"},
+        {"id": "5", "foto": "./fotos_BD/profile5.png", "nombre":"Juan", "apellidos":"García Peñate", "email":"juangar23@gmail.com", "clave":"$2a$12$tG7urzl51uGPrzxEpVyWtuTIX5LJ9L9LP432ol7Jt2zcLsG/iLCai", "tipo":"3"},
+        {"id": "6", "foto": "./fotos_BD/profile6.png", "nombre":"Sara", "apellidos":"Martínez Hernández", "email":"saramarher@gmail.com", "clave":"$2a$12$tG7urzl51uGPrzxEpVyWtuTIX5LJ9L9LP432ol7Jt2zcLsG/iLCai", "tipo":"3"},
+        {"id": "7", "foto": "./fotos_BD/profile7.png", "nombre":"Carla", "apellidos":"Domínguez Ortega", "email":"carladomort65@gmail.com", "clave":"$2a$12$tG7urzl51uGPrzxEpVyWtuTIX5LJ9L9LP432ol7Jt2zcLsG/iLCai", "tipo":"3"}
     ]},
 
 

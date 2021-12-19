@@ -42,6 +42,9 @@
     <%= form.text_area :cuerpo %>
   </div>
 
+  <%= form.hidden_field :user_id, :value => current_user.id %>
+
+
   <div class="actions">
     <%= form.submit %>
   </div>

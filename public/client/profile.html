@@ -10,8 +10,10 @@
         <link rel="stylesheet" type="text/css" href="style/footer_style.css"/>
         <link rel="stylesheet" type="text/css" href ="style/breadcrumbs_style.css"/>
         <link rel="stylesheet" type="text/css" href ="style/sidebar_style.css"/>
+        <script src="scripts/jquery-3.6.0.min.js"></script>
         <script src="scripts/script.js"></script>
-        
+        <script src="scripts/data_load.js"></script>
+
     </head>
     <body>
         <header class="headers">
@@ -36,7 +38,7 @@
                     <a class="header_links nav-link nav-item" href="contact_registered.html">Contacto</a>
                 </div>
                 <div class="div_user ms-auto">
-                    <a class="login_register_btn navbar-brand" id="btn_login_out"href="login.html">Cerrar Sesi&oacute;n</a>
+                    <a class="login_register_btn navbar-brand" id="btn_login_out"href="http://localhost:3000/login">Cerrar Sesi&oacute;n</a>
                     <a class="profile_link" href="profile.html"><img class="header_profile_img" title="Profile" alt="Profile" src="img/profile.png"></a>
                 </div>
             </nav>
@@ -53,8 +55,8 @@
                 <div class="mobile_sidebar dropdown-menu">
                     <div class="mobile_sidebar_list "><img class="img_icon" title="Home" alt="Home" src="img/home_mobile.png">
                         <a class="sidebar_link dropdown-item" href="home_registered.html">Home</a>
-                        <img class="img_icon" title="Panel" alt="Panel" src="img/panel_mobile.png">
-                        <a class="sidebar_link dropdown-item" href="admin_content_panel.html">Panel</a>
+                        <img id= "mobile_panel_img" class="img_icon" title="Panel" alt="Panel" src="img/panel_mobile.png">
+                        <a id= "mobile_panel_link" class="sidebar_link dropdown-item" href="admin_content_panel.html">Panel</a>
                     </div>
             </div>
             </div>
@@ -67,8 +69,8 @@
                             <li class="nav_items"><img class="sidebar_logos" title="Home" alt="Home" src="img/home.png">
                                 <a class="sidebar_links" href="home_registered.html">Home</a>
                             </li>
-                            <li class="nav_items"><img class="sidebar_logos" title="Panel" alt="Panel" src="img/panel.png">
-                                <a class="sidebar_links" href="admin_content_panel.html">Panel</a>
+                            <li id= "pc_tablet_panel_img" class="nav_items"><img class="sidebar_logos" title="Panel" alt="Panel" src="img/panel.png">
+                                <a id= "pc_tablet_panel_link" class="sidebar_links" href="admin_content_panel.html">Panel</a>
                             </li>
                         </ul>
                     </nav>
@@ -89,7 +91,7 @@
                                     <input class="input_text col-sm-4" id="name_profile" type="text"
                                         pattern="[A-Za-z&aacute;&eacute;&iacute;&oacute;&uacute;&Aacute;&Eacute;&Iacute;&Oacute;&Uacute;&ntilde;&Ntilde;\s]{1,}"
                                         placeholder="Nombre"required/>
-                                        <button class="button_edit" type="button"><img class="edit_delete" title="Edit" alt="Panel" src="img/edit.png"></button>
+                                        <button class="button_edit" type="button"><img class="edit_delete" title="Edit" alt="Edit" src="img/edit.png"></button>
                                         <button class="button_ok" type="button"><img title="ok" alt="Panel" src="img/ok.png"></button>
                                 </div>
                                 <div class="mb-1 row">
