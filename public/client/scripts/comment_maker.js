@@ -32,6 +32,10 @@ $(document).ready(function(){
                         url: "http://localhost:3000/articles/" + id + "/comments",
                         data: { comment: {user_id: iduser, article_id : id, texto : texto}},
                         success: function(datos) {
+                            document.location.reload(true);
+                        },
+                        error: function(datos) {
+                            document.location.reload(true);
                         }
                     });
                 } else {
