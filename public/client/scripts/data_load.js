@@ -20,7 +20,6 @@ $(document).ready(function(){
 
                 //Set the photo and name of logged user
                 var usuario = JSON.parse(localStorage.getItem("Usuario"));
-                console.log(usuario);
                 localStorage.removeItem("Usuario");
                 var nombre = usuario.nombre;
                 var apellidos = usuario.apellidos;
@@ -35,60 +34,65 @@ $(document).ready(function(){
                 case "admin_comments_panel.html":
                     $.getJSON("https://planetadeporte.herokuapp.com/comments",function(json) {
                         localStorage.setItem("Comentarios", JSON.stringify(json));
-                    });
+                        data = JSON.parse(localStorage.getItem("Comentarios"));
+                        localStorage.removeItem("Comentarios");
+                        for(var i= 0; i < data.length; i++) {
+                            data[i].id = i;
+                        }
 
-                    $.getJSON("https://planetadeporte.herokuapp.com/articles",function(json) {
-                        localStorage.setItem("Articulos", JSON.stringify(json));
-                    });
+                        $.getJSON("https://planetadeporte.herokuapp.com/articles",function(json) {
+                            localStorage.setItem("Articulos", JSON.stringify(json));
+                            var dataNews = JSON.parse(localStorage.getItem("Articulos"));
+                            localStorage.removeItem("Articulos");
+                            for(var i= 0; i < dataNews.length; i++) {
+                                dataNews[i].id = i;
+                            }
 
-                    $.getJSON("https://planetadeporte.herokuapp.com/users",function(json) {
-                        localStorage.setItem("Usuarios", JSON.stringify(json));
-                    });
-                    data = JSON.parse(localStorage.getItem("Comentarios"));
-                    var dataNews = JSON.parse(localStorage.getItem("Articulos"));
-                    var dataUsers = JSON.parse(localStorage.getItem("Usuarios"));
-                    localStorage.removeItem("Articulos");
-                    localStorage.removeItem("Comentarios");
-                    localStorage.removeItem("Usuarios");
+                            $.getJSON("https://planetadeporte.herokuapp.com/users",function(json) {
+                                localStorage.setItem("Usuarios", JSON.stringify(json));
+                                var dataUsers = JSON.parse(localStorage.getItem("Usuarios"));
+                                localStorage.removeItem("Usuarios");
+                                for(var i= 0; i < dataUsers.length; i++) {
+                                    dataUsers[i].id = i;
+                                }
 
+                                $('.comments_table').empty();
 
-                    $('.comments_table').empty();
-
-                    var th = '<tr>\
+                                var th = '<tr>\
                                 <th class="author_th">Autor</th>\
                                 <th class="comment_th">Comentario</th>\
                                 <th class="news_th">Noticia</th>\
                                 <th class="actions_th">Acciones</th>\
                             </tr>';
 
-                    $('.comments_table').append(th);
+                                $('.comments_table').append(th);
 
-                    $.each(data, function (i) {
-                        var name;
-                        var photo;
-                        var news;
-                        var idautor = this['user_id'];
-                        var idnoticia = this['article_id'];
+                                $.each(data, function (i) {
+                                    var name;
+                                    var photo;
+                                    var news;
+                                    var idautor = this['user_id'];
+                                    var idnoticia = this['article_id'];
 
-                        /*JOIN de Comentarios y Usuarios*/
-                        $.each(dataUsers, function (i) {
-                            if (idautor == dataUsers[i].id) {
-                                name = dataUsers[i].nombre;
-                                photo = dataUsers[i].foto;
-                            }
+                                    /*JOIN de Comentarios y Usuarios*/
+                                    $.each(dataUsers, function (i) {
+                                        if (idautor == dataUsers[i].id) {
+                                            name = dataUsers[i].nombre;
+                                            photo = dataUsers[i].foto;
+                                        }
 
-                        });
+                                    });
 
-                        /*JOIN de Comentarios y Noticias*/
-                        $.each(dataNews, function (j) {
-                            if (idnoticia == dataNews[j].id) {
-                                news = dataNews[j];
-                            }
-                        });
+                                    /*JOIN de Comentarios y Noticias*/
+                                    $.each(dataNews, function (j) {
+                                        if (idnoticia == dataNews[j].id) {
+                                            news = dataNews[j];
+                                        }
+                                    });
 
-                        if (page == "admin_comments_panel.html") {
+                                    if (page == "admin_comments_panel.html") {
 
-                            var info = '<tr>\
+                                        var info = '<tr>\
                                             <td><img class="comments_table_profile_img" title="User Img" alt="User Img" src="' + photo + '"> <p class="author_name">' + name + '</p></td>\
                                             <td class="comment_txt">' + this['texto'] + '</td>\
                                             <td class="comment_new_txt">' + news.titulo + '</td>\
@@ -97,8 +101,8 @@ $(document).ready(function(){
                                                 <a class="remove_table_links" href="" onclick="deleteComment('+this['id'] + ',' + news.id +')"> Eliminar comentario</a>\
                                                 <a class="answer_table_links" href="new_registered.html?new=' + news.id + '"> Responder</a> <br>\
                                             </td>';
-                        } else {
-                            var info = '<tr>\
+                                    } else {
+                                        var info = '<tr>\
                                             <td><img class="comments_table_profile_img" title="User Img" alt="User Img" src="' + photo + '"> <p class="author_name">' + name + '</p></td>\
                                             <td class="comment_txt">' + this['texto'] + '</td>\
                                             <td class="comment_new_txt">' + news.titulo + '</td>\
@@ -106,17 +110,22 @@ $(document).ready(function(){
                                                 <a class="remove_table_links" href="" onclick="deleteComment('+this['id'] + ',' + news.id +')"> Eliminar comentario</a>\
                                                 <a class="answer_table_links" href="new_registered.html?new=' + news.id + '"> Responder</a> <br>\
                                             </td>';
-                        }
+                                    }
 
-                        $('.comments_table').append(info);
+                                    $('.comments_table').append(info);
+                                });
+                            });
+                        });
                     });
-                    break;
-
+                break;
 
                 case "writer_content_panel.html":
                 case "admin_content_panel.html":
                     $.getJSON("https://planetadeporte.herokuapp.com/articles",function(json) {
                         data = json;
+                        for(var i= 0; i < data.length; i++) {
+                            data[i].id = i;
+                        }
                         $('.content_section').empty();
                         var editLocation;
 
@@ -148,6 +157,9 @@ $(document).ready(function(){
 
                     $.getJSON("https://planetadeporte.herokuapp.com/users",function(json) {
                         data = json;
+                        for(var i= 0; i < data.length; i++) {
+                            data[i].id = i;
+                        }
                         $('.users_table').empty();
                         var th = '<tr>\
                                     <th>Foto</th>\
@@ -214,6 +226,10 @@ $(document).ready(function(){
                 case "sport_section.html":
                     $.getJSON("https://planetadeporte.herokuapp.com/articles",function(json) {
                         data = json;//News
+                        for(var i= 0; i < data.length; i++) {
+                            data[i].id = i;
+                        }
+                        console.log(data);
                         var flag = window.location.href.split("=").pop();//This indicates what section is the user in
                         $('#btn_login_out').attr("href", "https://planetadeporte.herokuapp.com/login"); // Login out button
                         var pivot = false;
@@ -770,59 +786,71 @@ $(document).ready(function(){
 
                 case "new_registered.html":
                 case "new.html":
+                    var flag = window.location.href.split("=").pop();
                     $.getJSON("https://planetadeporte.herokuapp.com/articles",function(json) {
                         localStorage.setItem("Articulos", JSON.stringify(json));
-                    });
+                        data = JSON.parse(localStorage.getItem("Articulos"));//News
+                        localStorage.removeItem("Articulos");
 
-                    $.getJSON("https://planetadeporte.herokuapp.com/comments",function(json) {
-                        localStorage.setItem("Comentarios", JSON.stringify(json));
-                    });
-
-                    $.getJSON("https://planetadeporte.herokuapp.com/users",function(json) {
-                        localStorage.setItem("Usuarios", JSON.stringify(json));
-                    });
-                    data = JSON.parse(localStorage.getItem("Articulos"));//News
-                    var dataComments = JSON.parse(localStorage.getItem("Comentarios"));
-                    var dataUsers = JSON.parse(localStorage.getItem("Usuarios"));
-
-                    console.log(data);
-
-                    localStorage.removeItem("Articulos");
-                    localStorage.removeItem("Comentarios");
-                    localStorage.removeItem("Usuarios");
-
-
-                    var flag = window.location.href.split("=").pop();//This indicates what new has been selected
-                    $('#btn_login_out').attr("href","https://planetadeporte.herokuapp.com/login"); // Login out button
-
-                    //Modifying breadcrumbs attributes and values
-                    $('#brdc_new_section').text(data[flag].seccion);
-                    if(page == "new.html") $('#brdc_new_section').attr("href", "sport_section.html?seccion="+ data[flag].seccion.toLowerCase());
-                    else $('#brdc_new_section').attr("href", "sport_section_registered.html?seccion="+ data[flag].seccion.toLowerCase());
-                    $('#brdc_new input').val(data[flag].titulo);
-                    $('#brdc_new_tablet input').val(data[flag].titulo);
-                    $('#brdc_new_mobile').val(data[flag].titulo);
-
-                    $('.main_new_section').empty();
-                    $('.author_biography').empty();
-                    $('.recommendations').empty();
-                    $('.comments').empty();
-
-                    //Get the author
-                    var autor;
-                    $.each(dataUsers, function(i) {
-                        if(dataUsers[i].id == data[flag].user_id) {
-                            autor = dataUsers[i];
+                        for(var i= 0; i < data.length; i++) {
+                            data[i].id = i;
                         }
-                    });
-
-                    //Date format
-                    var unix = data[flag].fecha;
-                    var date = new Date(unix * 1000);
 
 
-                    //Main New
-                    var mainNew='<header>\
+                        $.getJSON("https://planetadeporte.herokuapp.com/comments",function(json) {
+                            localStorage.setItem("Comentarios", JSON.stringify(json));
+                            var dataComments = JSON.parse(localStorage.getItem("Comentarios"));
+                            localStorage.removeItem("Comentarios");
+
+                            for(var i= 0; i < dataComments.length; i++) {
+                                dataComments[i].id = i;
+                                //dataComments[i].article_id = flag;
+                            }
+
+                            $.getJSON("https://planetadeporte.herokuapp.com/users",function(json) {
+                                localStorage.setItem("Usuarios", JSON.stringify(json));
+                                var dataUsers = JSON.parse(localStorage.getItem("Usuarios"));
+                                localStorage.removeItem("Usuarios");
+
+                                for(var i= 0; i < dataUsers.length; i++) {
+                                    dataUsers[i].id = i;
+                                }
+
+                                console.log(data);
+                                console.log(dataComments);
+                                console.log(dataUsers);
+
+                                var flag = window.location.href.split("=").pop();//This indicates what new has been selected
+                                $('#btn_login_out').attr("href","https://planetadeporte.herokuapp.com/login"); // Login out button
+
+                                //Modifying breadcrumbs attributes and values
+                                $('#brdc_new_section').text(data[flag].seccion);
+                                if(page == "new.html") $('#brdc_new_section').attr("href", "sport_section.html?seccion="+ data[flag].seccion.toLowerCase());
+                                else $('#brdc_new_section').attr("href", "sport_section_registered.html?seccion="+ data[flag].seccion.toLowerCase());
+                                $('#brdc_new input').val(data[flag].titulo);
+                                $('#brdc_new_tablet input').val(data[flag].titulo);
+                                $('#brdc_new_mobile').val(data[flag].titulo);
+
+                                $('.main_new_section').empty();
+                                $('.author_biography').empty();
+                                $('.recommendations').empty();
+                                $('.comments').empty();
+
+                                //Get the author
+                                var autor;
+                                $.each(dataUsers, function(i) {
+                                    if(dataUsers[i].id == data[flag].user_id) {
+                                        autor = dataUsers[i];
+                                    }
+                                });
+
+                                //Date format
+                                var unix = data[flag].fecha;
+                                var date = new Date(unix * 1000);
+
+
+                                //Main New
+                                var mainNew='<header>\
                                 <h1>'+ data[flag].titulo + '</h1>\
                                 <h4 class="new_subtitle">'+ data[flag].subtitulo + '</h4>\
                             </header>\
@@ -830,10 +858,12 @@ $(document).ready(function(){
                             <pre class="new_date">'+ autor.nombre + ' ' + autor.apellidos +  '     Publicado <time>'+ date.toLocaleString('en-GB')+ '</time></pre>\
                             <p>'+ data[flag].cuerpo + '</p>';
 
-                    $('.main_new_section').append(mainNew);
+                                $('.main_new_section').append(mainNew);
 
-                    //Author section
-                    var author='<div class="author_photo_section">\
+
+
+                                //Author section
+                                var author='<div class="author_photo_section">\
                                 <img class="author_image" title="Author photo" alt="Author photo" src="'+ autor.foto + '">\
                             </div>\
                             <div class="author_text_section">\
@@ -846,93 +876,65 @@ $(document).ready(function(){
                                 segundo de ellos mis padres recibieron una oferta de trabajo en Madrid, mudándonos todos a un piso cercano a la Puerta del Sol.</p>\
                             </div>';
 
-                    $('.author_biography').append(author);
+                                $('.author_biography').append(author);
 
-                    //Recommendations section
-                    //Get the related news
-                    var new1;
-                    var new2;
-                    var new3;
-                    var count=0;
-                    $.each(data, function(i) {
-                        if(data[i].seccion == data[flag].seccion) {
-                            if(data[i].id != data[flag].id) {
-                                if(count == 0) {
-                                    new1 = data[i];
-                                    count++;
-                                } else if (count == 1) {
-                                    new2 = data[i];
-                                    count++;
-                                } else if ( count == 2) {
-                                    new3 = data[i];
-                                    count++;
-                                }
-                            }
-                        }
-                    });
 
-                    var url;
-                    var url2;
-                    var url3;
-                    if(page == "new.html") {
-                        url='<a class="news_links" href="new.html?new='+ new1.id +'">';
-                        url2='<a class="news_links" href="new.html?new='+ new2.id +'">';
-                        url3='<a class="news_links" href="new.html?new='+ new3.id +'">';
 
-                    } else {
-                        url='<a class="news_links" href="new_registered.html?new='+ new1.id +'">';
-                        url2='<a class="news_links" href="new_registered.html?new='+ new2.id +'">';
-                        url3='<a class="news_links" href="new_registered.html?new='+ new3.id +'">';
-                    }
-
-                    var relatedNews = '<header>\
+                                //Recommendations section
+                                //Get the related news
+                                var count=0;
+                                var arr=[];
+                                var relatedNews='<header>\
                                         <h3 class="section_header">Te recomendamos</h3>\
-                                    </header>\
-                                    <div class="recommendation_new_section_1">\
-                                        <img class="recommendation_images" title="new1" alt="new1" src="'+ new1.foto + '">\
-                                        <header>'
-                        + url +'\
-                                                <h6 class="recommendation_text">'+ new1.titulo + '</h6>\
-                                            </a>\
-                                        </header>\
-                                    </div>\
-                                    <div class="recommendation_new_section_2">\
-                                        <img class="recommendation_images" title="new2" alt="new2" src="'+ new2.foto + '">\
-                                        <header>'
-                        + url2 +'\
-                                                <h6 class="recommendation_text">'+ new2.titulo + '</h6>\
-                                            </a>\
-                                        </header>\
-                                    </div>\
-                                    <div class="recommendation_new_section_3">\
-                                        <img class="recommendation_images" title="new3" alt="new3" src="'+ new3.foto + '">\
-                                        <header>'
-                        + url3 +'\
-                                                <h6 class="recommendation_text">'+ new3.titulo + '</h6>\
-                                            </a>\
-                                        </header>\
-                                    </div>';
-
-                    $('.recommendations').append(relatedNews);
+                                    </header>';
 
 
-                    //Comments Section
-                    var commentsHeader='<header>\
+                                $.each(data, function(i) {
+                                    if(data[i].seccion == data[flag].seccion) {
+                                        if(data[i].id != data[flag].id && count < 3) {
+                                            arr[count] = data[i];
+                                            count++;
+                                        }
+                                    }
+                                });
+                                for(var j = 0; j < arr.length; j++) {
+                                    var k = j+1;
+                                    var noticia = arr[j];
+                                    var url;
+                                    if(page == "new.html") {
+                                        url='<a class="news_links" href="new.html?new='+ noticia.id +'">';
+                                    } else {
+                                        url='<a class="news_links" href="new_registered.html?new='+ noticia.id +'">';
+                                    }
+                                    relatedNews += '<div class="recommendation_new_section_' + k + '">\
+                                                        <img class="recommendation_images" title="new' + k + '" alt="new'+ k + '" src="'+ noticia.foto + '">\
+                                                        <header>'
+                                                + url +'\
+                                                            <h6 class="recommendation_text">'+ noticia.titulo + '</h6>\
+                                                        </a>\
+                                                        </header>\
+                                                    </div>';
+                                }
+                                $('.recommendations').append(relatedNews);
+
+
+                                //Comments Section
+                                var commentsHeader='<header>\
                                         <h3 class="section_header">Comentarios</h3>\
                                     </header>';
 
-                    $('.comments').append(commentsHeader);
+                                $('.comments').append(commentsHeader);
 
-                    var array='';
+                                var array='';
 
-                    /* Get the related Comments: JOIN Comments, News & Users*/
-                    $.each(dataComments, function(j){
-                        if(dataComments[j].article_id == data[flag].id) {
-                            var comment = dataComments[j];
-                            $.each(dataUsers, function(l){
-                                if(comment.user_id == dataUsers[l].id) {
-                                    var user = dataUsers[l];
-                                    var relatedComments = '<div class="comment_section">\
+                                /* Get the related Comments: JOIN Comments, News & Users*/
+                                $.each(dataComments, function(j){
+                                    if(dataComments[j].article_id == data[flag].id) {
+                                        var comment = dataComments[j];
+                                        $.each(dataUsers, function(l){
+                                            if(comment.user_id == dataUsers[l].id) {
+                                                var user = dataUsers[l];
+                                                var relatedComments = '<div class="comment_section">\
                                                                     <div class="commentator_photo_section">\
                                                                         <img class="commentator_photo" title="Comentator photo" alt="Comentator photo 1" src="'+ user.foto + '">\
                                                                     </div>\
@@ -943,20 +945,22 @@ $(document).ready(function(){
                                                                         <p class="commentator_text">' + comment.texto +'</p>\
                                                                     </div>\
                                                                 </div>';
-                                    array += relatedComments;
-                                }
-                            });
-                        }
-                    });
+                                                array += relatedComments;
+                                            }
+                                        });
+                                    }
+                                });
 
-                    $('.comments').append(array);
-                    break;
+                                $('.comments').append(array);
+                            });
+                        });
+                    });
+                break;
 
                 case "profile.html":
 
                     var token = localStorage.getItem("Token");
                     var idsent = localStorage.getItem("Idsent");
-                    console.log(idsent);
 
                     if(token == 1) {
                         $('#mobile_panel_link').attr("href","admin_content_panel.html");
@@ -975,6 +979,9 @@ $(document).ready(function(){
                     //Fill user fields with their data
                     $.getJSON("https://planetadeporte.herokuapp.com/users",function(json) {
                         data = json;
+                        for(var i= 0; i < data.length; i++) {
+                            data[i].id = i;
+                        }
 
                         var user;
 
