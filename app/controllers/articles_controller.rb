@@ -23,6 +23,7 @@ class ArticlesController < ApplicationController
   # POST /articles ; /articles.json
   def create
     @article = Article.new(article_params)
+    @article.id = Article.maximum("id")+1
     #@article = current_user.articles.build(article_params)
     if @article.save
       id = @article.id

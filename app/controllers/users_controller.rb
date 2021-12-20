@@ -18,6 +18,7 @@ class UsersController < ApplicationController
   # POST /users ; /users.json
   def create
     @user = User.new(user_params)
+    @user.id = User.maximum("id")+1
     if @user.save
       session[:user_id] = @user.id
       #redirect_to user_path(@user)
