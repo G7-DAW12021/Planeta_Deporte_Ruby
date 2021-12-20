@@ -49,6 +49,18 @@ $(document).ready(function(){
                     localStorage.removeItem("Comentarios");
                     localStorage.removeItem("Usuarios");
 
+                    for(var i = 0; i < data.length; i++) {
+                        data[i].id = i;
+                    }
+
+                    for(var i = 0; i < dataNews.length; i++) {
+                        dataNews[i].id = i;
+                    }
+
+                    for(var i = 0; i < dataUsers.length; i++) {
+                        dataUsers[i].id = i;
+                    }
+
 
                     $('.comments_table').empty();
 
@@ -115,6 +127,9 @@ $(document).ready(function(){
                 case "admin_content_panel.html":
                     $.getJSON("https://planetadeporte.herokuapp.com/articles",function(json) {
                         data = json;
+                        for(var i = 0; i < data.length; i++) {
+                            data[i].id = i;
+                        }
                         $('.content_section').empty();
                         var editLocation;
 
@@ -146,6 +161,9 @@ $(document).ready(function(){
 
                     $.getJSON("https://planetadeporte.herokuapp.com/users",function(json) {
                         data = json;
+                        for(var i = 0; i < data.length; i++) {
+                            data[i].id = i;
+                        }
                         $('.users_table').empty();
                         var th = '<tr>\
                                     <th>Foto</th>\
@@ -212,6 +230,9 @@ $(document).ready(function(){
                 case "sport_section.html":
                     $.getJSON("https://planetadeporte.herokuapp.com/articles",function(json) {
                         data = json;//News
+                        for(var i = 0; i < data.length; i++) {
+                            data[i].id = i;
+                        }
                         var flag = window.location.href.split("=").pop();//This indicates what section is the user in
                         $('#btn_login_out').attr("href", "https://planetadeporte.herokuapp.com/login"); // Login out button
                         var pivot = false;
@@ -783,6 +804,18 @@ $(document).ready(function(){
                     var dataComments = JSON.parse(localStorage.getItem("Comentarios"));
                     var dataUsers = JSON.parse(localStorage.getItem("Usuarios"));
 
+                    for(var i = 0; i < data.length; i++) {
+                        data[i].id = i;
+                    }
+
+                    for(var i = 0; i < dataComments.length; i++) {
+                        dataComments[i].id = i;
+                    }
+
+                    for(var i = 0; i < dataUsers.length; i++) {
+                        dataUsers[i].id = i;
+                    }
+
                     localStorage.removeItem("Articulos");
                     localStorage.removeItem("Comentarios");
                     localStorage.removeItem("Usuarios");
@@ -971,6 +1004,9 @@ $(document).ready(function(){
                     //Fill user fields with their data
                     $.getJSON("https://planetadeporte.herokuapp.com/users",function(json) {
                         data = json;
+                        for(var i = 0; i < data.length; i++) {
+                            data[i].id = i;
+                        }
                         var user;
 
                         $.each(data, function(i) {
