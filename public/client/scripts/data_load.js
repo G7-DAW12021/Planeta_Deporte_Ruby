@@ -8,8 +8,9 @@ $(document).ready(function(){
         var data;
 
         //Clean and Get the current user
-        localStorage.removeItem("Token");
-        localStorage.removeItem("Idsent");
+        //localStorage.removeItem("Token");
+        //localStorage.removeItem("Idsent");
+        localStorage.clear();
         // Get the current user type to filter between admin and writer
         $.getJSON("https://planetadeporte.herokuapp.com/sendToken",function(json) {
             if(json != undefined) {
