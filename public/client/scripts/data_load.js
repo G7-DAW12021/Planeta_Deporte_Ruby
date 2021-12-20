@@ -184,26 +184,26 @@ $(document).ready(function(){
                 case "home_registered.html":
                 case "home.html":
                     if(page == "home.html") {
-                        $('#main_new_link').attr("href","new.html?new=3");
-                        $('#sec_new1_link').attr("href","new.html?new=5");
-                        $('#sec_new2_link').attr("href","new.html?new=21");
-                        $('#aside_new1_link').attr("href","new.html?new=6");
-                        $('#aside_new2_link').attr("href","new.html?new=1");
-                        $('#aside_new3_link').attr("href","new.html?new=2");
+                        $('#main_new_link').attr("href","new.html?new=2");
+                        $('#sec_new1_link').attr("href","new.html?new=4");
+                        $('#sec_new2_link').attr("href","new.html?new=20");
+                        $('#aside_new1_link').attr("href","new.html?new=5");
+                        $('#aside_new2_link').attr("href","new.html?new=0");
+                        $('#aside_new3_link').attr("href","new.html?new=1");
 
-                        $('#mobile_new3_link').attr("href","new.html?new=4");
-                        $('#mobile_new4_link').attr("href","new.html?new=6");
+                        $('#mobile_new3_link').attr("href","new.html?new=3");
+                        $('#mobile_new4_link').attr("href","new.html?new=5");
 
                     } else {
-                        $('#main_new_link').attr("href","new_registered.html?new=3");
-                        $('#sec_new1_link').attr("href","new_registered.html?new=5");
-                        $('#sec_new2_link').attr("href","new_registered.html?new=21");
-                        $('#aside_new1_link').attr("href","new_registered.html?new=6");
-                        $('#aside_new2_link').attr("href","new_registered.html?new=1");
-                        $('#aside_new3_link').attr("href","new_registered.html?new=2");
+                        $('#main_new_link').attr("href","new_registered.html?new=2");
+                        $('#sec_new1_link').attr("href","new_registered.html?new=4");
+                        $('#sec_new2_link').attr("href","new_registered.html?new=20");
+                        $('#aside_new1_link').attr("href","new_registered.html?new=5");
+                        $('#aside_new2_link').attr("href","new_registered.html?new=0");
+                        $('#aside_new3_link').attr("href","new_registered.html?new=1");
 
-                        $('#mobile_new3_link').attr("href","new_registered.html?new=4");
-                        $('#mobile_new4_link').attr("href","new_registered.html?new=6");
+                        $('#mobile_new3_link').attr("href","new_registered.html?new=3");
+                        $('#mobile_new4_link').attr("href","new_registered.html?new=5");
                     }
 
                     break;
@@ -792,12 +792,12 @@ $(document).ready(function(){
                     $('#btn_login_out').attr("href","https://planetadeporte.herokuapp.com/login"); // Login out button
 
                     //Modifying breadcrumbs attributes and values
-                    $('#brdc_new_section').text(data[flag-1].seccion);
-                    if(page == "new.html") $('#brdc_new_section').attr("href", "sport_section.html?seccion="+ data[flag-1].seccion.toLowerCase());
-                    else $('#brdc_new_section').attr("href", "sport_section_registered.html?seccion="+ data[flag-1].seccion.toLowerCase());
-                    $('#brdc_new input').val(data[flag-1].titulo);
-                    $('#brdc_new_tablet input').val(data[flag-1].titulo);
-                    $('#brdc_new_mobile').val(data[flag-1].titulo);
+                    $('#brdc_new_section').text(data[flag].seccion);
+                    if(page == "new.html") $('#brdc_new_section').attr("href", "sport_section.html?seccion="+ data[flag].seccion.toLowerCase());
+                    else $('#brdc_new_section').attr("href", "sport_section_registered.html?seccion="+ data[flag].seccion.toLowerCase());
+                    $('#brdc_new input').val(data[flag].titulo);
+                    $('#brdc_new_tablet input').val(data[flag].titulo);
+                    $('#brdc_new_mobile').val(data[flag].titulo);
 
                     $('.main_new_section').empty();
                     $('.author_biography').empty();
@@ -807,24 +807,24 @@ $(document).ready(function(){
                     //Get the author
                     var autor;
                     $.each(dataUsers, function(i) {
-                        if(dataUsers[i].id == data[flag-1].user_id) {
+                        if(dataUsers[i].id == data[flag].user_id) {
                             autor = dataUsers[i];
                         }
                     });
 
                     //Date format
-                    var unix = data[flag-1].fecha;
+                    var unix = data[flag].fecha;
                     var date = new Date(unix * 1000);
 
 
                     //Main New
                     var mainNew='<header>\
-                                <h1>'+ data[flag-1].titulo + '</h1>\
-                                <h4 class="new_subtitle">'+ data[flag-1].subtitulo + '</h4>\
+                                <h1>'+ data[flag].titulo + '</h1>\
+                                <h4 class="new_subtitle">'+ data[flag].subtitulo + '</h4>\
                             </header>\
-                            <img class="new_image" title="photo_new" alt="photo_new" src="'+ data[flag-1].foto + '">\
+                            <img class="new_image" title="photo_new" alt="photo_new" src="'+ data[flag].foto + '">\
                             <pre class="new_date">'+ autor.nombre + ' ' + autor.apellidos +  '     Publicado <time>'+ date.toLocaleString('en-GB')+ '</time></pre>\
-                            <p>'+ data[flag-1].cuerpo + '</p>';
+                            <p>'+ data[flag].cuerpo + '</p>';
 
                     $('.main_new_section').append(mainNew);
 
@@ -851,8 +851,8 @@ $(document).ready(function(){
                     var new3;
                     var count=0;
                     $.each(data, function(i) {
-                        if(data[i].seccion == data[flag-1].seccion) {
-                            if(data[i].id != data[flag-1].id) {
+                        if(data[i].seccion == data[flag].seccion) {
+                            if(data[i].id != data[flag].id) {
                                 if(count == 0) {
                                     new1 = data[i];
                                     count++;
@@ -923,7 +923,7 @@ $(document).ready(function(){
 
                     /* Get the related Comments: JOIN Comments, News & Users*/
                     $.each(dataComments, function(j){
-                        if(dataComments[j].article_id == data[flag-1].id) {
+                        if(dataComments[j].article_id == data[flag].id) {
                             var comment = dataComments[j];
                             $.each(dataUsers, function(l){
                                 if(comment.user_id == dataUsers[l].id) {
