@@ -4,7 +4,7 @@
 
 function deleteArticle(id) {
     $.ajax ({
-        url: 'http://localhost:3000/articles/' + id,
+        url: 'https://planetadeporte.herokuapp.com/articles/' + id,
         type: 'DELETE',
         success: function(result) {
             //location.reload();
@@ -18,7 +18,7 @@ function deleteArticle(id) {
 
 function deleteUser(id) {
     $.ajax ({
-        url: 'http://localhost:3000/users/' + id,
+        url: 'https://planetadeporte.herokuapp.com/users/' + id,
         type: 'DELETE',
         success: function(result) {
             document.location.reload(true);
@@ -32,7 +32,7 @@ function deleteUser(id) {
 
 function deleteComment(id, idnoticia) {
     $.ajax ({
-        url: 'http://localhost:3000/articles/' + idnoticia + '/comments/' + id,
+        url: 'https://planetadeporte.herokuapp.com/articles/' + idnoticia + '/comments/' + id,
         type: 'DELETE',
         success: function(result) {
             document.location.reload(true);

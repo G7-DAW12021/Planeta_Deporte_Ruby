@@ -29,7 +29,7 @@ $(document).ready(function(){
                 if(iduser != undefined) {
                     $.ajax( {
                         type : "POST",
-                        url: "http://localhost:3000/articles/" + id + "/comments",
+                        url: "https://planetadeporte.herokuapp.com/articles/" + id + "/comments",
                         data: { comment: {user_id: iduser, article_id : id, texto : texto}},
                         success: function(datos) {
                             document.location.reload(true);
@@ -39,7 +39,7 @@ $(document).ready(function(){
                         }
                     });
                 } else {
-                    window.location.replace("http://localhost:3000/login");
+                    window.location.replace("https://planetadeporte.herokuapp.com/login");
                 }
 
 

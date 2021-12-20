@@ -11,7 +11,7 @@ $(document).ready(function(){
         localStorage.removeItem("Token");
         localStorage.removeItem("Idsent");
         // Get the current user type to filter between admin and writer
-        $.getJSON("http://localhost:3000/sendToken",function(json) {
+        $.getJSON("https://planetadeporte.herokuapp.com/sendToken",function(json) {
             if(json != undefined) {
                 localStorage.setItem("Token", json["tipo"]);
                 localStorage.setItem("Idsent", json["id"]);
@@ -31,15 +31,15 @@ $(document).ready(function(){
 
                 case "writer_comments_panel.html":
                 case "admin_comments_panel.html":
-                    $.getJSON("http://localhost:3000/comments",function(json) {
+                    $.getJSON("https://planetadeporte.herokuapp.com/comments",function(json) {
                         localStorage.setItem("Comentarios", JSON.stringify(json));
                     });
 
-                    $.getJSON("http://localhost:3000/articles",function(json) {
+                    $.getJSON("https://planetadeporte.herokuapp.com/articles",function(json) {
                         localStorage.setItem("Articulos", JSON.stringify(json));
                     });
 
-                    $.getJSON("http://localhost:3000/users",function(json) {
+                    $.getJSON("https://planetadeporte.herokuapp.com/users",function(json) {
                         localStorage.setItem("Usuarios", JSON.stringify(json));
                     });
                     data = JSON.parse(localStorage.getItem("Comentarios"));
@@ -91,7 +91,7 @@ $(document).ready(function(){
                                             <td class="comment_txt">' + this['texto'] + '</td>\
                                             <td class="comment_new_txt">' + news.titulo + '</td>\
                                             <td class="actions_td"> \
-                                                <a class="edit_table_links" href="http://localhost:3000/articles/'+ news.id + '/comments/'+ this['id']+ '/edit\"> Editar comentario</a>\
+                                                <a class="edit_table_links" href="https://planetadeporte.herokuapp.com/articles/'+ news.id + '/comments/'+ this['id']+ '/edit\"> Editar comentario</a>\
                                                 <a class="remove_table_links" href="" onclick="deleteComment('+this['id'] + ',' + news.id +')"> Eliminar comentario</a>\
                                                 <a class="answer_table_links" href="new_registered.html?new=' + news.id + '"> Responder</a> <br>\
                                             </td>';
@@ -113,13 +113,13 @@ $(document).ready(function(){
 
                 case "writer_content_panel.html":
                 case "admin_content_panel.html":
-                    $.getJSON("http://localhost:3000/articles",function(json) {
+                    $.getJSON("https://planetadeporte.herokuapp.com/articles",function(json) {
                         data = json;
                         $('.content_section').empty();
                         var editLocation;
 
                         $.each(data, function(i) {
-                            editLocation = "window.location.href='http://localhost:3000/articles/"+ data[i].id + "/edit'";
+                            editLocation = "window.location.href='https://planetadeporte.herokuapp.com/articles/"+ data[i].id + "/edit'";
 
                             var info=   '<div class="div_content_panel_new">\
                                     <div onclick= "window.location.href=\'new_registered.html?new='+ data[i].id +'\'">\
@@ -144,7 +144,7 @@ $(document).ready(function(){
 
                 case "admin_users_panel.html":
 
-                    $.getJSON("http://localhost:3000/users",function(json) {
+                    $.getJSON("https://planetadeporte.herokuapp.com/users",function(json) {
                         data = json;
                         $('.users_table').empty();
                         var th = '<tr>\
@@ -167,7 +167,7 @@ $(document).ready(function(){
                                         <td class="hash_td">' + this['clave_digest'] + '</td>\
                                         <td>\
                                             <div class="edit_remove_btns_V2">\
-                                                <button class="button_edit_V2" onclick="window.location.href= \'http://localhost:3000/users/'+ this['id']+ '/edit\'">\
+                                                <button class="button_edit_V2" onclick="window.location.href= \'https://planetadeporte.herokuapp.com/users/'+ this['id']+ '/edit\'">\
                                                     <img  class="edit_delete_V2" title="Edit" alt="Edit" src="img/edit.png">\
                                                 </button>\
                                                 <button  class="button_delete_V2" onclick="deleteUser('+this['id']+')" type="button">\
@@ -210,10 +210,10 @@ $(document).ready(function(){
 
                 case "sport_section_registered.html":
                 case "sport_section.html":
-                    $.getJSON("http://localhost:3000/articles",function(json) {
+                    $.getJSON("https://planetadeporte.herokuapp.com/articles",function(json) {
                         data = json;//News
                         var flag = window.location.href.split("=").pop();//This indicates what section is the user in
-                        $('#btn_login_out').attr("href", "http://localhost:3000/login"); // Login out button
+                        $('#btn_login_out').attr("href", "https://planetadeporte.herokuapp.com/login"); // Login out button
                         var pivot = false;
                         $('.main_new').empty();
                         $('.aside_news').empty();
@@ -768,15 +768,15 @@ $(document).ready(function(){
 
                 case "new_registered.html":
                 case "new.html":
-                    $.getJSON("http://localhost:3000/articles",function(json) {
+                    $.getJSON("https://planetadeporte.herokuapp.com/articles",function(json) {
                         localStorage.setItem("Articulos", JSON.stringify(json));
                     });
 
-                    $.getJSON("http://localhost:3000/comments",function(json) {
+                    $.getJSON("https://planetadeporte.herokuapp.com/comments",function(json) {
                         localStorage.setItem("Comentarios", JSON.stringify(json));
                     });
 
-                    $.getJSON("http://localhost:3000/users",function(json) {
+                    $.getJSON("https://planetadeporte.herokuapp.com/users",function(json) {
                         localStorage.setItem("Usuarios", JSON.stringify(json));
                     });
                     data = JSON.parse(localStorage.getItem("Articulos"));//News
@@ -789,7 +789,7 @@ $(document).ready(function(){
 
 
                     var flag = window.location.href.split("=").pop();//This indicates what new has been selected
-                    $('#btn_login_out').attr("href","http://localhost:3000/login"); // Login out button
+                    $('#btn_login_out').attr("href","https://planetadeporte.herokuapp.com/login"); // Login out button
 
                     //Modifying breadcrumbs attributes and values
                     $('#brdc_new_section').text(data[flag-1].seccion);
@@ -969,7 +969,7 @@ $(document).ready(function(){
                     }
 
                     //Fill user fields with their data
-                    $.getJSON("http://localhost:3000/users",function(json) {
+                    $.getJSON("https://planetadeporte.herokuapp.com/users",function(json) {
                         data = json;
                         var user;
 
@@ -982,7 +982,7 @@ $(document).ready(function(){
                         $('#name_profile').val(user.nombre);
                         $('#last_name_profile').val(user.apellidos);
                         $('#email_profile').val(user.email);
-                        var editLocation = "window.location.href='http://localhost:3000/users/"+ user.id + "/edit'";
+                        var editLocation = "window.location.href='https://planetadeporte.herokuapp.com/users/"+ user.id + "/edit'";
                         $(".button_edit, .btn_change_img").attr("onclick", "" + editLocation);
                     });
                     break;
