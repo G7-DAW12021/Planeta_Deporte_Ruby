@@ -17,16 +17,16 @@ noticias = data_parsed['data'][1]['noticias']
 comentarios = data_parsed['data'][2]['comentarios']
 
 for i in 0...usuarios.length
-  User.create(:foto => usuarios[i]['foto'], :nombre => usuarios[i]['nombre'], :apellidos => usuarios[i]['apellidos'],
+  User.create(:id => usuarios[i]['id'], :foto => usuarios[i]['foto'], :nombre => usuarios[i]['nombre'], :apellidos => usuarios[i]['apellidos'],
               :email => usuarios[i]['email'], :clave_digest => usuarios[i]['clave'], :tipo => usuarios[i]['tipo'])
 end
 
 for j in 0...noticias.length
-  Article.create(:user_id => noticias[j]['idautor'], :foto => noticias[j]['foto'], :fecha => noticias[j]['fecha'], :titulo => noticias[j]['titulo'],
+  Article.create(:id => noticias[j]['id'], :user_id => noticias[j]['idautor'], :foto => noticias[j]['foto'], :fecha => noticias[j]['fecha'], :titulo => noticias[j]['titulo'],
                  :subtitulo => noticias[j]['subtitulo'], :seccion => noticias[j]['seccion'],
                  :cuerpo => noticias[j]['cuerpo'])
 end
 
 for k in 0...comentarios.length
-  Comment.create(:user_id => comentarios[k]['idautor'], :article_id => comentarios[k]['idnoticia'], :texto => comentarios[k]['texto'])
+  Comment.create(:id => comentarios[k]['id'], :user_id => comentarios[k]['idautor'], :article_id => comentarios[k]['idnoticia'], :texto => comentarios[k]['texto'])
 end
