@@ -17,17 +17,20 @@ class ArticlesController < ApplicationController
   # GET /articles/new
   def new
     @article = Article.new
-    #@article = current_user.articles.build
+
   end
 
   # POST /articles ; /articles.json
   def create
     @article = Article.new(article_params)
     @article.id = Article.maximum("id")+1
-    #@article = current_user.articles.build(article_params)
+
     if @article.save
-      id = @article.id
-      redirect_to '/client/new_registered.html?new=' + id.to_s
+      if current_user.tipo == "1"
+        redirect_to '/client/admin_content_panel.html'
+      else
+        redirect_to '/client/writer_content_panel.html'
+      end
     else
       render 'new'
     end
@@ -40,8 +43,11 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/id ; /articles/id.json
   def update
     if @article.update(article_params)
-      id = @article.id
-      redirect_to '/client/new_registered.html?new=' + id.to_s
+      if current_user.tipo == "1"
+        redirect_to '/client/admin_content_panel.html'
+      else
+        redirect_to '/client/writer_content_panel.html'
+      end
     else
       render 'edit'
     end

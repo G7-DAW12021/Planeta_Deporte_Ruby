@@ -8,8 +8,6 @@ $(document).ready(function(){
         var data;
 
         //Clean and Get the current user
-        //localStorage.removeItem("Token");
-        //localStorage.removeItem("Idsent");
         localStorage.clear();
         // Get the current user type to filter between admin and writer
         $.getJSON("https://planetadeporte.herokuapp.com/sendToken",function(json) {
@@ -36,25 +34,18 @@ $(document).ready(function(){
                         localStorage.setItem("Comentarios", JSON.stringify(json));
                         data = JSON.parse(localStorage.getItem("Comentarios"));
                         localStorage.removeItem("Comentarios");
-                        for(var i= 0; i < data.length; i++) {
-                            data[i].id = i;
-                        }
 
                         $.getJSON("https://planetadeporte.herokuapp.com/articles",function(json) {
                             localStorage.setItem("Articulos", JSON.stringify(json));
                             var dataNews = JSON.parse(localStorage.getItem("Articulos"));
                             localStorage.removeItem("Articulos");
-                            for(var i= 0; i < dataNews.length; i++) {
-                                dataNews[i].id = i;
-                            }
+
 
                             $.getJSON("https://planetadeporte.herokuapp.com/users",function(json) {
                                 localStorage.setItem("Usuarios", JSON.stringify(json));
                                 var dataUsers = JSON.parse(localStorage.getItem("Usuarios"));
                                 localStorage.removeItem("Usuarios");
-                                for(var i= 0; i < dataUsers.length; i++) {
-                                    dataUsers[i].id = i;
-                                }
+
 
                                 $('.comments_table').empty();
 
@@ -99,7 +90,7 @@ $(document).ready(function(){
                                             <td class="actions_td"> \
                                                 <a class="edit_table_links" href="https://planetadeporte.herokuapp.com/articles/'+ news.id + '/comments/'+ this['id']+ '/edit\"> Editar comentario</a>\
                                                 <a class="remove_table_links" href="" onclick="deleteComment('+this['id'] + ',' + news.id +')"> Eliminar comentario</a>\
-                                                <a class="answer_table_links" href="new_registered.html?new=' + news.id + '"> Responder</a> <br>\
+                                                <a class="answer_table_links" href="new_registered.html?new=' + i + '"> Responder</a> <br>\
                                             </td>';
                                     } else {
                                         var info = '<tr>\
@@ -108,7 +99,7 @@ $(document).ready(function(){
                                             <td class="comment_new_txt">' + news.titulo + '</td>\
                                             <td class="actions_td_writer"> \
                                                 <a class="remove_table_links" href="" onclick="deleteComment('+this['id'] + ',' + news.id +')"> Eliminar comentario</a>\
-                                                <a class="answer_table_links" href="new_registered.html?new=' + news.id + '"> Responder</a> <br>\
+                                                <a class="answer_table_links" href="new_registered.html?new=' + i + '"> Responder</a> <br>\
                                             </td>';
                                     }
 
@@ -123,9 +114,7 @@ $(document).ready(function(){
                 case "admin_content_panel.html":
                     $.getJSON("https://planetadeporte.herokuapp.com/articles",function(json) {
                         data = json;
-                        for(var i= 0; i < data.length; i++) {
-                            data[i].id = i;
-                        }
+
                         $('.content_section').empty();
                         var editLocation;
 
@@ -133,7 +122,7 @@ $(document).ready(function(){
                             editLocation = "window.location.href='https://planetadeporte.herokuapp.com/articles/"+ data[i].id + "/edit'";
 
                             var info=   '<div class="div_content_panel_new">\
-                                    <div onclick= "window.location.href=\'new_registered.html?new='+ data[i].id +'\'">\
+                                    <div onclick= "window.location.href=\'new_registered.html?new='+ i +'\'">\
                                     <img class="img_content_panel_new" title="New" alt="New" src="'+ this['foto']+ '">\
                                     <p class="text_content_panel_new">'+ this['titulo'] + '</p>\
                                     </div>\
@@ -157,9 +146,7 @@ $(document).ready(function(){
 
                     $.getJSON("https://planetadeporte.herokuapp.com/users",function(json) {
                         data = json;
-                        for(var i= 0; i < data.length; i++) {
-                            data[i].id = i;
-                        }
+
                         $('.users_table').empty();
                         var th = '<tr>\
                                     <th>Foto</th>\
@@ -197,38 +184,144 @@ $(document).ready(function(){
 
                 case "home_registered.html":
                 case "home.html":
-                    if(page == "home.html") {
-                        $('#main_new_link').attr("href","new.html?new=2");
-                        $('#sec_new1_link').attr("href","new.html?new=4");
-                        $('#sec_new2_link').attr("href","new.html?new=20");
-                        $('#aside_new1_link').attr("href","new.html?new=5");
-                        $('#aside_new2_link').attr("href","new.html?new=0");
-                        $('#aside_new3_link').attr("href","new.html?new=1");
 
-                        $('#mobile_new3_link').attr("href","new.html?new=3");
-                        $('#mobile_new4_link').attr("href","new.html?new=5");
+                    $.getJSON("https://planetadeporte.herokuapp.com/articles",function(json) {
+                       data = json;
+                       var array= [];
+                       var aux = [];
+                       var count = 0;
+                       $.each(data, function() {
+                         if(count < 6) {
+                             var random = Math.floor(Math.random() * data.length);
+                             if(aux.includes(random) == false) {
+                                 aux[count] = random;
+                                 array[count] = data[random];
+                                 count++;
+                             }
+                         }
+                       });
+                       console.log(array);
+                       var mainNew = array[0];
+                       var secNew1 = array[1];
+                       var secNew2 = array[2];
+                       var asideNew1 = array[3];
+                       var asideNew2 = array[4];
+                       var asideNew3 = array[5];
+                       var mobile3 = asideNew1;
+                       var mobile4 = asideNew2;
 
-                    } else {
-                        $('#main_new_link').attr("href","new_registered.html?new=2");
-                        $('#sec_new1_link').attr("href","new_registered.html?new=4");
-                        $('#sec_new2_link').attr("href","new_registered.html?new=20");
-                        $('#aside_new1_link').attr("href","new_registered.html?new=5");
-                        $('#aside_new2_link').attr("href","new_registered.html?new=0");
-                        $('#aside_new3_link').attr("href","new_registered.html?new=1");
 
-                        $('#mobile_new3_link').attr("href","new_registered.html?new=3");
-                        $('#mobile_new4_link').attr("href","new_registered.html?new=5");
-                    }
+                        if(page == "home.html") {
+                            //Main New
+                            $('#main_new_img').attr("src", mainNew.foto);
+                            $('#main_new_link').attr("href","new.html?new="+ data.indexOf(mainNew));
+                            $('#main_new_title').text(mainNew.titulo);
 
-                    break;
+
+                            //Secondary New 1
+                            $('#sec_new1_img').attr("src", secNew1.foto);
+                            $('#sec_new1_link').attr("href","new.html?new="+ data.indexOf(secNew1));
+                            $('#sec_new1_txt').text(secNew1.seccion);
+                            $('#sec_new1_title').text(secNew1.titulo);
+
+
+                            //Secondary New 2
+                            $('#sec_new2_img').attr("src", secNew2.foto);
+                            $('#sec_new2_link').attr("href","new.html?new="+ data.indexOf(secNew2));
+                            $('#sec_new2_txt').text(secNew2.seccion);
+                            $('#sec_new2_title').text(secNew2.titulo);
+
+
+                            //Aside New 1
+                            $('#aside_new1_img').attr("src", asideNew1.foto);
+                            $('#aside_new1_link').attr("href","new.html?new="+ data.indexOf(asideNew1));
+                            $('#aside_new1_title').text(asideNew1.titulo);
+
+
+                            //Aside New 2
+                            $('#aside_new2_img').attr("src", asideNew2.foto);
+                            $('#aside_new2_link').attr("href","new.html?new="+ data.indexOf(asideNew2));
+                            $('#aside_new2_title').text(asideNew2.titulo);
+
+
+                            //Aside New 3
+                            $('#aside_new3_img').attr("src", asideNew3.foto);
+                            $('#aside_new3_link').attr("href","new.html?new="+ data.indexOf(asideNew3));
+                            $('#aside_new3_title').text(asideNew3.titulo);
+
+                            //Mobile New 3
+                            $('#mobile_new3_img').attr("src", mobile3.foto);
+                            $('#mobile_new3_link').attr("href","new.html?new="+ data.indexOf(mobile3));
+                            $('#mobile_new3_txt').text(mobile3.seccion);
+                            $('#mobile_new3_title').text(mobile3.titulo);
+
+                            //Mobile New 4
+                            $('#mobile_new4_img').attr("src", mobile4.foto);
+                            $('#mobile_new4_link').attr("href","new.html?new="+ data.indexOf(mobile4));
+                            $('#mobile_new4_txt').text(mobile4.seccion);
+                            $('#mobile_new4_title').text(mobile4.titulo);
+
+                        } else {
+                            //Main New
+                            $('#main_new_img').attr("src", mainNew.foto);
+                            $('#main_new_link').attr("href","new_registered.html?new="+ data.indexOf(mainNew));
+                            $('#main_new_title').text(mainNew.titulo);
+
+
+                            //Secondary New 1
+                            $('#sec_new1_img').attr("src", secNew1.foto);
+                            $('#sec_new1_link').attr("href","new_registered.html?new="+ data.indexOf(secNew1));
+                            $('#sec_new1_txt').text(secNew1.seccion);
+                            $('#sec_new1_title').text(secNew1.titulo);
+
+
+                            //Secondary New 2
+                            $('#sec_new2_img').attr("src", secNew2.foto);
+                            $('#sec_new2_link').attr("href","new_registered.html?new="+ data.indexOf(secNew2));
+                            $('#sec_new2_txt').text(secNew2.seccion);
+                            $('#sec_new2_title').text(secNew2.titulo);
+
+
+                            //Aside New 1
+                            $('#aside_new1_img').attr("src", asideNew1.foto);
+                            $('#aside_new1_link').attr("href","new_registered.html?new="+ data.indexOf(asideNew1));
+                            $('#aside_new1_title').text(asideNew1.titulo);
+
+
+                            //Aside New 2
+                            $('#aside_new2_img').attr("src", asideNew2.foto);
+                            $('#aside_new2_link').attr("href","new_registered.html?new="+ data.indexOf(asideNew2));
+                            $('#aside_new2_title').text(asideNew2.titulo);
+
+
+                            //Aside New 3
+                            $('#aside_new3_img').attr("src", asideNew3.foto);
+                            $('#aside_new3_link').attr("href","new_registered.html?new="+ data.indexOf(asideNew3));
+                            $('#aside_new3_title').text(asideNew3.titulo);
+
+                            //Mobile New 3
+                            $('#mobile_new3_img').attr("src", mobile3.foto);
+                            $('#mobile_new3_link').attr("href","new_registered.html?new="+ data.indexOf(mobile3));
+                            $('#mobile_new3_txt').text(mobile3.seccion);
+                            $('#mobile_new3_title').text(mobile3.titulo);
+
+                            //Mobile New 4
+                            $('#mobile_new4_img').attr("src", mobile4.foto);
+                            $('#mobile_new4_link').attr("href","new_registered.html?new="+ data.indexOf(mobile4));
+                            $('#mobile_new4_txt').text(mobile4.seccion);
+                            $('#mobile_new4_title').text(mobile4.titulo);
+                        }
+                    });
+
+                break;
 
                 case "sport_section_registered.html":
                 case "sport_section.html":
                     $.getJSON("https://planetadeporte.herokuapp.com/articles",function(json) {
                         data = json;//News
-                        for(var i= 0; i < data.length; i++) {
+                        /*for(var i= 0; i < data.length; i++) {
                             data[i].id = i;
-                        }
+                        }*/
                         console.log(data);
                         var flag = window.location.href.split("=").pop();//This indicates what section is the user in
                         $('#btn_login_out').attr("href", "https://planetadeporte.herokuapp.com/login"); // Login out button
@@ -265,9 +358,9 @@ $(document).ready(function(){
                                                     <img id="futbol' + i + '" class="main_image" title="futbol' + i + '" alt="futbol' + i + '" src="' + data[i].foto + '">';
 
                                             if (page == "sport_section.html") {
-                                                url = '<a class="news_links" href="new.html?new=' + data[i].id + '">';
+                                                url = '<a class="news_links" href="new.html?new=' + i + '">';
                                             } else {
-                                                url = '<a class="news_links" href="new_registered.html?new=' + data[i].id + '">';
+                                                url = '<a class="news_links" href="new_registered.html?new=' + i + '">';
                                             }
                                             mainNew += url;
                                             mainNew += '<h3 id="futbol' + i + '_text" class="news_text">' + data[i].titulo + '</h3>\
@@ -287,9 +380,9 @@ $(document).ready(function(){
                                                             <img id="futbol' + i + '" class="secondary_images" title="futbol' + i + '" alt="futbol' + i + '" src="' + data[i].foto + '">';
 
                                                 if (page == "sport_section.html") {
-                                                    url = '<a class="secondary_links" href="new.html?new=' + data[i].id + '">';
+                                                    url = '<a class="secondary_links" href="new.html?new=' + i + '">';
                                                 } else {
-                                                    url = '<a class="secondary_links" href="new_registered.html?new=' + data[i].id + '">';
+                                                    url = '<a class="secondary_links" href="new_registered.html?new=' + i + '">';
                                                 }
                                                 secondNew += url;
                                                 secondNew += '<h5 id="futbol' + i + '_text" class="news_text sport_sec_text vertical">' + data[i].titulo + '</h5>\
@@ -305,9 +398,9 @@ $(document).ready(function(){
                                                             <img id="futbol' + i + '" class="aside_images" title="futbol' + i + '" alt="futbol' + i + '" src="' + data[i].foto + '"/>';
 
                                                 if (page == "sport_section.html") {
-                                                    url = '<a class="news_links" href="new.html?new=' + data[i].id + '">';
+                                                    url = '<a class="news_links" href="new.html?new=' + i + '">';
                                                 } else {
-                                                    url = '<a class="news_links" href="new_registered.html?new=' + data[i].id + '">';
+                                                    url = '<a class="news_links" href="new_registered.html?new=' + i + '">';
                                                 }
                                                 asideNew += url;
                                                 asideNew += '<h6 id="futbol' + i + '_text" class="news_text">' + data[i].titulo + '</h6>\
@@ -322,9 +415,9 @@ $(document).ready(function(){
                                                             <img id="futbol' + i + '" class="secondary_images" title="futbol' + i + '" alt="futbol' + i + '" src="' + data[i].foto + '">';
 
                                             if (page == "sport_section.html") {
-                                                url = '<a class="secondary_links" href="new.html?new=' + data[i].id + '">';
+                                                url = '<a class="secondary_links" href="new.html?new=' + i+ '">';
                                             } else {
-                                                url = '<a class="secondary_links" href="new_registered.html?new=' + data[i].id + '">';
+                                                url = '<a class="secondary_links" href="new_registered.html?new=' + i + '">';
                                             }
 
                                             secondNewMobile += url;
@@ -354,10 +447,11 @@ $(document).ready(function(){
                                                     <img id="baloncesto' + i + '" class="main_image" title="baloncesto' + i + '" alt="baloncesto' + i + '" src="' + data[i].foto + '">';
 
                                             if (page == "sport_section.html") {
-                                                url = '<a class="news_links" href="new.html?new=' + data[i].id + '">';
+                                                url = '<a class="news_links" href="new.html?new=' + i + '">';
                                             } else {
-                                                url = '<a class="news_links" href="new_registered.html?new=' + data[i].id + '">';
+                                                url = '<a class="news_links" href="new_registered.html?new=' + i + '">';
                                             }
+                                            console.log(i);
                                             mainNew += url;
                                             mainNew += '<h3 id="baloncesto' + i + '_text" class="news_text">' + data[i].titulo + '</h3>\
                                                 </a>\
@@ -374,9 +468,9 @@ $(document).ready(function(){
                                                             <img id="baloncesto' + i + '" class="secondary_images" title="baloncesto' + i + '" alt="baloncesto' + i + '" src="' + data[i].foto + '">';
 
                                                 if (page == "sport_section.html") {
-                                                    url = '<a class="secondary_links" href="new.html?new=' + data[i].id + '">';
+                                                    url = '<a class="secondary_links" href="new.html?new=' + i+ '">';
                                                 } else {
-                                                    url = '<a class="secondary_links" href="new_registered.html?new=' + data[i].id + '">';
+                                                    url = '<a class="secondary_links" href="new_registered.html?new=' + i + '">';
                                                 }
                                                 secondNew += url;
                                                 secondNew += '<h5 id="baloncesto' + i + '_text" class="news_text sport_sec_text vertical">' + data[i].titulo + '</h5>\
@@ -393,9 +487,9 @@ $(document).ready(function(){
                                                             <img id="baloncesto' + i + '" class="aside_images" title="baloncesto' + i + '" alt="baloncesto' + i + '" src="' + data[i].foto + '"/>';
 
                                                 if (page == "sport_section.html") {
-                                                    url = '<a class="news_links" href="new.html?new=' + data[i].id + '">';
+                                                    url = '<a class="news_links" href="new.html?new=' + i+ '">';
                                                 } else {
-                                                    url = '<a class="news_links" href="new_registered.html?new=' + data[i].id + '">';
+                                                    url = '<a class="news_links" href="new_registered.html?new=' + i + '">';
                                                 }
                                                 asideNew += url;
                                                 asideNew += '<h6 id="baloncesto' + i + '_text" class="news_text">' + data[i].titulo + '</h6>\
@@ -411,9 +505,9 @@ $(document).ready(function(){
                                                             <img id="baloncesto' + i + '" class="secondary_images" title="baloncesto' + i + '" alt="baloncesto' + i + '" src="' + data[i].foto + '">';
 
                                             if (page == "sport_section.html") {
-                                                url = '<a class="secondary_links" href="new.html?new=' + data[i].id + '">';
+                                                url = '<a class="secondary_links" href="new.html?new=' + i + '">';
                                             } else {
-                                                url = '<a class="secondary_links" href="new_registered.html?new=' + data[i].id + '">';
+                                                url = '<a class="secondary_links" href="new_registered.html?new=' + i + '">';
                                             }
                                             secondNewMobile += url;
                                             secondNewMobile += '<h5 id="baloncesto' + i + '_text" class="news_text sport_sec_text vertical">' + data[i].titulo + '</h5>\
@@ -444,9 +538,9 @@ $(document).ready(function(){
                                                     <img id="tenis' + i + '" class="main_image" title="tenis' + i + '" alt="tenis' + i + '" src="' + data[i].foto + '">';
 
                                             if (page == "sport_section.html") {
-                                                url = '<a class="news_links" href="new.html?new=' + data[i].id + '">';
+                                                url = '<a class="news_links" href="new.html?new=' + i + '">';
                                             } else {
-                                                url = '<a class="news_links" href="new_registered.html?new=' + data[i].id + '">';
+                                                url = '<a class="news_links" href="new_registered.html?new=' + i + '">';
                                             }
                                             mainNew += url;
                                             mainNew += '<h3 id="tenis' + i + '_text" class="news_text">' + data[i].titulo + '</h3>\
@@ -464,9 +558,9 @@ $(document).ready(function(){
                                                             <img id="tenis' + i + '" class="secondary_images" title="tenis' + i + '" alt="tenis' + i + '" src="' + data[i].foto + '">';
 
                                                 if (page == "sport_section.html") {
-                                                    url = '<a class="secondary_links" href="new.html?new=' + data[i].id + '">';
+                                                    url = '<a class="secondary_links" href="new.html?new=' + i + '">';
                                                 } else {
-                                                    url = '<a class="secondary_links" href="new_registered.html?new=' + data[i].id + '">';
+                                                    url = '<a class="secondary_links" href="new_registered.html?new=' + i + '">';
                                                 }
                                                 secondNew += url;
                                                 secondNew += '<h5 id="tenis' + i + '_text" class="news_text sport_sec_text vertical">' + data[i].titulo + '</h5>\
@@ -482,9 +576,9 @@ $(document).ready(function(){
                                                             <img id="tenis' + i + '" class="aside_images" title="tenis' + i + '" alt="tenis' + i + '" src="' + data[i].foto + '"/>';
 
                                                 if (page == "sport_section.html") {
-                                                    url = '<a class="news_links" href="new.html?new=' + data[i].id + '">';
+                                                    url = '<a class="news_links" href="new.html?new=' + i + '">';
                                                 } else {
-                                                    url = '<a class="news_links" href="new_registered.html?new=' + data[i].id + '">';
+                                                    url = '<a class="news_links" href="new_registered.html?new=' + i + '">';
                                                 }
                                                 asideNew += url;
                                                 asideNew += '<h6 id="tenis' + i + '_text" class="news_text">' + data[i].titulo + '</h6>\
@@ -500,9 +594,9 @@ $(document).ready(function(){
                                                             <img id="tenis' + i + '" class="secondary_images" title="tenis' + i + '" alt="tenis' + i + '" src="' + data[i].foto + '">';
 
                                             if (page == "sport_section.html") {
-                                                url = '<a class="secondary_links" href="new.html?new=' + data[i].id + '">';
+                                                url = '<a class="secondary_links" href="new.html?new=' + i + '">';
                                             } else {
-                                                url = '<a class="secondary_links" href="new_registered.html?new=' + data[i].id + '">';
+                                                url = '<a class="secondary_links" href="new_registered.html?new=' + i + '">';
                                             }
                                             secondNewMobile += url;
                                             secondNewMobile += '<h5 id="tenis' + i + '_text" class="news_text sport_sec_text vertical">' + data[i].titulo + '</h5>\
@@ -533,9 +627,9 @@ $(document).ready(function(){
                                                     <img id="ciclismo' + i + '" class="main_image" title="ciclismo' + i + '" alt="ciclismo' + i + '" src="' + data[i].foto + '">';
 
                                             if (page == "sport_section.html") {
-                                                url = '<a class="news_links" href="new.html?new=' + data[i].id + '">';
+                                                url = '<a class="news_links" href="new.html?new=' + i + '">';
                                             } else {
-                                                url = '<a class="news_links" href="new_registered.html?new=' + data[i].id + '">';
+                                                url = '<a class="news_links" href="new_registered.html?new=' + i + '">';
                                             }
                                             mainNew += url;
                                             mainNew += '<h3 id="ciclismo' + i + '_text" class="news_text">' + data[i].titulo + '</h3>\
@@ -553,9 +647,9 @@ $(document).ready(function(){
                                                             <img id="ciclismo' + i + '" class="secondary_images" title="ciclismo' + i + '" alt="ciclismo' + i + '" src="' + data[i].foto + '">';
 
                                                 if (page == "sport_section.html") {
-                                                    url = '<a class="secondary_links" href="new.html?new=' + data[i].id + '">';
+                                                    url = '<a class="secondary_links" href="new.html?new=' + i + '">';
                                                 } else {
-                                                    url = '<a class="secondary_links" href="new_registered.html?new=' + data[i].id + '">';
+                                                    url = '<a class="secondary_links" href="new_registered.html?new=' + i + '">';
                                                 }
                                                 secondNew += url;
                                                 secondNew += '<h5 id="ciclismo' + i + '_text" class="news_text sport_sec_text vertical">' + data[i].titulo + '</h5>\
@@ -572,9 +666,9 @@ $(document).ready(function(){
                                                             <img id="ciclismo' + i + '" class="aside_images" title="cicesports' + i + '" alt="ciclismo' + i + '" src="' + data[i].foto + '"/>';
 
                                                 if (page == "sport_section.html") {
-                                                    url = '<a class="news_links" href="new.html?new=' + data[i].id + '">';
+                                                    url = '<a class="news_links" href="new.html?new=' + i + '">';
                                                 } else {
-                                                    url = '<a class="news_links" href="new_registered.html?new=' + data[i].id + '">';
+                                                    url = '<a class="news_links" href="new_registered.html?new=' + i + '">';
                                                 }
                                                 asideNew += url;
                                                 asideNew += '<h6 id="ciclismo' + i + '_text" class="news_text">' + data[i].titulo + '</h6>\
@@ -590,9 +684,9 @@ $(document).ready(function(){
                                                             <img id="ciclismo' + i + '" class="secondary_images" title="ciclismo' + i + '" alt="ciclismo' + i + '" src="' + data[i].foto + '">';
 
                                             if (page == "sport_section.html") {
-                                                url = '<a class="secondary_links" href="new.html?new=' + data[i].id + '">';
+                                                url = '<a class="secondary_links" href="new.html?new=' + i + '">';
                                             } else {
-                                                url = '<a class="secondary_links" href="new_registered.html?new=' + data[i].id + '">';
+                                                url = '<a class="secondary_links" href="new_registered.html?new=' + i + '">';
                                             }
                                             secondNewMobile += url;
                                             secondNewMobile += '<h5 id="ciclismo' + i + '_text" class="news_text sport_sec_text vertical">' + data[i].titulo + '</h5>\
@@ -622,9 +716,9 @@ $(document).ready(function(){
                                                     <img id="motor' + i + '" class="main_image" title="motor' + i + '" alt="motor' + i + '" src="' + data[i].foto + '">';
 
                                             if (page == "sport_section.html") {
-                                                url = '<a class="news_links" href="new.html?new=' + data[i].id + '">';
+                                                url = '<a class="news_links" href="new.html?new=' + i + '">';
                                             } else {
-                                                url = '<a class="news_links" href="new_registered.html?new=' + data[i].id + '">';
+                                                url = '<a class="news_links" href="new_registered.html?new=' + i + '">';
                                             }
                                             mainNew += url;
                                             mainNew += '<h3 id="motor' + i + '_text" class="news_text">' + data[i].titulo + '</h3>\
@@ -642,9 +736,9 @@ $(document).ready(function(){
                                                             <img id="motor' + i + '" class="secondary_images" title="motor' + i + '" alt="motor' + i + '" src="' + data[i].foto + '">';
 
                                                 if (page == "sport_section.html") {
-                                                    url = '<a class="secondary_links" href="new.html?new=' + data[i].id + '">';
+                                                    url = '<a class="secondary_links" href="new.html?new=' + i + '">';
                                                 } else {
-                                                    url = '<a class="secondary_links" href="new_registered.html?new=' + data[i].id + '">';
+                                                    url = '<a class="secondary_links" href="new_registered.html?new=' + i + '">';
                                                 }
                                                 secondNew += url;
                                                 secondNew += '<h5 id="motor' + i + '_text" class="news_text sport_sec_text vertical">' + data[i].titulo + '</h5>\
@@ -660,9 +754,9 @@ $(document).ready(function(){
                                                 var asideNew = '<div class="aside_new">\
                                                             <img id="motor' + i + '" class="aside_images" title="motor' + i + '" alt="motor' + i + '" src="' + data[i].foto + '"/>';
                                                 if (page == "sport_section.html") {
-                                                    url = '<a class="news_links" href="new.html?new=' + data[i].id + '">';
+                                                    url = '<a class="news_links" href="new.html?new=' + i + '">';
                                                 } else {
-                                                    url = '<a class="news_links" href="new_registered.html?new=' + data[i].id + '">';
+                                                    url = '<a class="news_links" href="new_registered.html?new=' + i + '">';
                                                 }
                                                 asideNew += url;
                                                 asideNew += '<h6 id="motor' + i + '_text" class="news_text">' + data[i].titulo + '</h6>\
@@ -677,9 +771,9 @@ $(document).ready(function(){
                                             var secondNewMobile = ' <div class="secondary_new_container secondary_new_mobile">\
                                                             <img id="motor' + i + '" class="secondary_images" title="motor' + i + '" alt="motor' + i + '" src="' + data[i].foto + '">';
                                             if (page == "sport_section.html") {
-                                                url = '<a class="secondary_links" href="new.html?new=' + data[i].id + '">';
+                                                url = '<a class="secondary_links" href="new.html?new=' + i + '">';
                                             } else {
-                                                url = '<a class="secondary_links" href="new_registered.html?new=' + data[i].id + '">';
+                                                url = '<a class="secondary_links" href="new_registered.html?new=' + i + '">';
                                             }
                                             secondNewMobile += url;
                                             secondNewMobile += '<h5 id="motor' + i + '_text" class="news_text sport_sec_text vertical">' + data[i].titulo + '</h5>\
@@ -709,9 +803,9 @@ $(document).ready(function(){
                                                     <img id="esports' + i + '" class="main_image" title="esports' + i + '" alt="esports' + i + '" src="' + data[i].foto + '">';
 
                                             if (page == "sport_section.html") {
-                                                url = '<a class="news_links" href="new.html?new=' + data[i].id + '">';
+                                                url = '<a class="news_links" href="new.html?new=' + i + '">';
                                             } else {
-                                                url = '<a class="news_links" href="new_registered.html?new=' + data[i].id + '">';
+                                                url = '<a class="news_links" href="new_registered.html?new=' + i + '">';
                                             }
                                             mainNew += url;
                                             mainNew += '<h3 id="esports' + i + '_text" class="news_text">' + data[i].titulo + '</h3>\
@@ -729,9 +823,9 @@ $(document).ready(function(){
                                                             <img id="esports' + i + '" class="secondary_images" title="esports' + i + '" alt="esports' + i + '" src="' + data[i].foto + '">';
 
                                                 if (page == "sport_section.html") {
-                                                    url = '<a class="secondary_links" href="new.html?new=' + data[i].id + '">';
+                                                    url = '<a class="secondary_links" href="new.html?new=' + i + '">';
                                                 } else {
-                                                    url = '<a class="secondary_links" href="new_registered.html?new=' + data[i].id + '">';
+                                                    url = '<a class="secondary_links" href="new_registered.html?new=' + i + '">';
                                                 }
                                                 secondNew += url;
                                                 secondNew += '<h5 id="esports' + i + '_text" class="news_text sport_sec_text vertical">' + data[i].titulo + '</h5>\
@@ -747,9 +841,9 @@ $(document).ready(function(){
                                                 var asideNew = '<div class="aside_new">\
                                                             <img id="esports' + i + '" class="aside_images" title="esports' + i + '" alt="esports' + i + '" src="' + data[i].foto + '"/>';
                                                 if (page == "sport_section.html") {
-                                                    url = '<a class="news_links" href="new.html?new=' + data[i].id + '">';
+                                                    url = '<a class="news_links" href="new.html?new=' + i + '">';
                                                 } else {
-                                                    url = '<a class="news_links" href="new_registered.html?new=' + data[i].id + '">';
+                                                    url = '<a class="news_links" href="new_registered.html?new=' + i + '">';
                                                 }
                                                 asideNew += url;
                                                 asideNew += '<h6 id="esports' + i + '_text" class="news_text">' + data[i].titulo + '</h6>\
@@ -765,9 +859,9 @@ $(document).ready(function(){
                                                             <img id="esports' + i + '" class="secondary_images" title="esports' + i + '" alt="esports' + i + '" src="' + data[i].foto + '">';
 
                                             if (page == "sport_section.html") {
-                                                url = '<a class="secondary_links" href="new.html?new=' + data[i].id + '">';
+                                                url = '<a class="secondary_links" href="new.html?new=' + i + '">';
                                             } else {
-                                                url = '<a class="secondary_links" href="new_registered.html?new=' + data[i].id + '">';
+                                                url = '<a class="secondary_links" href="new_registered.html?new=' + i + '">';
                                             }
                                             secondNewMobile += url;
                                             secondNewMobile += '<h5 id="esports' + i + '_text" class="news_text sport_sec_text vertical">' + data[i].titulo + '</h5>\
@@ -792,29 +886,19 @@ $(document).ready(function(){
                         data = JSON.parse(localStorage.getItem("Articulos"));//News
                         localStorage.removeItem("Articulos");
 
-                        for(var i= 0; i < data.length; i++) {
-                            data[i].id = i;
-                        }
-
 
                         $.getJSON("https://planetadeporte.herokuapp.com/comments",function(json) {
                             localStorage.setItem("Comentarios", JSON.stringify(json));
                             var dataComments = JSON.parse(localStorage.getItem("Comentarios"));
                             localStorage.removeItem("Comentarios");
 
-                            for(var i= 0; i < dataComments.length; i++) {
-                                dataComments[i].id = i;
-                                //dataComments[i].article_id = flag;
-                            }
+
 
                             $.getJSON("https://planetadeporte.herokuapp.com/users",function(json) {
                                 localStorage.setItem("Usuarios", JSON.stringify(json));
                                 var dataUsers = JSON.parse(localStorage.getItem("Usuarios"));
                                 localStorage.removeItem("Usuarios");
 
-                                for(var i= 0; i < dataUsers.length; i++) {
-                                    dataUsers[i].id = i;
-                                }
 
                                 console.log(data);
                                 console.log(dataComments);
@@ -902,9 +986,9 @@ $(document).ready(function(){
                                     var noticia = arr[j];
                                     var url;
                                     if(page == "new.html") {
-                                        url='<a class="news_links" href="new.html?new='+ noticia.id +'">';
+                                        url='<a class="news_links" href="new.html?new='+ data.indexOf(noticia) +'">';
                                     } else {
-                                        url='<a class="news_links" href="new_registered.html?new='+ noticia.id +'">';
+                                        url='<a class="news_links" href="new_registered.html?new='+ data.indexOf(noticia) +'">';
                                     }
                                     relatedNews += '<div class="recommendation_new_section_' + k + '">\
                                                         <img class="recommendation_images" title="new' + k + '" alt="new'+ k + '" src="'+ noticia.foto + '">\
@@ -979,9 +1063,6 @@ $(document).ready(function(){
                     //Fill user fields with their data
                     $.getJSON("https://planetadeporte.herokuapp.com/users",function(json) {
                         data = json;
-                        for(var i= 0; i < data.length; i++) {
-                            data[i].id = i;
-                        }
 
                         var user;
 

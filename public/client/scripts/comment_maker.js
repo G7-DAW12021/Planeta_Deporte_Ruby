@@ -23,25 +23,29 @@ $(document).ready(function(){
 
 
             $(submitButton).click(function () {
-                var texto = $("#comentArea").val();
-                var id= window.location.href.split("=").pop();
-                var iduser = localStorage.getItem("Idsent");
-                if(iduser != undefined) {
-                    $.ajax( {
-                        type : "POST",
-                        url: "https://planetadeporte.herokuapp.com/articles/" + id + "/comments",
-                        data: { comment: {user_id: iduser, article_id : id, texto : texto}},
-                        success: function(datos) {
-                            document.location.reload(true);
-                        },
-                        error: function(datos) {
-                            document.location.reload(true);
-                        }
-                    });
-                } else {
-                    window.location.replace("https://planetadeporte.herokuapp.com/login");
-                }
 
+                var texto = $("#comentArea").val();
+                var flag= window.location.href.split("=").pop();
+                var iduser = localStorage.getItem("Idsent");
+                $.getJSON("https://planetadeporte.herokuapp.com/articles",function(json) {
+                    var id= json[flag].id;
+                    if(iduser != undefined) {
+                        $.ajax( {
+                            type : "POST",
+                            url: "https://planetadeporte.herokuapp.com/articles/" + id + "/comments",
+                            data: { comment: {user_id: iduser, article_id : id, texto : texto}},
+                            success: function(datos) {
+                                document.location.reload(true);
+                            },
+                            error: function(datos) {
+                                document.location.reload(true);
+                            }
+                        });
+                    } else {
+                        window.location.replace("https://planetadeporte.herokuapp.com/login");
+                    }
+
+                });
 
 
                 $("#text_area_div").empty();
