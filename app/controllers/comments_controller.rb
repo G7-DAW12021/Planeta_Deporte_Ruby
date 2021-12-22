@@ -26,8 +26,7 @@ class CommentsController < ApplicationController
     @article = Article.find(params[:article_id])
     @comment = @article.comments.find(params[:id])
     if @comment.update(comment_params)
-      id = @article.id
-      redirect_to '/client/new_registered.html?new=' + id.to_s
+        redirect_to '/client/admin_comments_panel.html'
     else
       render 'edit'
     end

@@ -12,10 +12,7 @@
   <% end %>
 
 
-  <div class="field">
-    <%= form.label :fecha %>
-    <%= form.text_field :fecha %>
-  </div>
+  <%= form.hidden_field :fecha, :value => Time.now.to_i %>
 
   <div class="field">
     <%= form.label :titulo %>
@@ -39,7 +36,7 @@
 
   <div class="field">
     <%= form.label :cuerpo %>
-    <%= form.text_area :cuerpo %>
+    <%= form.text_area :cuerpo, :cols => 70, :rows => 10 %>
   </div>
 
   <%= form.hidden_field :user_id, :value => current_user.id %>
