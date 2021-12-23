@@ -1,0 +1,27 @@
+<%= form_for  @articule do |form| %>
+    <%= form.hidden_field :fecha, :value => Time.now.to_i %>
+
+  <div class="field">
+    <%= form.label :titulo %>
+    <%= form.text_field :titulo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :subtitulo %>
+    <%= form.text_field :subtitulo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :seccion %>
+    <%= form.select(:seccion, ['Futbol', 'Baloncesto', 'Tenis', 'Ciclismo', 'Motor', 'eSports'] )%>
+  </div>
+
+  <div class="field">
+    <%= form.label :cuerpo %>
+    <%= form.text_area :cuerpo, :cols => 70, :rows => 10 %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

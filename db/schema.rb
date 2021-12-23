@@ -10,22 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_13_192115) do
+ActiveRecord::Schema.define(version: 2021_12_23_111840) do
 
-  create_table "students", force: :cascade do |t|
-    t.string "photo"
-    t.string "name"
-    t.string "last_name"
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.integer "type"
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+  create_table "articules", force: :cascade do |t|
+    t.string "foto"
+    t.string "fecha"
+    t.text "titulo"
+    t.text "subtitulo"
+    t.string "seccion"
+    t.text "cuerpo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["email"], name: "index_students_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -35,8 +30,8 @@ ActiveRecord::Schema.define(version: 2021_12_13_192115) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "photo"
-    t.string "name"
-    t.string "last_name"
+    t.string "name", default: "", null: false
+    t.string "last_name", default: "", null: false
     t.integer "type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

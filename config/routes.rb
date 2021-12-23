@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :students
   get 'home/index'
   root to:'home#index'
+  get 'articule/filtered', to: 'articule#filtered'
   #devise_for :users, :path => '', path_names:
     #{ sign_in: "login", sign_out: "logout"}
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

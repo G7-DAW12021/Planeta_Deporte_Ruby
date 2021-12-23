@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  foto: MyString
+  fecha: MyString
+  titulo: MyString
+  subtitulo: MyString
+  seccion: MyString
+  cuerpo: MyString
+
+two:
+  foto: MyString
+  fecha: MyString
+  titulo: MyString
+  subtitulo: MyString
+  seccion: MyString
+  cuerpo: MyString
