@@ -58,8 +58,9 @@ class UsersController < ApplicationController
 
   # DELETE /users/id ; /users/id.json
   def destroy
-    @user.destroy
-    redirect_to root_path
+    if current_user.id != @user.id
+      @user.destroy
+    end
   end
 
   # GET /sendToken
