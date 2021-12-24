@@ -7,7 +7,6 @@ function deleteArticle(id) {
         url: 'https://planetadeporte.herokuapp.com/articles/' + id,
         type: 'DELETE',
         success: function(result) {
-            //location.reload();
             document.location.reload(true);
         },
         error: function(errors) {
